@@ -13,6 +13,10 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [rememberToggleCheckBox, setRememberToggleCheckBox] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+
+
 
 
   const handleSignUp = () => {
@@ -129,40 +133,76 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
               color: 'black',
             }}
           />
+          
 
-          <TextInput
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Password"
-            placeholderTextColor={'#21212160'}
-            secureTextEntry={true}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 50,
-              paddingLeft: 20,
-              paddingRight: 20,
-              marginTop: 10,
-              elevation: 10,
-              color: 'black',
-            }}
-          />
+          <View style={{ position: 'relative' }}>
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Password"
+              placeholderTextColor={'#21212160'}
+              secureTextEntry={!isPasswordVisible}
+              style={{
+                backgroundColor: 'white',
+                borderRadius: 50,
+                paddingLeft: 20,
+                paddingRight: 20,
+                marginTop: 10,
+                elevation: 10,
+                color: 'black',
+              }}
+            />
+            <TouchableOpacity
+                onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                disabled={!password}
+                style={{
+                  position: 'absolute',
+                  right: 20,
+                  top: '50%',
+                  transform: [{ translateY: -9 }],
+                  opacity: password ? 1 : 0.5,
+                }}>
+                <Image 
+                source={isPasswordVisible ? require('../images/icons/eye_close.png') : require('../images/icons/eye_icon.png')}
+                style={{ width: 24, height: 24 }}>
+                </Image>
+            </TouchableOpacity>
+          </View>  
+        
+          <View style={{ position: 'relative' }}>
+            <TextInput
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+              placeholder="Confirm password"
+              placeholderTextColor={'#21212160'}
+              secureTextEntry={!isConfirmPasswordVisible}
+              style={{
+                backgroundColor: 'white',
+                borderRadius: 50,
+                paddingLeft: 20,
+                paddingRight: 20,
+                marginTop: 10,
+                elevation: 10,
+                color: 'black',
+              }}
+            />
+            <TouchableOpacity
+                onPress={() => setIsConfirmPasswordVisible(!isConfirmPasswordVisible)}
+                disabled={!confirmPassword}
+                style={{
+                  position: 'absolute',
+                  right: 20,
+                  top: '50%',
+                  transform: [{ translateY: -9 }],
+                  opacity: confirmPassword ? 1 : 0.5,
+                }}>
+                <Image 
+                source={isConfirmPasswordVisible ? require('../images/icons/eye_close.png') : require('../images/icons/eye_icon.png')}
+                style={{ width: 24, height: 24 }}>
+                </Image>
+            </TouchableOpacity>
+          </View>
 
-          <TextInput
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            placeholder="Confirm password"
-            placeholderTextColor={'#21212160'}
-            secureTextEntry={true}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 50,
-              paddingLeft: 20,
-              paddingRight: 20,
-              marginTop: 10,
-              elevation: 10,
-              color: 'black',
-            }}
-          />
           <View
             style={{
               flexDirection: 'row',

@@ -11,6 +11,8 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
 
   const handleLogin = () => {
     if (email != '' && password != '') {
@@ -121,23 +123,39 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
               color: 'black'
             }}
           />
-
-          <TextInput
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Password"
-            placeholderTextColor={'#21212160'}
-            secureTextEntry={true}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 50,
-              paddingLeft: 20,
-              paddingRight: 20,
-              marginTop: 10,
-              elevation: 10,
-              color: 'black',
-            }}
-          />
+          <View style={{ position: 'relative' }}>
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Password"
+              placeholderTextColor={'#21212160'}
+              secureTextEntry={!isPasswordVisible}
+              style={{
+                backgroundColor: 'white',
+                borderRadius: 50,
+                paddingLeft: 20,
+                paddingRight: 20,
+                marginTop: 10,
+                elevation: 10,
+                color: 'black',
+              }}
+            />
+            <TouchableOpacity
+                onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                disabled={!password}
+                style={{
+                  position: 'absolute',
+                  right: 20,
+                  top: '50%',
+                  transform: [{ translateY: -9 }],
+                  opacity: password ? 1 : 0.5,
+                }}>
+                <Image 
+                source={isPasswordVisible ? require('../images/icons/eye_close.png') : require('../images/icons/eye_icon.png')}
+                style={{ width: 24, height: 24 }}>
+                </Image>
+            </TouchableOpacity>
+          </View>
 
           <Text
             style={{
