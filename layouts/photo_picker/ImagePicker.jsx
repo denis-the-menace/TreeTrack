@@ -18,6 +18,7 @@ const PhotoPick = ({onSelect, isCleared, setIsCleared}) => {
       width: 300,
       height: 400,
       cropping: true,
+      freeStyleCropEnabled: true,
     })
       .then(image => {
         // console.log("Image (camera): ", image);
@@ -43,6 +44,7 @@ const PhotoPick = ({onSelect, isCleared, setIsCleared}) => {
       width: 300,
       height: 400,
       cropping: true,
+      freeStyleCropEnabled: true,
     })
       .then(image => {
         //console.log('Image (gallery): ', image);
