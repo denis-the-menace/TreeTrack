@@ -23,6 +23,7 @@ import EditPlantLocation from "../pages/EditPlantLocation";
 import EditGarden from "../pages/EditGarden";
 import EditGardenPolygon from "../pages/EditGardenPolygon";
 import Support from "../pages/Support";
+import PrivacyAndSafety from "../pages/PrivacyAndSafety";
 
 
 const { width, height } = Dimensions.get("window")
@@ -240,6 +241,7 @@ const SettingsStack = ({ setIsSigned }) => {
       <Stack.Screen name="Settings" component={Settings} initialParams={{ setIsSigned }} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Support" component={Support} />
+      <Stack.Screen name="PrivacyAndSafety" component={PrivacyAndSafety} />
     </Stack.Navigator>
   );
 }
