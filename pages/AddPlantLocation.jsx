@@ -79,11 +79,7 @@ const AddPlantLocation = ({navigation}) => {
   return (
     <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{height: '100%'}}>
       <View style={styles.container}>
-<<<<<<< HEAD
         <Text style={styles.text}>Select plant location</Text>
-=======
-        <Text style={styles.text}>select plant location</Text>
->>>>>>> origin/master
 
         <Text
           style={{

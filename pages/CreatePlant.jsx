@@ -90,11 +90,7 @@ const CreatePlant = ({route, navigation}) => {
           {'\u003E'}
           {garden.name}{' '}
         </Text>
-<<<<<<< HEAD
         <Text style={styles.text}>Add a new plant</Text>
-=======
-        <Text style={styles.text}>add a new plant</Text>
->>>>>>> origin/master
         {/* add plant section */}
         <View>
           <Text style={styles.t4}>Give a name to your plant</Text>

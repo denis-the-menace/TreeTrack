@@ -22,10 +22,7 @@ import EditPlant from "../pages/EditPlant";
 import EditPlantLocation from "../pages/EditPlantLocation";
 import EditGarden from "../pages/EditGarden";
 import EditGardenPolygon from "../pages/EditGardenPolygon";
-<<<<<<< HEAD
 import Support from "../pages/Support";
-=======
->>>>>>> origin/master
 
 
 const { width, height } = Dimensions.get("window")
@@ -242,10 +239,7 @@ const SettingsStack = ({ setIsSigned }) => {
       }}>
       <Stack.Screen name="Settings" component={Settings} initialParams={{ setIsSigned }} />
       <Stack.Screen name="Profile" component={Profile} />
-<<<<<<< HEAD
       <Stack.Screen name="Support" component={Support} />
-=======
->>>>>>> origin/master
     </Stack.Navigator>
   );
 }

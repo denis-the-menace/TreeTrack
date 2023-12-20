@@ -29,11 +29,7 @@ const Galleries = ({route}) => {
               color: '#09A555',
               marginBottom: 10,
             }}>
-<<<<<<< HEAD
             GALLERY
-=======
-            gallery
->>>>>>> origin/master
           </Text>
 
           <View style={{flexDirection: 'row', justifyContent: 'center'}}>

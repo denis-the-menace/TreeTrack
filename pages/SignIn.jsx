@@ -11,11 +11,8 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-<<<<<<< HEAD
-=======
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
->>>>>>> origin/master
 
   const handleLogin = () => {
     if (email != '' && password != '') {
@@ -126,25 +123,6 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
               color: 'black'
             }}
           />
-<<<<<<< HEAD
-
-          <TextInput
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Password"
-            placeholderTextColor={'#21212160'}
-            secureTextEntry={true}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 50,
-              paddingLeft: 20,
-              paddingRight: 20,
-              marginTop: 10,
-              elevation: 10,
-              color: 'black',
-            }}
-          />
-=======
           <View style={{ position: 'relative' }}>
             <TextInput
               value={password}
@@ -178,7 +156,6 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
                 </Image>
             </TouchableOpacity>
           </View>
->>>>>>> origin/master
 
           <Text
             style={{

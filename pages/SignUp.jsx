@@ -13,13 +13,10 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [rememberToggleCheckBox, setRememberToggleCheckBox] = useState(false);
-<<<<<<< HEAD
-=======
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 
 
->>>>>>> origin/master
 
 
   const handleSignUp = () => {
@@ -136,42 +133,6 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
               color: 'black',
             }}
           />
-<<<<<<< HEAD
-
-          <TextInput
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Password"
-            placeholderTextColor={'#21212160'}
-            secureTextEntry={true}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 50,
-              paddingLeft: 20,
-              paddingRight: 20,
-              marginTop: 10,
-              elevation: 10,
-              color: 'black',
-            }}
-          />
-
-          <TextInput
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            placeholder="Confirm password"
-            placeholderTextColor={'#21212160'}
-            secureTextEntry={true}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 50,
-              paddingLeft: 20,
-              paddingRight: 20,
-              marginTop: 10,
-              elevation: 10,
-              color: 'black',
-            }}
-          />
-=======
           
 
           <View style={{ position: 'relative' }}>
@@ -242,7 +203,6 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
             </TouchableOpacity>
           </View>
 
->>>>>>> origin/master
           <View
             style={{
               flexDirection: 'row',
@@ -331,9 +291,5 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
 }
 
 
-<<<<<<< HEAD
-export default SignUp
-=======
 export default SignUp
 
->>>>>>> origin/master

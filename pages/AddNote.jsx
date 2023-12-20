@@ -23,11 +23,7 @@ const AddPlantNote = ({ navigation }) => {
           flex: 1,
           marginBottom: 150,
         }}>
-<<<<<<< HEAD
         <Text style={styles.text}>ADD NOTE</Text>
-=======
-        <Text style={styles.text}>add note</Text>
->>>>>>> origin/master
         {isEmpty === true && (
           <View>
             <Text style={styles.t4}>

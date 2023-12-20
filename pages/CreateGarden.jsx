@@ -76,11 +76,7 @@ const CreateGarden = ({route, navigation}) => {
       colors={['#D1A96DE5', '#DB966FE5']}
       style={{height: '100%'}}>
       <View style={{padding: 20, flex: 1, marginBottom: 110}}>
-<<<<<<< HEAD
         <Text style={styles.text}>Add a new garden</Text>
-=======
-        <Text style={styles.text}>add a new garden</Text>
->>>>>>> origin/master
         {/* add garden section */}
         <View>
           <Text style={styles.t4}>Give a name to your garden</Text>
