@@ -2,10 +2,10 @@ import { View, Text, TouchableOpacity, Image } from "react-native"
 import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/Style";
 
-const Settings = ({navigation, route}) => {
+const Settings = ({ navigation, route }) => {
 
   const { setIsSigned } = route.params;
-  
+
   return (
 
     <LinearGradient
@@ -33,7 +33,7 @@ const Settings = ({navigation, route}) => {
 
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Profile", {setIsSigned: setIsSigned})
+              navigation.navigate("Profile", { setIsSigned: setIsSigned })
             }}
             style={{
               padding: 10,
@@ -89,6 +89,9 @@ const Settings = ({navigation, route}) => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("PrivacyAndSafety");
+            }}
             style={{
               padding: 10,
               borderRadius: 50,
@@ -109,9 +112,7 @@ const Settings = ({navigation, route}) => {
                   marginEnd: 5
                 }}
                 source={require('../images/icons/ic_right_arrow.png')}
-              >
-              </Image>
-
+              />
             </View>
           </TouchableOpacity>
 
