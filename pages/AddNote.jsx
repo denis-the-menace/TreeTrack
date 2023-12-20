@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity, Image } from "react-native"
 import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/Style";
 import React, { useEffect, useState} from 'react';
-//import gardenList from "./jsons/garden_list.json";
 import PlantNote from "../layouts/add_note/PlantNote";
 import GardenNote from "../layouts/add_note/GardenNote";
 import { isEmptyGarden } from "../services/garden_services";
