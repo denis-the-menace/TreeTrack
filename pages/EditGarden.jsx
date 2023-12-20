@@ -50,7 +50,11 @@ const EditGarden = ({ navigation }) => {
                 <ScrollView>
                     <View style={{ marginBottom: 90 }}>
                         <Text style={styles.subtext}> &gt; {garden.name}</Text>
+<<<<<<< HEAD
                         <Text style={styles.text}>Edit garden</Text>
+=======
+                        <Text style={styles.text}>edit garden</Text>
+>>>>>>> origin/master
                         <Text style={styles.t4}>Edit garden name</Text>
                         <TextInput
                             value={gardenName}

@@ -10,6 +10,7 @@ const Profile = ({route}) => {
   
   const { setIsSigned } = route.params;
   const currentUser = auth().currentUser;
+<<<<<<< HEAD
   const [firstName, setFirstName] = useState("Name");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,6 +34,17 @@ const Profile = ({route}) => {
     });
   }, []);
   
+=======
+  const[userName, setUserName] = useState("Name");
+
+  useEffect(() => {
+    const ref = firestore().collection('users').doc(currentUser.uid)
+      ref.onSnapshot(documentSnapshot => {
+        setUserName(documentSnapshot.data().name);
+        console.log('User data: ', documentSnapshot.data());
+      });
+  }, []);
+>>>>>>> origin/master
 
   const handleSignOut = () => {
     auth()
@@ -60,7 +72,11 @@ const Profile = ({route}) => {
           flex: 1,
         }}>
           <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#09A555" }}>
+<<<<<<< HEAD
             PROFILE
+=======
+            profile
+>>>>>>> origin/master
           </Text>
 
         </View>
@@ -84,6 +100,10 @@ const Profile = ({route}) => {
         >
           <Image
             source={require("../images/profile.png")}>
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
           </Image>
         </View>
         <View style={{
@@ -103,11 +123,19 @@ const Profile = ({route}) => {
               paddingBottom: 10,
               borderRadius: 10
             }}>
+<<<<<<< HEAD
             <Text style={{color: "black"}}>{firstName}</Text>
             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
             <Text style={{color: "black"}}>{lastName}</Text>
             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
             <Text style={{color: "black"}}>{email}</Text>
+=======
+            <Text style={{color: "black"}}>{userName}</Text>
+            <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
+            <Text style={{color: "black"}}>Last Name</Text>
+            <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
+            <Text style={{color: "black"}}>Bio</Text>
+>>>>>>> origin/master
             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
             <Text style={{color: "black"}}>Home Garden</Text>
 

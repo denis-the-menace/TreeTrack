@@ -19,7 +19,11 @@ const Settings = ({navigation, route}) => {
           flex: 2,
         }}>
           <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#09A555" }}>
+<<<<<<< HEAD
             SETTINGS
+=======
+            settings
+>>>>>>> origin/master
           </Text>
 
         </View>
@@ -143,9 +147,12 @@ const Settings = ({navigation, route}) => {
           </TouchableOpacity>
 
           <TouchableOpacity
+<<<<<<< HEAD
             onPress={() => {
               navigation.navigate("Support");
             }}
+=======
+>>>>>>> origin/master
             style={{
               padding: 10,
               borderRadius: 50,
@@ -160,10 +167,22 @@ const Settings = ({navigation, route}) => {
               }}
             >
               <Text style={{ color: "#25596E" }}> Support </Text>
+<<<<<<< HEAD
               <Image
                 style={{ marginEnd: 5 }}
                 source={require('../images/icons/ic_right_arrow.png')}
               />
+=======
+
+              <Image
+                style={{
+                  marginEnd: 5
+                }}
+                source={require('../images/icons/ic_right_arrow.png')}
+              >
+              </Image>
+
+>>>>>>> origin/master
             </View>
           </TouchableOpacity>
 

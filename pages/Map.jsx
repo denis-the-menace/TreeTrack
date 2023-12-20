@@ -86,7 +86,11 @@ const Map = () => {
       colors={['#D1A96DE5', '#DB966FE5']}
       style={{height: '100%'}}>
       <View style={styles.container}>
+<<<<<<< HEAD
         <Text style={styles.text}>MAP</Text>
+=======
+        <Text style={styles.text}>map</Text>
+>>>>>>> origin/master
 
         {/* TODO: search bar - google cloud gerekli*/}
         <TextInput

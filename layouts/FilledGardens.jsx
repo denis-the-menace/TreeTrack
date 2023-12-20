@@ -27,7 +27,11 @@ const FilledGardens = ({ navigation, gardens, onUpdate }) => {
           flex: 1,
         }}>
           <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#9E673D" }}>
+<<<<<<< HEAD
             MY GARDENS
+=======
+            my gardens
+>>>>>>> origin/master
           </Text>
 
         </View>
