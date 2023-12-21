@@ -1,17 +1,19 @@
-import {
-  View,
-} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Image } from 'react-native';
 import Pick from './Pick';
 import UnPick from './UnPick';
 import ImagePicker from 'react-native-image-crop-picker';
 
-
-const PhotoPick = ({onSelect, isCleared, setIsCleared}) => {
-
-  const handleUnPick = () => setImageSelected(false);
-  const [imagePath, setImage] = useState(null);
+const PhotoPick = ({ onSelect, isCleared, setIsCleared }) => {
+  const [imagePath, setImagePath] = useState(null);
   const [isImageSelected, setImageSelected] = useState(false);
+
+  const handleUnPick = () => {
+    setImagePath(null);
+    setImageSelected(false);
+    setIsCleared(true);
+    onSelect(null);
+  };
 
   const openCamera = () => {
     ImagePicker.openCamera({
@@ -20,16 +22,13 @@ const PhotoPick = ({onSelect, isCleared, setIsCleared}) => {
       cropping: true,
       freeStyleCropEnabled: true,
     })
-      .then(image => {
-        // console.log("Image (camera): ", image);
-        setImage(image.path);
+      .then((image) => {
+        setImagePath(image.path);
         setImageSelected(true);
-        isCleared = false
-        setIsCleared(false)
+        setIsCleared(false);
         onSelect(image);
-        //this.bs.current.snapTo(1);
       })
-      .catch(error => {
+      .catch((error) => {
         onSelect(null);
         if (error.message === 'User cancelled image selection') {
           console.log(error.message + ' (camera)');
@@ -46,30 +45,37 @@ const PhotoPick = ({onSelect, isCleared, setIsCleared}) => {
       cropping: true,
       freeStyleCropEnabled: true,
     })
-      .then(image => {
-        //console.log('Image (gallery): ', image);
-        setImage(image.path);
+      .then((image) => {
+        setImagePath(image.path);
         setImageSelected(true);
-        isCleared = false
-        setIsCleared(false)
+        setIsCleared(false);
         onSelect(image);
       })
-      .catch(error => {
+      .catch((error) => {
         onSelect(null);
         if (error.message === 'User cancelled image selection') {
-            console.log(error.message + ' (gallery)');
+          console.log(error.message + ' (gallery)');
         } else {
           console.log('Other Error', error);
         }
       });
   };
 
+  //image size
   return (
-    <View>
+    <View style={{ alignItems: 'center' }}>
       {isImageSelected && !isCleared ? (
-        <Pick unPick={handleUnPick} image={imagePath} />
+        <TouchableOpacity onPress={handleUnPick}>
+          <Image
+            style={{ width: 175, height: 233, borderRadius: 10 }}
+            
+            source={{ uri: imagePath }}
+          />
+        </TouchableOpacity>
       ) : (
-        <UnPick openCamera={openCamera} openGallery={openGallery} />
+        <View>
+          <UnPick openCamera={openCamera} openGallery={openGallery} />
+        </View>
       )}
     </View>
   );

@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
-    marginBottom: 50,
+    marginBottom: 20, //tab bar moved down a bit
     borderRadius: 30,
     paddingTop: 20,
     paddingBottom: 20,
