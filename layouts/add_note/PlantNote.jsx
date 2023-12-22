@@ -128,29 +128,37 @@ const PlantNote = ({navigation}) => {
   }; 
   
   return (
-    <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{height: '100%'}}>
-      <ScrollView>
-        <View style={{marginBottom: 90}}>
+    <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{ height: '100%' }}>
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={{ marginBottom: 90, paddingHorizontal: 10 }}>
           <Text style={styles.t4}>
-            Take a photo of your plant or select it from your gallery.
+            Add a photo of your plant
           </Text>
-          <PhotoPick onSelect={onSelectImage} isCleared = {isImageCleared} setIsCleared = {setIsImageCleared}></PhotoPick>
-          
+          <PhotoPick
+            onSelect={onSelectImage}
+            isCleared={isImageCleared}
+            setIsCleared={setIsImageCleared}
+            
+          />
+
           <Text style={styles.t4}>Select a garden</Text>
           <View style={styles.picker_view}>
             <Picker
               dropdownIconRippleColor={'rgba(202, 255, 222, 0.56)'}
               dropdownIconColor={'#21212110'}
-              style={{color: '#212121'}}
+              style={{ color: '#212121' }}
               selectedValue={gardenPickerValue}
-              onValueChange={itemValue => {
+              onValueChange={(itemValue) => {
                 setGardenPickerValue(itemValue);
                 setSelectedGarden(
-                  gardenList.find(garden => garden.id === itemValue),
+                  gardenList.find((garden) => garden.id === itemValue)
                 );
-                navigation.setParams({ selectedPlant: null });
-              }}>
-              {gardenNames.map(garden => (
+              }}
+            >
+              {gardenNames.map((garden) => (
                 <Picker.Item
                   key={garden.id}
                   label={garden.gardenName}
@@ -159,54 +167,66 @@ const PlantNote = ({navigation}) => {
               ))}
             </Picker>
           </View>
-          <Text style={styles.t4}>Select a plant from garden</Text>
-          <View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-            {selectedPlant && <Text style={{fontSize: 18, color: "#fff", marginHorizontal: 10, fontWeight: 'bold'}}> {selectedPlant.name}</Text>}
-            <TouchableOpacity
-            style={{
+
+          <Text style={styles.t4}>Enter your notes</Text>
+          <KeyboardAvoidingView
+            behavior="padding"
+            keyboardVerticalOffset={10}
+            style={{ flex: 1 }}
+          >
+            {/*Automatic growth of the text input field as you enter
+            text has been prevented and a scrool has been added.*/}
+            <ScrollView
+              style={{ maxHeight: 130 }} // Max height of ScrollView
+              contentContainerStyle={{ flexGrow: 1 }}
+            >
+              <TextInput
+                value={plantNote}
+                onChangeText={(text) => setPlantNote(text)}
+                multiline
+                numberOfLines={5}
+                placeholder="Plant notes..."
+                placeholderTextColor={'#21212160'}
+                style={styles.text_area}
+                scrollEnabled={false}
+              />
+            </ScrollView>
+
+            <Text style={styles.t4}>Select a plant from garden</Text>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+              {/* Open Map Button */}
+              <TouchableOpacity
+                style={{
                   ...styles.button_left,
                   flexDirection: 'row',
                   alignItems: 'center',
                 }}
-            onPress={() => {
-              navigation.navigate('SelectPlant', {selectedGarden});
-            }}>
-              <Image
+                onPress={() => {
+                  navigation.navigate('SelectPlant', { selectedGarden });
+                }}
+              >
+                <Image
                   source={{
                     uri: 'https://cdn-icons-png.flaticon.com/32/854/854901.png',
                   }}
                   style={{
                     width: 25,
                     height: 25,
-                  }}></Image>
-              <Text style={{ ...styles.bt1, color: '#212121', marginLeft: 5 }}> Open Map </Text>
-            </TouchableOpacity>
-            
-          </View> 
-          <Text style={styles.t4}>Enter your notes</Text>
-          <KeyboardAvoidingView 
-            behavior='padding'
-            keyboardVerticalOffset={10}
-            >
-          <TextInput
-            value={plantNote}
-            onChangeText={text => setPlantNote(text)}
-            multiline
-            numberOfLines={5}
-            placeholder="Plant notes..."
-            placeholderTextColor={'#21212160'}
-            style={styles.text_area}
-    
-          />
-          {/* TODO: fotoğraf seçilince küçük ekranlarda bu buton navbar'ın altında kalıyor */}
-          <TouchableOpacity
-            style={styles.button_right}
-            onPress={saveNote}>
-            <Text style={styles.bt1}> Save Note </Text>
-          </TouchableOpacity>
+                  }}
+                ></Image>
+                <Text style={{ ...styles.bt1, color: '#212121', marginLeft: 5 }}> Open Map </Text>
+              </TouchableOpacity>
+
+              {/* Save Button */}
+              <TouchableOpacity
+                style={styles.button_right}
+                onPress={saveNote}
+              >
+                <Text style={styles.bt1}> Save </Text>
+              </TouchableOpacity>
+            </View>
+
           </KeyboardAvoidingView>
-          
-          
         </View>
       </ScrollView>
     </LinearGradient>

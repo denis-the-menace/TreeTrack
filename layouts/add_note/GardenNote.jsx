@@ -118,7 +118,7 @@ const GardenNote = ({ navigation }) => {
       >
         <View style={{ marginBottom: 90, paddingHorizontal: 10 }}>
           <Text style={styles.t4}>
-            Take a photo of your garden or select it from your gallery.
+            Add a photo of your garden
           </Text>
           <PhotoPick
             onSelect={onSelectImage}
