@@ -67,7 +67,7 @@ const PhotoPick = ({ onSelect, isCleared, setIsCleared }) => {
       {isImageSelected && !isCleared ? (
         <TouchableOpacity onPress={handleUnPick}>
           <Image
-            style={{ width: 175, height: 233, borderRadius: 10 }}
+            style={{ width: 175, height: 230, borderRadius: 10 }}
             
             source={{ uri: imagePath }}
           />
