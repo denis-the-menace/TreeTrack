@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Image } from 'react-native';
 import Pick from './Pick';
 import UnPick from './UnPick';
 import ImagePicker from 'react-native-image-crop-picker';
+import styles from '../../styles/Style';
 
 const PhotoPick = ({ onSelect, isCleared, setIsCleared }) => {
   const [imagePath, setImagePath] = useState(null);
@@ -61,17 +62,26 @@ const PhotoPick = ({ onSelect, isCleared, setIsCleared }) => {
       });
   };
 
-  //image size
+
   return (
     <View style={{ alignItems: 'center' }}>
       {isImageSelected && !isCleared ? (
-        <TouchableOpacity onPress={handleUnPick}>
+        <View>
+          <TouchableOpacity onPress={handleUnPick} style={styles.deleteIcon}>
+            {/* cross icon added */}
+            <Image
+              style={{ width: 15, height: 15 }}
+              source={require('TreeTrack/images/icons/cross_icon.png')}
+            />
+          </TouchableOpacity>
+
+          {/* TouchableOpacity has been removed */}
           <Image
-            style={{ width: 175, height: 230, borderRadius: 10 }}
-            
+            style={{ width: 175, height: 230, borderRadius: 10 }} //image size
             source={{ uri: imagePath }}
           />
-        </TouchableOpacity>
+
+        </View>
       ) : (
         <View>
           <UnPick openCamera={openCamera} openGallery={openGallery} />
