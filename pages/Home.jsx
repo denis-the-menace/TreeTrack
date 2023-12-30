@@ -65,12 +65,7 @@ const Home = ({navigation}) => {
               </Text>
             </TouchableOpacity>
 
-            <Text
-              style={{
-                color: 'white',
-                marginTop: 10,
-                marginLeft: 10,
-              }}>
+            <Text className="text-white mt-4 ml-4">
               Already have an account?
             </Text>
 
