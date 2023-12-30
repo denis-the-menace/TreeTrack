@@ -1,18 +1,20 @@
-import { View, Text, TouchableOpacity, Image } from "react-native"
-import LinearGradient from "react-native-linear-gradient";
-import styles from "../styles/Style";
-import React, { useEffect, useState} from 'react';
-import PlantNote from "../layouts/add_note/PlantNote";
-import GardenNote from "../layouts/add_note/GardenNote";
-import { isEmptyGarden } from "../services/garden_services";
+import {View, Text, TouchableOpacity, Image} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import styles from '../styles/Style';
+import React, {useEffect, useState} from 'react';
+import PlantNote from '../layouts/add_note/PlantNote';
+import GardenNote from '../layouts/add_note/GardenNote';
+import {isEmptyGarden} from '../services/garden_services';
 
-const AddPlantNote = ({ navigation }) => {
+const AddPlantNote = ({navigation}) => {
   const [showGarden, setShowGarden] = useState(false); // display plant note page by default
-  const [isEmpty, setIsEmptyGarden] = useState(-1)
-  useEffect(()=> {
-    const fetchData = async () => {setIsEmptyGarden(await isEmptyGarden())}
-    fetchData()
-  }, [])
+  const [isEmpty, setIsEmptyGarden] = useState(-1);
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsEmptyGarden(await isEmptyGarden());
+    };
+    fetchData();
+  }, []);
 
   return (
     <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{height: '100%'}}>
@@ -37,16 +39,20 @@ const AddPlantNote = ({ navigation }) => {
                 borderRadius: 10,
                 elevation: 7,
                 marginVertical: 20,
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "row",
-                justifyContent: "center"
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'center',
               }}
               onPress={() => {
                 navigation.navigate('CreateGarden');
               }}>
-              <Image source={require("../images/icons/plant_white.png")} style={{width: 25, height: 25, marginRight: 10}}></Image>
-              <Text style={{...styles.t4, alignSelf: "center"}}>Add Garden</Text>
+              <Image
+                source={require('../images/icons/plant_white.png')}
+                style={{width: 25, height: 25, marginRight: 10}}></Image>
+              <Text style={{...styles.t4, alignSelf: 'center'}}>
+                Add Garden
+              </Text>
             </TouchableOpacity>
           </View>
         )}
@@ -102,6 +108,6 @@ const AddPlantNote = ({ navigation }) => {
       </View>
     </LinearGradient>
   );
-}
+};
 
-export default AddPlantNote
+export default AddPlantNote;

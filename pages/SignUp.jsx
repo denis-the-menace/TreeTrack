@@ -1,12 +1,19 @@
-import LinearGradient from "react-native-linear-gradient";
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, ToastAndroid } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  ToastAndroid,
+} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore'
-import CheckBox from "@react-native-community/checkbox";
-import { saveUserId } from "../services/storage";
+import firestore from '@react-native-firebase/firestore';
+import CheckBox from '@react-native-community/checkbox';
+import {saveUserId} from '../services/storage';
 
-const SignUp = ({ setIsInSignIn, setIsSigned }) => {
+const SignUp = ({setIsSigned, navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,52 +21,50 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [rememberToggleCheckBox, setRememberToggleCheckBox] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
 
-
-
-
-  const handleSignUp = () => {
-    if (toggleCheckBox && email != '' && name != '' && password != '') {
+  const handleSignUp = async () => {
+    if (toggleCheckBox && email !== '' && name !== '' && password !== '') {
       if (password !== confirmPassword) {
         ToastAndroid.show('Passwords do not match!', ToastAndroid.SHORT);
         return;
       }
-      auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(async (response) => {
-          const { uid, email } = response.user;
-          const ref = firestore().collection('users').doc(uid)
-          ref.set({
-            "user_uid": uid,
-            "name": name,
-            "email": email,
-          })
-          setIsSigned(true);
-          await saveUserId(uid, toggleCheckBox);
-          console.log('User signed up!');
-          ToastAndroid.show('User signed up!', ToastAndroid.SHORT);
 
-          })
-        .catch((error) => {
-          console.log(error);
-          ToastAndroid.show(error.message.split('] ')[1], ToastAndroid.SHORT);
+      try {
+        const response = await auth().createUserWithEmailAndPassword(
+          email,
+          password,
+        );
+        const {uid, email} = response.user;
+        const ref = firestore().collection('users').doc(uid);
+
+        await ref.set({
+          user_uid: uid,
+          name: name,
+          email: email,
         });
-    }
 
-    else if (email == '' || password == '' || name == '') {
+        setIsSigned(true);
+        await saveUserId(uid, toggleCheckBox);
+
+        console.log('User signed up!');
+        ToastAndroid.show('User signed up!', ToastAndroid.SHORT);
+      } catch (error) {
+        console.error(error);
+        if (error.message) {
+          ToastAndroid.show(error.message.split('] ')[1], ToastAndroid.SHORT);
+        }
+      }
+    } else if (email === '' || password === '' || name === '') {
       ToastAndroid.show('Please fill the form correctly!', ToastAndroid.SHORT);
+    } else {
+      ToastAndroid.show(
+        'Please, read and confirm the terms and conditions!',
+        ToastAndroid.SHORT,
+      );
     }
-
-    else {
-      ToastAndroid.show('Please, read and confirm the terms and conditions!', ToastAndroid.SHORT);
-    }
-
   };
-
-  const handleSignIn = () => {
-    setIsInSignIn(true)
-  }
 
   return (
     <View
@@ -133,9 +138,8 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
               color: 'black',
             }}
           />
-          
 
-          <View style={{ position: 'relative' }}>
+          <View style={{position: 'relative'}}>
             <TextInput
               value={password}
               onChangeText={setPassword}
@@ -153,23 +157,26 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
               }}
             />
             <TouchableOpacity
-                onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                disabled={!password}
-                style={{
-                  position: 'absolute',
-                  right: 20,
-                  top: '50%',
-                  transform: [{ translateY: -9 }],
-                  opacity: password ? 1 : 0.5,
-                }}>
-                <Image 
-                source={isPasswordVisible ? require('../images/icons/eye_close.png') : require('../images/icons/eye_icon.png')}
-                style={{ width: 24, height: 24 }}>
-                </Image>
+              onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+              disabled={!password}
+              style={{
+                position: 'absolute',
+                right: 20,
+                top: '50%',
+                transform: [{translateY: -9}],
+                opacity: password ? 1 : 0.5,
+              }}>
+              <Image
+                source={
+                  isPasswordVisible
+                    ? require('../images/icons/eye_close.png')
+                    : require('../images/icons/eye_icon.png')
+                }
+                style={{width: 24, height: 24}}></Image>
             </TouchableOpacity>
-          </View>  
-        
-          <View style={{ position: 'relative' }}>
+          </View>
+
+          <View style={{position: 'relative'}}>
             <TextInput
               value={confirmPassword}
               onChangeText={setConfirmPassword}
@@ -187,19 +194,24 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
               }}
             />
             <TouchableOpacity
-                onPress={() => setIsConfirmPasswordVisible(!isConfirmPasswordVisible)}
-                disabled={!confirmPassword}
-                style={{
-                  position: 'absolute',
-                  right: 20,
-                  top: '50%',
-                  transform: [{ translateY: -9 }],
-                  opacity: confirmPassword ? 1 : 0.5,
-                }}>
-                <Image 
-                source={isConfirmPasswordVisible ? require('../images/icons/eye_close.png') : require('../images/icons/eye_icon.png')}
-                style={{ width: 24, height: 24 }}>
-                </Image>
+              onPress={() =>
+                setIsConfirmPasswordVisible(!isConfirmPasswordVisible)
+              }
+              disabled={!confirmPassword}
+              style={{
+                position: 'absolute',
+                right: 20,
+                top: '50%',
+                transform: [{translateY: -9}],
+                opacity: confirmPassword ? 1 : 0.5,
+              }}>
+              <Image
+                source={
+                  isConfirmPasswordVisible
+                    ? require('../images/icons/eye_close.png')
+                    : require('../images/icons/eye_icon.png')
+                }
+                style={{width: 24, height: 24}}></Image>
             </TouchableOpacity>
           </View>
 
@@ -277,7 +289,7 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
         <Text style={{color: 'black'}}>Already have an account?</Text>
 
         <Text
-          onPress={handleSignIn}
+          onPress={() => navigation.navigate('SignIn', {setIsSigned: false})}
           style={{
             textDecorationLine: 'underline',
             fontWeight: 'bold',
@@ -288,8 +300,6 @@ const SignUp = ({ setIsInSignIn, setIsSigned }) => {
       </View>
     </View>
   );
-}
+};
 
-
-export default SignUp
-
+export default SignUp;

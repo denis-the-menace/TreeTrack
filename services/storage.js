@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // async storage'dan key ile değer alınır
-export const getFromStorage = async (key) => {
+export const getFromStorage = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
@@ -26,7 +26,7 @@ export const saveUserId = async (userId, remember_auth) => {
 // oturum açılırken user_uid ve hatırlama tercihi async storage'a kaydedilir
 export const removeUserId = async () => {
   try {
-    await AsyncStorage.clear()
+    await AsyncStorage.clear();
     console.log('User info cleared!');
   } catch (error) {
     console.log('Error clearing: ', error);

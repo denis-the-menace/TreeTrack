@@ -1,49 +1,50 @@
-import LinearGradient from "react-native-linear-gradient";
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, ToastAndroid } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  ToastAndroid,
+} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore'
-import CheckBox from "@react-native-community/checkbox";
-import { saveUserId } from "../services/storage";
+import firestore from '@react-native-firebase/firestore';
+import CheckBox from '@react-native-community/checkbox';
+import {saveUserId} from '../services/storage';
 
-
-const SignIn = ({ setIsInSignIn, setIsSigned }) => {
+const SignIn = ({setIsSigned, navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
+  const handleLogin = async () => {
+    if (email !== '' && password !== '') {
+      try {
+        const response = await auth().signInWithEmailAndPassword(
+          email,
+          password,
+        );
+        const uid = response.user.uid;
+        const usersRef = firestore().collection('users').doc(uid);
+        const firestoreDocument = await usersRef.get();
 
-  const handleLogin = () => {
-    if (email != '' && password != '') {
-      auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(response => {
-          const uid = response.user.uid;
-          const usersRef = firestore().collection('users').doc(uid);
-          usersRef
-            .get()
-            .then(async firestoreDocument => {
-              if (!firestoreDocument.exists) {
-                ToastAndroid.show('User does not exist!', ToastAndroid.SHORT);
-              }
-              setIsSigned(true);
-              await saveUserId(uid, toggleCheckBox);
-              ToastAndroid.show(
-                'User signed in succesfully.',
-                ToastAndroid.SHORT,
-              );
-            })
-            .catch(error => {
-              console.error(error);
-              ToastAndroid.show(error.toString(), ToastAndroid.SHORT);
-            });
-        })
-        .catch(error => {
-          console.log(error);
+        if (!firestoreDocument.exists) {
+          ToastAndroid.show('User does not exist!', ToastAndroid.SHORT);
+        }
+
+        setIsSigned(true);
+        await saveUserId(uid, toggleCheckBox);
+        console.log('inside handleLogin ', uid, toggleCheckBox);
+        ToastAndroid.show('User signed in successfully.', ToastAndroid.SHORT);
+      } catch (error) {
+        console.error(error);
+        if (error.message) {
           ToastAndroid.show(error.message.split('] ')[1], ToastAndroid.SHORT);
-        });
-    } else if (email == '' || password == '') {
+        }
+      }
+    } else if (email === '' || password === '') {
       ToastAndroid.show(
         'Email and password cannot be empty!',
         ToastAndroid.SHORT,
@@ -56,12 +57,7 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
     }
   };
 
-  const handleSignUp = () => {
-    setIsInSignIn(false)
-  }
-
   return (
-
     <View
       style={{
         paddingTop: '8%',
@@ -77,9 +73,7 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
         style={{
           width: '75%',
         }}
-        source={require('../images/tree_track.png')}>
-
-        </Image>
+        source={require('../images/tree_track.png')}></Image>
 
       <LinearGradient
         colors={['#BAE9D1', '#36861C']}
@@ -91,13 +85,9 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
           borderBottomLeftRadius: 0,
           borderBottomRightRadius: 50,
           padding: 20,
-          paddingBottom: '20%'
-
-
+          paddingBottom: '20%',
         }}>
-        
         <View>
-
           <Text
             style={{
               color: 'white',
@@ -120,10 +110,10 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
               paddingRight: 20,
               marginTop: 10,
               elevation: 10,
-              color: 'black'
+              color: 'black',
             }}
           />
-          <View style={{ position: 'relative' }}>
+          <View style={{position: 'relative'}}>
             <TextInput
               value={password}
               onChangeText={setPassword}
@@ -141,19 +131,22 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
               }}
             />
             <TouchableOpacity
-                onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                disabled={!password}
-                style={{
-                  position: 'absolute',
-                  right: 20,
-                  top: '50%',
-                  transform: [{ translateY: -9 }],
-                  opacity: password ? 1 : 0.5,
-                }}>
-                <Image 
-                source={isPasswordVisible ? require('../images/icons/eye_close.png') : require('../images/icons/eye_icon.png')}
-                style={{ width: 24, height: 24 }}>
-                </Image>
+              onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+              disabled={!password}
+              style={{
+                position: 'absolute',
+                right: 20,
+                top: '50%',
+                transform: [{translateY: -9}],
+                opacity: password ? 1 : 0.5,
+              }}>
+              <Image
+                source={
+                  isPasswordVisible
+                    ? require('../images/icons/eye_close.png')
+                    : require('../images/icons/eye_icon.png')
+                }
+                style={{width: 24, height: 24}}></Image>
             </TouchableOpacity>
           </View>
 
@@ -173,13 +166,11 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
               marginTop: 10,
               alignItems: 'center',
             }}>
-
             <CheckBox
               disabled={false}
               value={toggleCheckBox}
               onValueChange={newValue => setToggleCheckBox(newValue)}
               tintColors={{true: 'white'}}
-
             />
             <Text
               style={{
@@ -187,15 +178,8 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
               }}>
               Remember me
             </Text>
-
-
           </View>
-
-
         </View>
-
-
-        
       </LinearGradient>
 
       <TouchableOpacity
@@ -224,7 +208,7 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
         <Text style={{color: 'black'}}>Don't you have an account?</Text>
 
         <Text
-          onPress={handleSignUp}
+          onPress={() => navigation.navigate('SignUp', {setIsSigned: false})}
           style={{
             textDecorationLine: 'underline',
             fontWeight: 'bold',
@@ -235,8 +219,6 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
       </View>
     </View>
   );
-}
+};
 
-
-export default SignIn
-
+export default SignIn;

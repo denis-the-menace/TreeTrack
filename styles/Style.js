@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -133,12 +133,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-end',
   },
-  deleteIcon: { // for cross icon in AddPlant page
+  deleteIcon: {
+    // for cross icon in AddPlant page
     position: 'absolute',
     top: 0,
     right: 0,
     zIndex: 1,
-  }
+  },
 });
 
 export default styles;
