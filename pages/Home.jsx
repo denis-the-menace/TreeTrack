@@ -3,69 +3,34 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 
 const Home = ({navigation}) => {
   return (
-    <LinearGradient colors={['#FFFFFF', '#FFFFFF']} style={{height: '100%'}}>
-      <View style={{flex: 1}}>
-        <View
-          style={{
-            padding: 20,
-            paddingTop: 100,
-            flex: 10,
-            alignItems: 'center',
-          }}>
+    <LinearGradient colors={['#FFFFFF', '#FFFFFF']} className="h-full">
+      <View className="flex">
+        <View className="h-2/3 p-8 pt-32 flex items-center">
           <Image
             resizeMode="contain"
-            style={{
-              width: '100%',
-            }}
+            className="w-full"
             source={require('../images/tree_track.png')}></Image>
 
           <Image
             resizeMode="contain"
-            style={{
-              width: '75%',
-              marginTop: 50,
-            }}
+            className="w-3/4 mt-8"
             source={require('../images/human.png')}></Image>
         </View>
-        <View
-          style={{
-            flex: 5,
-          }}>
+        <View className="flex h-1/3">
           <LinearGradient
-            colors={['#BAE9D1', '#36861C']}
-            style={{
-              height: '100%',
-              borderTopLeftRadius: 50,
-              borderTopRightRadius: 50,
-              alignItems: 'center',
-            }}>
+            colors={['#9BC8B0', '#285D13']}
+            className="h-full rounded-t-[40px] items-center">
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate('SignUp', {setIsSigned: false})
               }
-              style={{
-                justifyContent: 'center',
-                backgroundColor: 'white',
-                borderRadius: 50,
-                marginTop: 50,
-                marginLeft: 50,
-                marginRight: 50,
-                height: 50,
-                width: '75%',
-                elevation: 5,
-              }}>
-              <Text
-                style={{
-                  fontSize: 16,
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                  color: '#36861C',
-                }}>
+              className="justify-center bg-white rounded-full mt-12 mx-8 h-16 w-3/4 shadow-md">
+              <Text className="text-lg text-center font-bold text-green-600">
                 SIGN UP
               </Text>
             </TouchableOpacity>
 
-            <Text className="text-white mt-4 ml-4">
+            <Text className="text-white text-xl mt-4 ml-4">
               Already have an account?
             </Text>
 
@@ -73,11 +38,7 @@ const Home = ({navigation}) => {
               onPress={() =>
                 navigation.navigate('SignIn', {setIsSigned: false})
               }
-              style={{
-                color: 'white',
-                textDecorationLine: 'underline',
-                marginLeft: 10,
-              }}>
+              className="text-white text-xl underline ml-2">
               Sign in
             </Text>
           </LinearGradient>

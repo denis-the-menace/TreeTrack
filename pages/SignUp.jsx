@@ -67,237 +67,146 @@ const SignUp = ({setIsSigned, navigation}) => {
   };
 
   return (
-    <View
-      style={{
-        padding: '5%',
-        alignItems: 'center',
-        backgroundColor: '#efefef',
-        height: '100%',
-      }}>
+    <View className="flex p-8 justify-center items-center bg-white h-full">
       <Image
         resizeMode="contain"
-        style={{
-          marginVertical: 10,
-          marginHorizontal: '5%',
-          alignItems: 'center',
-          width: '75%',
-        }}
+        className="w-5/6 items-center"
         source={require('../images/tree_track.png')}></Image>
-
       <LinearGradient
-        colors={['#BAE9D1', '#36861C']}
-        style={{
-          width: '100%',
-          borderTopLeftRadius: 50,
-          borderTopRightRadius: 50,
-          borderBottomLeftRadius: 0,
-          borderBottomRightRadius: 50,
-          paddingHorizontal: 20,
-          paddingTop: '5%',
-          paddingBottom: '10%',
-        }}>
-        <View>
-          <Text
+        className="w-full mt-2 p-8 rounded-[32px] rounded-bl-none flex items-center"
+        colors={['#BAE9D1', '#36861C']}>
+        <Text className="text-white text-xl mb-2 text-center">Welcome!</Text>
+
+        <TextInput
+          value={name}
+          onChangeText={setName}
+          placeholder="Name"
+          placeholderTextColor={'#21212160'}
+          className="bg-white rounded-full mt-2 pl-4 w-full text-black"
+          style={{
+            elevation: 10,
+          }}
+        />
+
+        <TextInput
+          value={email}
+          onChangeText={setEmail}
+          placeholder="E-mail"
+          placeholderTextColor={'#21212160'}
+          className="bg-white rounded-full mt-2 pl-4 w-full text-black"
+          style={{
+            elevation: 10,
+          }}
+        />
+
+        <View className="relative w-full">
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Password"
+            placeholderTextColor={'#21212160'}
+            secureTextEntry={!isPasswordVisible}
+            className="bg-white rounded-full mt-2 pl-4 w-full text-black"
             style={{
-              color: 'white',
-              textAlign: 'center',
-              fontSize: 20,
-              marginBottom: '5%',
+              elevation: 10,
+            }}
+          />
+          <TouchableOpacity
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+            disabled={!password}
+            style={{
+              position: 'absolute',
+              right: 20,
+              top: '50%',
+              transform: [{translateY: -9}],
+              opacity: password ? 1 : 0.5,
             }}>
-            welcome :)
-          </Text>
-
-          <TextInput
-            value={name}
-            onChangeText={setName}
-            placeholder="Name"
-            placeholderTextColor={'#21212160'}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 50,
-              paddingLeft: 20,
-              paddingRight: 20,
-              marginTop: 10,
-              elevation: 10,
-              color: 'black',
-            }}
-          />
-
-          <TextInput
-            value={email}
-            onChangeText={setEmail}
-            placeholder="E-mail"
-            placeholderTextColor={'#21212160'}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 50,
-              paddingLeft: 20,
-              paddingRight: 20,
-              marginTop: 10,
-              elevation: 10,
-              color: 'black',
-            }}
-          />
-
-          <View style={{position: 'relative'}}>
-            <TextInput
-              value={password}
-              onChangeText={setPassword}
-              placeholder="Password"
-              placeholderTextColor={'#21212160'}
-              secureTextEntry={!isPasswordVisible}
-              style={{
-                backgroundColor: 'white',
-                borderRadius: 50,
-                paddingLeft: 20,
-                paddingRight: 20,
-                marginTop: 10,
-                elevation: 10,
-                color: 'black',
-              }}
-            />
-            <TouchableOpacity
-              onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-              disabled={!password}
-              style={{
-                position: 'absolute',
-                right: 20,
-                top: '50%',
-                transform: [{translateY: -9}],
-                opacity: password ? 1 : 0.5,
-              }}>
-              <Image
-                source={
-                  isPasswordVisible
-                    ? require('../images/icons/eye_close.png')
-                    : require('../images/icons/eye_icon.png')
-                }
-                style={{width: 24, height: 24}}></Image>
-            </TouchableOpacity>
-          </View>
-
-          <View style={{position: 'relative'}}>
-            <TextInput
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-              placeholder="Confirm password"
-              placeholderTextColor={'#21212160'}
-              secureTextEntry={!isConfirmPasswordVisible}
-              style={{
-                backgroundColor: 'white',
-                borderRadius: 50,
-                paddingLeft: 20,
-                paddingRight: 20,
-                marginTop: 10,
-                elevation: 10,
-                color: 'black',
-              }}
-            />
-            <TouchableOpacity
-              onPress={() =>
-                setIsConfirmPasswordVisible(!isConfirmPasswordVisible)
+            <Image
+              source={
+                isPasswordVisible
+                  ? require('../images/icons/eye_close.png')
+                  : require('../images/icons/eye_icon.png')
               }
-              disabled={!confirmPassword}
-              style={{
-                position: 'absolute',
-                right: 20,
-                top: '50%',
-                transform: [{translateY: -9}],
-                opacity: confirmPassword ? 1 : 0.5,
-              }}>
-              <Image
-                source={
-                  isConfirmPasswordVisible
-                    ? require('../images/icons/eye_close.png')
-                    : require('../images/icons/eye_icon.png')
-                }
-                style={{width: 24, height: 24}}></Image>
-            </TouchableOpacity>
-          </View>
-
-          <View
-            style={{
-              flexDirection: 'row',
-              marginTop: 10,
-              alignItems: 'center',
-            }}>
-            <CheckBox
-              disabled={false}
-              value={toggleCheckBox}
-              onValueChange={newValue => setToggleCheckBox(newValue)}
-              tintColors={{true: 'white'}}
+              className="w-6 h-6"
             />
-            <Text
-              style={{
-                color: 'white',
-              }}>
-              I accept the
-            </Text>
+          </TouchableOpacity>
+        </View>
 
-            <Text
-              style={{
-                color: 'white',
-                textDecorationLine: 'underline',
-              }}>
-              {'\t'}terms and conditions
-            </Text>
-          </View>
-          <View
+        <View className="relative w-full">
+          <TextInput
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            placeholder="Confirm password"
+            placeholderTextColor={'#21212160'}
+            secureTextEntry={!isConfirmPasswordVisible}
+            className="bg-white rounded-full mt-2 pl-4 w-full text-black"
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
+              elevation: 10,
+            }}
+          />
+          <TouchableOpacity
+            onPress={() =>
+              setIsConfirmPasswordVisible(!isConfirmPasswordVisible)
+            }
+            disabled={!confirmPassword}
+            style={{
+              position: 'absolute',
+              right: 20,
+              top: '50%',
+              transform: [{translateY: -9}],
+              opacity: confirmPassword ? 1 : 0.5,
             }}>
-            <CheckBox
-              disabled={false}
-              value={rememberToggleCheckBox}
-              onValueChange={newValue => setRememberToggleCheckBox(newValue)}
-              tintColors={{true: 'white'}}
+            <Image
+              source={
+                isConfirmPasswordVisible
+                  ? require('../images/icons/eye_close.png')
+                  : require('../images/icons/eye_icon.png')
+              }
+              className="w-6 h-6"
             />
-            <Text
-              style={{
-                color: 'white',
-              }}>
-              Remember me
-            </Text>
-          </View>
+          </TouchableOpacity>
+        </View>
+
+        <View className="self-start flex flex-row mt-2 ml-2 justify-center items-center">
+          <CheckBox
+            disabled={false}
+            value={toggleCheckBox}
+            onValueChange={newValue => setToggleCheckBox(newValue)}
+            tintColors={{true: 'white'}}
+          />
+          <Text className="text-white text-sm">I accept the</Text>
+
+          <Text className="text-white text-sm underline">
+            {'\t'}terms and conditions
+          </Text>
+        </View>
+        <View className="self-start flex flex-row mt-2 ml-2 justify-center items-center">
+          <CheckBox
+            disabled={false}
+            value={rememberToggleCheckBox}
+            onValueChange={newValue => setRememberToggleCheckBox(newValue)}
+            tintColors={{true: 'white'}}
+          />
+          <Text className="text-white text-sm">Remember me</Text>
         </View>
       </LinearGradient>
-
       <TouchableOpacity
         onPress={handleSignUp}
+        className="justify-center bg-[#36861C] rounded-full mt-8 mx-8 h-16 w-3/4"
         style={{
-          justifyContent: 'center',
-          backgroundColor: '#36861C',
-          borderRadius: 50,
-          marginTop: 15,
-          marginLeft: 50,
-          marginRight: 50,
-          height: 50,
-          width: '75%',
           elevation: 5,
         }}>
-        <Text style={{color: '#fff', fontSize: 16, textAlign: 'center'}}>
+        <Text className="text-lg text-center font-bold text-white">
           SIGN UP
         </Text>
       </TouchableOpacity>
+      <Text className="text-black text-lg mt-4">Already have an account?</Text>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          marginTop: 10,
-        }}>
-        <Text style={{color: 'black'}}>Already have an account?</Text>
-
-        <Text
-          onPress={() => navigation.navigate('SignIn', {setIsSigned: false})}
-          style={{
-            textDecorationLine: 'underline',
-            fontWeight: 'bold',
-            color: '#36861C',
-          }}>
-          {'\t'}Sign in
-        </Text>
-      </View>
+      <Text
+        onPress={() => navigation.navigate('SignIn', {setIsSigned: false})}
+        className="text-lg underline font-bold text-[#36861C]">
+        {'\t'}Sign in
+      </Text>
     </View>
   );
 };
