@@ -24,6 +24,7 @@ import EditGarden from "../pages/EditGarden";
 import EditGardenPolygon from "../pages/EditGardenPolygon";
 import Support from "../pages/Support";
 import PrivacyAndSafety from "../pages/PrivacyAndSafety";
+import MainMenu from "../pages/MainMenu";
 
 
 const { width, height } = Dimensions.get("window")
@@ -45,7 +46,23 @@ const BottomNavigation = ({setIsSigned}) => {
           headerShown: false,
           tabBarHideOnKeyboard: true,
         }}>
-
+        <Tab.Screen
+          name="MainMenu"
+          component={MainMenuScreen} // Main Menu component'ini kullanın
+          options={{
+            unmountOnBlur: true,
+            tabBarIcon: ({ focused }) => (
+              <View style={{ alignItems: "center", justifyContent: "center" }}>
+                <Image
+                  source={focused ? require("../images/icons/focused_mainmenu.png") : require("../images/icons/mainmenu.png")}
+                  resizeMode="contain"
+                  style={styles.bottomNavigationİcons}
+                >
+                </Image>
+              </View>
+            ),
+          }}
+        />
         <Tab.Screen
           name="AddNoteStack"
           component={AddNoteStack}
@@ -203,6 +220,25 @@ const SettingsStack = ({setIsSigned}) => {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Support" component={Support} />
       <Stack.Screen name="PrivacyAndSafety" component={PrivacyAndSafety} />
+    </Stack.Navigator>
+  );
+}
+const MainMenuScreen = ({ setIsSigned }) => {
+
+
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarVisible: false,
+      }}
+    >
+      <Stack.Screen name="Main Menu" component={MainMenu} />
+      <Stack.Screen name="AddNote" component={AddNote} />
+      <Stack.Screen name="OpenMap" component={Map} />
+      <Stack.Screen name="MyGardens" component={Gardens} />
+      <Stack.Screen name="Gallery" component={Galleries} />
+      <Stack.Screen name="Settings" component={Settings} initialParams={{ setIsSigned }} />
     </Stack.Navigator>
   );
 }
