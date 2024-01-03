@@ -1,49 +1,50 @@
-import LinearGradient from "react-native-linear-gradient";
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, ToastAndroid } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  ToastAndroid,
+} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore'
-import CheckBox from "@react-native-community/checkbox";
-import { saveUserId } from "../services/storage";
+import firestore from '@react-native-firebase/firestore';
+import CheckBox from '@react-native-community/checkbox';
+import {saveUserId} from '../services/storage';
 
-
-const SignIn = ({ setIsInSignIn, setIsSigned }) => {
+const SignIn = ({setIsSigned, navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
+  const handleLogin = async () => {
+    if (email !== '' && password !== '') {
+      try {
+        const response = await auth().signInWithEmailAndPassword(
+          email,
+          password,
+        );
+        const uid = response.user.uid;
+        const usersRef = firestore().collection('users').doc(uid);
+        const firestoreDocument = await usersRef.get();
 
-  const handleLogin = () => {
-    if (email != '' && password != '') {
-      auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(response => {
-          const uid = response.user.uid;
-          const usersRef = firestore().collection('users').doc(uid);
-          usersRef
-            .get()
-            .then(async firestoreDocument => {
-              if (!firestoreDocument.exists) {
-                ToastAndroid.show('User does not exist!', ToastAndroid.SHORT);
-              }
-              setIsSigned(true);
-              await saveUserId(uid, toggleCheckBox);
-              ToastAndroid.show(
-                'User signed in succesfully.',
-                ToastAndroid.SHORT,
-              );
-            })
-            .catch(error => {
-              console.error(error);
-              ToastAndroid.show(error.toString(), ToastAndroid.SHORT);
-            });
-        })
-        .catch(error => {
-          console.log(error);
+        if (!firestoreDocument.exists) {
+          ToastAndroid.show('User does not exist!', ToastAndroid.SHORT);
+        }
+
+        setIsSigned(true);
+        await saveUserId(uid, toggleCheckBox);
+        console.log('inside handleLogin ', uid, toggleCheckBox);
+        ToastAndroid.show('User signed in successfully.', ToastAndroid.SHORT);
+      } catch (error) {
+        console.error(error);
+        if (error.message) {
           ToastAndroid.show(error.message.split('] ')[1], ToastAndroid.SHORT);
-        });
-    } else if (email == '' || password == '') {
+        }
+      }
+    } else if (email === '' || password === '') {
       ToastAndroid.show(
         'Email and password cannot be empty!',
         ToastAndroid.SHORT,
@@ -56,187 +57,98 @@ const SignIn = ({ setIsInSignIn, setIsSigned }) => {
     }
   };
 
-  const handleSignUp = () => {
-    setIsInSignIn(false)
-  }
-
   return (
-
-    <View
-      style={{
-        paddingTop: '8%',
-        paddingLeft: '5%',
-        paddingRight: '5%',
-        paddingBottom: '5%',
-        alignItems: 'center',
-        height: '100%',
-        backgroundColor: '#efefef',
-      }}>
+    <View className="flex p-8 justify-center items-center bg-white h-full">
       <Image
         resizeMode="contain"
-        style={{
-          width: '75%',
-        }}
-        source={require('../images/tree_track.png')}>
-
-        </Image>
+        className="w-5/6"
+        source={require('../images/tree_track.png')}
+      />
 
       <LinearGradient
         colors={['#BAE9D1', '#36861C']}
-        style={{
-          width: '100%',
-          marginTop: 40,
-          borderTopLeftRadius: 50,
-          borderTopRightRadius: 50,
-          borderBottomLeftRadius: 0,
-          borderBottomRightRadius: 50,
-          padding: 20,
-          paddingBottom: '20%'
+        className="w-full mt-10 p-8 rounded-[32px] rounded-bl-none flex items-center">
+        <Text className="text-white text-xl mb-2 text-center">Welcome!</Text>
 
-
-        }}>
-        
-        <View>
-
-          <Text
-            style={{
-              color: 'white',
-              textAlign: 'center',
-              fontSize: 20,
-              marginBottom: 10,
-            }}>
-            welcome :)
-          </Text>
-
+        <TextInput
+          value={email}
+          onChangeText={setEmail}
+          placeholder="E-mail"
+          placeholderTextColor={'#21212160'}
+          className="bg-white rounded-full mt-2 pl-4 w-full text-black"
+          style={{
+            elevation: 10,
+          }}
+        />
+        <View className="relative w-full">
           <TextInput
-            value={email}
-            onChangeText={setEmail}
-            placeholder="E-mail"
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Password"
             placeholderTextColor={'#21212160'}
+            secureTextEntry={!isPasswordVisible}
+            className="bg-white rounded-full mt-2 pl-4 w-full text-black"
             style={{
-              backgroundColor: 'white',
-              borderRadius: 50,
-              paddingLeft: 20,
-              paddingRight: 20,
-              marginTop: 10,
               elevation: 10,
-              color: 'black'
             }}
           />
-          <View style={{ position: 'relative' }}>
-            <TextInput
-              value={password}
-              onChangeText={setPassword}
-              placeholder="Password"
-              placeholderTextColor={'#21212160'}
-              secureTextEntry={!isPasswordVisible}
-              style={{
-                backgroundColor: 'white',
-                borderRadius: 50,
-                paddingLeft: 20,
-                paddingRight: 20,
-                marginTop: 10,
-                elevation: 10,
-                color: 'black',
-              }}
-            />
-            <TouchableOpacity
-                onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                disabled={!password}
-                style={{
-                  position: 'absolute',
-                  right: 20,
-                  top: '50%',
-                  transform: [{ translateY: -9 }],
-                  opacity: password ? 1 : 0.5,
-                }}>
-                <Image 
-                source={isPasswordVisible ? require('../images/icons/eye_close.png') : require('../images/icons/eye_icon.png')}
-                style={{ width: 24, height: 24 }}>
-                </Image>
-            </TouchableOpacity>
-          </View>
-
-          <Text
+          <TouchableOpacity
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+            disabled={!password}
             style={{
-              color: 'white',
-              textDecorationLine: 'underline',
-              marginTop: 10,
-              marginLeft: 10,
+              position: 'absolute',
+              right: 20,
+              top: '50%',
+              transform: [{translateY: -9}],
+              opacity: password ? 1 : 0.5,
             }}>
-            Forgot password?
-          </Text>
-
-          <View
-            style={{
-              flexDirection: 'row',
-              marginTop: 10,
-              alignItems: 'center',
-            }}>
-
-            <CheckBox
-              disabled={false}
-              value={toggleCheckBox}
-              onValueChange={newValue => setToggleCheckBox(newValue)}
-              tintColors={{true: 'white'}}
-
-            />
-            <Text
-              style={{
-                color: 'white',
-              }}>
-              Remember me
-            </Text>
-
-
-          </View>
-
-
+            <Image
+              source={
+                isPasswordVisible
+                  ? require('../images/icons/eye_close.png')
+                  : require('../images/icons/eye_icon.png')
+              }
+              className="w-6 h-6"></Image>
+          </TouchableOpacity>
         </View>
 
+        <Text className="text-white text-sm underline mt-2 ml-2">
+          Forgot password?
+        </Text>
 
-        
+        <View className="flex flex-row mt-2 justify-center items-center">
+          <CheckBox
+            disabled={false}
+            value={toggleCheckBox}
+            onValueChange={newValue => setToggleCheckBox(newValue)}
+            tintColors={{true: 'white'}}
+          />
+          <Text className="text-white text-sm">Remember me</Text>
+        </View>
       </LinearGradient>
 
       <TouchableOpacity
         onPress={handleLogin}
+        className="justify-center bg-[#36861C] rounded-full mt-8 mx-8 h-14 w-3/4"
         style={{
-          justifyContent: 'center',
-          backgroundColor: '#36861C',
-          borderRadius: 50,
-          marginTop: 15,
-          marginLeft: 50,
-          marginRight: 50,
-          height: 50,
-          width: '75%',
           elevation: 5,
         }}>
-        <Text style={{color: '#fff', fontSize: 16, textAlign: 'center'}}>
+        <Text className="text-lg text-center font-bold text-white">
           SIGN IN
         </Text>
       </TouchableOpacity>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          marginTop: 10,
-        }}>
-        <Text style={{color: 'black'}}>Don't you have an account?</Text>
+      <Text className="text-black text-lg mt-4">
+        Don't you have an account?
+      </Text>
 
-        <Text
-          onPress={handleSignUp}
-          style={{
-            textDecorationLine: 'underline',
-            fontWeight: 'bold',
-            color: '#36861C',
-          }}>
-          {'\t'}Sign up
-        </Text>
-      </View>
+      <Text
+        onPress={() => navigation.navigate('SignUp', {setIsSigned: false})}
+        className="text-lg underline font-bold text-[#36861C]">
+        {'\t'}Sign up
+      </Text>
     </View>
   );
-}
+};
 
-
-export default SignIn
-
+export default SignIn;

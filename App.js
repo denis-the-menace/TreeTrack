@@ -6,97 +6,66 @@
  * @flow strict-local
  */
 
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import React, {useState, useEffect} from 'react';
+import {View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import BottomNavigation from './navigations/BottomNavigation';
-import SignUp from './pages/SignUp';
-import SignIn from './pages/SignIn';
-import Main from './pages/Main';
 import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/auth';
-import { getFromStorage } from './services/storage';
+import {getFromStorage} from './services/storage';
+import HomeNavigation from './navigations/HomeNavigation';
 
 const App = () => {
   const [isSignedIn, setIsSigned] = useState(false);
-  const [isInMain, setIsInMain] = useState(true);
-  const [isInSign, setIsInSignIn] = useState(false);
-  
+
+  // onAuthStateChanged() kullanmadik cunku zaten giris yapildiginda setIsSigned()
+  // state i degisip buraya aktarilacak. Burada ise sadece AsyncStorage'dan
+  // remember_auth token'ini alip ona gore giris yapilip yapilmadigini kontrol ediyoruz.
   useEffect(() => {
-    getFromStorage('remember_auth')
-      .then(remember_auth => {
+    const checkRememberAuth = async () => {
+      try {
+        const remember_auth = await getFromStorage('remember_auth');
         console.log('Remember auth: ', remember_auth);
+
         if (remember_auth === 'true') {
-          const usersRef = firestore().collection('users');
-          // oturum açan kullanıcının durumunu dinle
-          firebase.auth().onAuthStateChanged(user => {
-            console.log(
-              'Checking if user is signed in before...'
-            );
-            if (user) {
-              usersRef
-                .doc(user.uid)
-                .get()
-                .then(firestoreDocument => {
-                  const userData = firestoreDocument.data();
-                  console.log(
-                    'User already signed in: ' + JSON.stringify(userData),
-                  );
-                  setIsSigned(true);
-                })
-                .catch(error => {
-                  console.log(error.toString());
-                });
+          const user = firebase.auth().currentUser;
+          if (user) {
+            const usersRef = firestore().collection('users');
+            const firestoreDocument = await usersRef.doc(user.uid).get();
+            const userData = firestoreDocument.data();
+            if (userData) {
+              console.log(
+                'User already signed in: ' + JSON.stringify(userData),
+              );
+              setIsSigned(true);
             }
-          });
+          }
         }
-      })
-      .catch(error => console.log('Getting remember auth error: ', error));    
+      } catch (error) {
+        console.log('Getting remember auth error: ', error);
+      }
+    };
+
+    checkRememberAuth();
   }, []);
 
-  const handle = ()  => 
-  {
-    if(isSignedIn)
-    {
-      return (
-        <NavigationContainer>
-          <BottomNavigation setIsSigned={setIsSigned}/>
-        </NavigationContainer>
-        )
-    }
+  const handle = () => {
+    //navigatiorlar arasindaki gecislere animasyon eklenmeli
+    return (
+      <NavigationContainer>
+        {isSignedIn ? (
+          <BottomNavigation setIsSigned={setIsSigned} />
+        ) : (
+          <HomeNavigation setIsSigned={setIsSigned} />
+        )}
+      </NavigationContainer>
+    );
+  };
 
-    else if(isInMain)
-      return <Main setIsInMain={setIsInMain} setIsInSignIn={setIsInSignIn}></Main>
+  // below code returns a blank page?
+  // return <View>{handle()}</View>;
 
-    else if(isInSign)
-       return <SignIn setIsSigned={setIsSigned} setIsInSignIn={setIsInSignIn}/>
-
-    else
-      return <SignUp setIsSigned={setIsSigned} setIsInSignIn={setIsInSignIn}/>
-     
-  }
-
-  const render = handle();
-
-  return (
-    <View>
-      {
-        render
-      }
-    </View>
-  );
+  return handle();
 };
 
-
 export default App;
-/*
-{isSignedIn ? (
-        <NavigationContainer>
-          <BottomNavigation setIsSignedIn={setIsSignedIn}/>
-        </NavigationContainer>
-      ) : isSign ? (
-        <SignIn setIsSignedIn={setIsSignedIn} setIsSign={setIsSign}/>
-      ) : <SignUp setIsSignedIn={setIsSignedIn} setIsSign={setIsSign}/>}
-*/

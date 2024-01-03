@@ -16,6 +16,7 @@ const Profile = ({ route }) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [profileImage, setProfileImage] = useState(null);
+  // Saydamlik ozelligi icin baska bir cozum var mi?
   const [isModalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
