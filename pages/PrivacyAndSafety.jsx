@@ -12,8 +12,9 @@ const PrivacyAndSafety = ({ navigation }) => {
     return (
         <LinearGradient
             colors={["#FFFFFF", "#FFFFFF"]}
-            style={{ flex: 1, fontWeight: 30 }}>
-            <ScrollView contentContainerStyle={{ paddingBottom: 110 }}>
+            
+            style={{ flex: 1 }}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 <View style={{ flex: 1 }}>
 
                     <View style={{
@@ -22,7 +23,7 @@ const PrivacyAndSafety = ({ navigation }) => {
                         marginBottom: 20
                     }}>
 
-                        <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#09A555" }}>
+                        <Text style={{ fontSize: 30, fontWeight: "bold", color: "#09A555" }}>
                             PRIVACY AND SAFETY
                         </Text>
                     </View>
@@ -33,7 +34,7 @@ const PrivacyAndSafety = ({ navigation }) => {
                             backgroundColor: 'grey',
                             height: 100,
                             width: 100,
-                            borderRadius: 40, // Half of the height and width makes it a circle
+                            borderRadius: 40, 
                             borderColor: '#FFFFFF',
                             borderWidth: 7,
                             position: 'absolute',
@@ -57,7 +58,7 @@ const PrivacyAndSafety = ({ navigation }) => {
 
                     <View style={{
                         padding: 20,
-                        flex: 17,
+                        flex: 1,
                         backgroundColor: "#89C6A7",
                         borderTopLeftRadius: 50,
                         borderTopRightRadius: 50
@@ -96,7 +97,8 @@ const PrivacyAndSafety = ({ navigation }) => {
                                 padding: 20,
                                 paddingTop: 10,
                                 paddingBottom: 10,
-                                borderRadius: 10
+                                borderRadius: 10,
+                                marginBottom:70
                             }}>
                             <Text style={{ color: "black" }}>User Conduct:</Text>
                             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
@@ -108,8 +110,8 @@ const PrivacyAndSafety = ({ navigation }) => {
                             <View style={{ marginTop: 5, marginBottom: 5 }}></View>
                             <Text style={{ color: "black" }}>Updates to Policy:</Text>
                             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>We may periodically update our Privacy and Safety policies. It's advisable to review these policies to stay informed about how we handle your data.</Text>
-
+                            <Text style={{ color: "black"}}>We may periodically update our Privacy and Safety policies. It's advisable to review these policies to stay informed about how we handle your data.</Text>
+                            
                         </View>
                     </View>
                 </View>
