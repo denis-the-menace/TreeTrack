@@ -1,35 +1,34 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import { View, Image, Dimensions } from "react-native";
+import React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {View, Image, Dimensions} from 'react-native';
 import AddNote from '../pages/AddNote';
-import Map from "../pages/Map";
-import Gardens from "../pages/Gardens";
-import Profile from "../pages/Profile";
-import Galleries from "../pages/Galleries";
-import styles from "../styles/Style";
-import CreateGarden from "../pages/CreateGarden"
-import SelectPlant from "../pages/SelectPlant"
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import DrawPolygon from "../pages/DrawPolygon";
-import Settings from "../pages/Settings";
-import ViewGarden from "../pages/ViewGarden";
-import Plants from "../pages/Plants";
-import CreatePlant from "../pages/CreatePlant";
-import AddPlantLocation from "../pages/AddPlantLocation";
-import PlantNote from "../layouts/add_note/PlantNote";
-import ViewPlant from "../pages/ViewPlant";
-import EditPlant from "../pages/EditPlant";
-import EditPlantLocation from "../pages/EditPlantLocation";
-import EditGarden from "../pages/EditGarden";
-import EditGardenPolygon from "../pages/EditGardenPolygon";
-import Support from "../pages/Support";
-import PrivacyAndSafety from "../pages/PrivacyAndSafety";
-import MainMenu from "../pages/MainMenu";
+import Map from '../pages/Map';
+import Gardens from '../pages/Gardens';
+import Profile from '../pages/Profile';
+import Galleries from '../pages/Galleries';
+import styles from '../styles/Style';
+import CreateGarden from '../pages/CreateGarden';
+import SelectPlant from '../pages/SelectPlant';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import DrawPolygon from '../pages/DrawPolygon';
+import Settings from '../pages/Settings';
+import ViewGarden from '../pages/ViewGarden';
+import Plants from '../pages/Plants';
+import CreatePlant from '../pages/CreatePlant';
+import AddPlantLocation from '../pages/AddPlantLocation';
+import PlantNote from '../layouts/add_note/PlantNote';
+import ViewPlant from '../pages/ViewPlant';
+import EditPlant from '../pages/EditPlant';
+import EditPlantLocation from '../pages/EditPlantLocation';
+import EditGarden from '../pages/EditGarden';
+import EditGardenPolygon from '../pages/EditGardenPolygon';
+import Support from '../pages/Support';
+import PrivacyAndSafety from '../pages/PrivacyAndSafety';
+import MainMenu from '../pages/MainMenu';
 
-
-const { width, height } = Dimensions.get("window")
-const Tab = createBottomTabNavigator()
-const Stack = createNativeStackNavigator()
+const {width, height} = Dimensions.get('window');
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const BottomNavigation = ({setIsSigned}) => {
   return (
@@ -39,7 +38,7 @@ const BottomNavigation = ({setIsSigned}) => {
         height,
       }}>
       <Tab.Navigator
-      tabBarPosition="bottom"
+        tabBarPosition="bottom"
         screenOptions={{
           tabBarShowLabel: false,
           tabBarStyle: styles.bottomNavigation,
@@ -51,14 +50,16 @@ const BottomNavigation = ({setIsSigned}) => {
           component={MainMenuScreen} // Main Menu component'ini kullanın
           options={{
             unmountOnBlur: true,
-            tabBarIcon: ({ focused }) => (
-              <View style={{ alignItems: "center", justifyContent: "center" }}>
+            tabBarIcon: ({focused}) => (
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Image
-                  source={focused ? require("../images/icons/focused_mainmenu.png") : require("../images/icons/mainmenu.png")}
+                  source={
+                    focused
+                      ? require('../images/icons/focused_mainmenu.png')
+                      : require('../images/icons/mainmenu.png')
+                  }
                   resizeMode="contain"
-                  style={styles.bottomNavigationİcons}
-                >
-                </Image>
+                  style={styles.bottomNavigationİcons}></Image>
               </View>
             ),
           }}
@@ -222,25 +223,26 @@ const SettingsStack = ({setIsSigned}) => {
       <Stack.Screen name="PrivacyAndSafety" component={PrivacyAndSafety} />
     </Stack.Navigator>
   );
-}
-const MainMenuScreen = ({ setIsSigned }) => {
-
-
+};
+const MainMenuScreen = ({setIsSigned}) => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         tabBarVisible: false,
-      }}
-    >
+      }}>
       <Stack.Screen name="Main Menu" component={MainMenu} />
       <Stack.Screen name="AddNote" component={AddNote} />
       <Stack.Screen name="OpenMap" component={Map} />
       <Stack.Screen name="MyGardens" component={Gardens} />
       <Stack.Screen name="Gallery" component={Galleries} />
-      <Stack.Screen name="Settings" component={Settings} initialParams={{ setIsSigned }} />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        initialParams={{setIsSigned}}
+      />
     </Stack.Navigator>
   );
-}
+};
 
 export default BottomNavigation;

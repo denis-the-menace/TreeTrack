@@ -1,44 +1,32 @@
-import { View, Text, Image } from "react-native"
-import LinearGradient from "react-native-linear-gradient";
-import styles from "../styles/Style";
-import { TouchableOpacity } from "react-native";
+import {View, Text, Image} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import styles from '../styles/Style';
+import {TouchableOpacity} from 'react-native';
 
-const EmptyGardens = ({ navigation }) => {
-
+const EmptyGardens = ({navigation}) => {
   return (
-    <LinearGradient
-      colors={["#D1A96DE5", "#DB966FE5"]}
-      style={{ height: "100%" }}
-
-    >
-      <View style={styles.container}>
-        <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#FFF1DD" }}>
-          MY GARDENS
-        </Text>
-
-        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
+    <LinearGradient colors={['#D1A96DE5', '#DB966FE5']} className="h-full">
+      <View className="p-5">
+      <Text className="text-[#FFF1DD] text-3xl font-bold">MY GARDENS</Text>
+        <View className="flex justify-center items-center mt-20">
           <TouchableOpacity
-            style={{ backgroundColor: "#FFF1DD", padding: 35, borderRadius: 50 }}
+            className="bg-[#FFF1DD] rounded-full p-5"
             onPress={() => {
-              navigation.navigate("CreateGarden")
+              navigation.navigate('CreateGarden');
             }}>
-
             <Image
-              source={require("../images/icons/plus.png")}
+              source={require('../images/icons/plus.png')}
               resizeMode="stretch"
-              style={{ height: 30, width: 30 }}
-            >
-
-            </Image>
+              className="w-6 h-6"
+            />
           </TouchableOpacity>
-          <Text style={{ color: "#FFF1DD", fontSize: 20, fontWeight: "300", marginTop: 10 }}>create garden</Text>
+          <Text className="text-[#FFF1DD] mt-2 text-3xl font-bold">
+            add garden
+          </Text>
         </View>
       </View>
-
     </LinearGradient>
-
-  )
-
-}
+  );
+};
 
 export default EmptyGardens;

@@ -1,46 +1,36 @@
-import { View, Text, Image } from "react-native"
-import LinearGradient from "react-native-linear-gradient";
-import styles from "../styles/Style";
-import { TouchableOpacity } from "react-native";
+import {View, Text, Image} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import styles from '../styles/Style';
+import {TouchableOpacity} from 'react-native';
 
-const EmptyPlants = ({ navigation, garden }) => {
+const EmptyPlants = ({navigation, garden}) => {
+  const gardenName = garden.name;
 
-	const gardenName = garden.name;
+  return (
+    <LinearGradient colors={['#89C6A7', '#89C6A7']} className="h-full">
+      <View className="p-5">
+        <Text className="text-[#FFF1DD] text-2xl font-bold">{gardenName}</Text>
+        <Text className="text-[#FFF1DD] text-3xl font-bold">MY PLANTS</Text>
 
-	return (
-		<LinearGradient
-			colors={['#89C6A7', '#89C6A7']}
-			style={{ height: "100%" }}
-
-		>
-			<View style={styles.container}>
-				<Text style={{ fontSize: 20, color: "white", fontWeight: "bold", color: "#FFF1DD" }}> {'\u003E'}{gardenName} </Text>
-				<Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#FFF1DD" }}>
-					my plants
-				</Text>
-
-				<View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
-					<TouchableOpacity
-					  onPress={() => {navigation.navigate("CreatePlant", {garden: garden})}}
-						style={{ backgroundColor: "#25596E", padding: 35, borderRadius: 50 }}
-					>
-
-						<Image
-							source={require("../images/icons/plus2.png")}
-							resizeMode="stretch"
-							style={{ height: 30, width: 30 }}
-						>
-
-						</Image>
-					</TouchableOpacity>
-					<Text style={{ color: "#FFF1DD", fontSize: 20, fontWeight: "300", marginTop: 10 }}>create plant for garden</Text>
-				</View>
-			</View>
-
-		</LinearGradient>
-
-	)
-
-}
+        <View className="flex justify-center items-center mt-20">
+          <TouchableOpacity
+            className="bg-[#25596E] rounded-full p-5"
+            onPress={() => {
+              navigation.navigate('CreatePlant', {garden: garden});
+            }}>
+            <Image
+              source={require('../images/icons/plus2.png')}
+              resizeMode="stretch"
+              className="w-6 h-6"
+            />
+          </TouchableOpacity>
+          <Text className="text-[#FFF1DD] mt-2 text-3xl font-bold">
+            add plant
+          </Text>
+        </View>
+      </View>
+    </LinearGradient>
+  );
+};
 
 export default EmptyPlants;
