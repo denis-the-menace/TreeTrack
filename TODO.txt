@@ -1,0 +1,2 @@
+garden ekledikten sonra garden gozukmuyor
+gardens ve plants sayfalarinda her geciste tekrardan request gonderiyor, sayfanin yuklenmesi icin sure gecmesi gerekiyor. 

@@ -14,85 +14,90 @@ import { formatDate, sortNoteList } from '../../services/helper';
 import strings from '../../strings/string';
 
 const GardenGallery = ({selectedGarden}) => {
-  console.log("selected garden: ", selectedGarden) // TODO - view in gallery
+  console.log('selected garden: ', selectedGarden); // TODO - view in gallery
   const [gardenNoteList, setNoteList] = useState([]);
   const [filteredNoteList, setFilteredNoteList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [pressedItem, setPressedItem] = useState({});
-  const [gardenNames, setGardenNames] = useState([])
+  const [gardenNames, setGardenNames] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true)
-      const gardenNotes = await getGardenNotes()
-      setNoteList(gardenNotes)
-      setFilteredNoteList(gardenNotes)
-      setIsLoading(false)
+      setIsLoading(true);
+      const gardenNotes = await getGardenNotes();
+      setNoteList(gardenNotes);
+      setFilteredNoteList(gardenNotes);
+      setIsLoading(false);
     };
     fetchData();
-    
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true)
-      const gardenNames = await getUserGardenNames()
-      setGardenNames(gardenNames)
-      setIsLoading(false)
-    }
-    fetchData()
+      setIsLoading(true);
+      const gardenNames = await getUserGardenNames();
+      setGardenNames(gardenNames);
+      setIsLoading(false);
+    };
+    fetchData();
   }, []);
 
   const displayNote = item => {
-    
-    setPressedItem(item)
-    setModalVisible(true)
+    setPressedItem(item);
+    setModalVisible(true);
     console.log('Garden note: ', pressedItem);
-
   };
 
-  const sortOptions = [{name: "Newest to Oldest", id: 1}
-                      ,{name: "Oldest to Newest", id: 2}
-                      ,{name: "Garden Names", id: 3}]
-  const [sortOptionPickerValue, setSortOptionPicker] = useState(sortOptions[0])
-  const filterOptions = [{name: "All Gardens", id: 1}, ...gardenNames]
-  const [filterOptionPickerValue, setFilterOptionPicker] = useState(filterOptions[0])
-  
-  const onFilterPickerChange = (itemValue) => {
+  const sortOptions = [
+    {name: 'Newest to Oldest', id: 1},
+    {name: 'Oldest to Newest', id: 2},
+    {name: 'Garden Names', id: 3},
+  ];
+  const [sortOptionPickerValue, setSortOptionPicker] = useState(sortOptions[0]);
+  const filterOptions = [{name: 'All Gardens', id: 1}, ...gardenNames];
+  const [filterOptionPickerValue, setFilterOptionPicker] = useState(
+    filterOptions[0],
+  );
+
+  const onFilterPickerChange = itemValue => {
     setFilterOptionPicker(itemValue);
-    if(itemValue === 1){
-      setFilteredNoteList(gardenNoteList)
-    }else{
-      setFilteredNoteList(gardenNoteList.filter(note => {return note.garden_id == itemValue}))
+    if (itemValue === 1) {
+      setFilteredNoteList(gardenNoteList);
+    } else {
+      setFilteredNoteList(
+        gardenNoteList.filter(note => {
+          return note.garden_id == itemValue;
+        }),
+      );
     }
-  }
+  };
 
-  const onSortOptionChange = (itemValue) => {
-    setSortOptionPicker(itemValue)
-    let sortedNotes = sortNoteList(filteredNoteList, itemValue, 'garden')
-    setFilteredNoteList(sortedNotes)
-  }
+  const onSortOptionChange = itemValue => {
+    setSortOptionPicker(itemValue);
+    let sortedNotes = sortNoteList(filteredNoteList, itemValue, 'garden');
+    setFilteredNoteList(sortedNotes);
+  };
 
-if (isLoading || filteredNoteList.length == 0) {
-  return (
-    <View>
-      {/* order options */}
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingHorizontal: 5,
-          paddingVertical: 10,
-        }}>
+  if (isLoading || filteredNoteList.length == 0) {
+    return (
+      <View>
+        {/* order options */}
         <View
           style={{
-            width: '49%',
-            height: 45,
-            borderRadius: 15,
-            backgroundColor: '#fff',
-            justifyContent: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingHorizontal: 5,
+            paddingVertical: 10,
           }}>
+          <View
+            style={{
+              width: '49%',
+              height: 45,
+              borderRadius: 15,
+              backgroundColor: '#fff',
+              justifyContent: 'center',
+            }}>
             <Picker
               dropdownIconRippleColor={'rgba(202, 255, 222, 0.56)'}
               dropdownIconColor={'#21212110'}
@@ -107,7 +112,7 @@ if (isLoading || filteredNoteList.length == 0) {
                 />
               ))}
             </Picker>
-        </View>
+          </View>
 
         <View
           style={{
@@ -150,20 +155,20 @@ if (isLoading || filteredNoteList.length == 0) {
             backgroundColor: '#fff',
             justifyContent: 'center',
           }}>
-            <Picker
-              dropdownIconRippleColor={'rgba(202, 255, 222, 0.56)'}
-              dropdownIconColor={'#21212110'}
-              style={{color: '#212121'}}
-              selectedValue={filterOptionPickerValue}
-              onValueChange={itemValue => onFilterPickerChange(itemValue)}>
-              {filterOptions.map(filter => (
-                <Picker.Item
-                  key={filter.id}
-                  label={filter.name}
-                  value={filter.id}
-                />
-              ))}
-            </Picker>
+          <Picker
+            dropdownIconRippleColor={'rgba(202, 255, 222, 0.56)'}
+            dropdownIconColor={'#21212110'}
+            style={{color: '#212121'}}
+            selectedValue={filterOptionPickerValue}
+            onValueChange={itemValue => onFilterPickerChange(itemValue)}>
+            {filterOptions.map(filter => (
+              <Picker.Item
+                key={filter.id}
+                label={filter.name}
+                value={filter.id}
+              />
+            ))}
+          </Picker>
         </View>
         <View
           style={{
@@ -173,15 +178,12 @@ if (isLoading || filteredNoteList.length == 0) {
             backgroundColor: '#fff',
             justifyContent: 'center',
           }}>
-          <Picker style={{color: '#212121'}} 
+          <Picker
+            style={{color: '#212121'}}
             selectedValue={sortOptionPickerValue}
             onValueChange={itemValue => onSortOptionChange(itemValue)}>
             {sortOptions.map(sort => (
-              <Picker.Item
-                key={sort.id}
-                label={sort.name}
-                value={sort.id}
-              />
+              <Picker.Item key={sort.id} label={sort.name} value={sort.id} />
             ))}
           </Picker>
         </View>
@@ -216,7 +218,9 @@ if (isLoading || filteredNoteList.length == 0) {
                     ? require('../../images/default_garden.png')
                     : {uri: item.image_url}
                 }></Image>
-              <Text style={{color: '#212121', marginTop: 5}}>{item.garden_name}</Text>
+              <Text style={{color: '#212121', marginTop: 5}}>
+                {item.garden_name}
+              </Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -235,7 +239,10 @@ if (isLoading || filteredNoteList.length == 0) {
                 <TouchableOpacity
                   style={[styles.buttonClose]}
                   onPress={() => setModalVisible(!modalVisible)}>
-                  <Text style={{color: '#fff', paddingTop: 2, fontWeight: '300'}}>x</Text>
+                  <Text
+                    style={{color: '#fff', paddingTop: 2, fontWeight: '300'}}>
+                    x
+                  </Text>
                 </TouchableOpacity>
                 <Text
                   style={{
@@ -279,7 +286,6 @@ if (isLoading || filteredNoteList.length == 0) {
       </ScrollView>
     </View>
   );
-  
 };
 
 export default GardenGallery;

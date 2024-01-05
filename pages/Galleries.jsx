@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity } from "react-native"
-import LinearGradient from "react-native-linear-gradient";
-import styles from "../styles/Style";
+import {View, Text, TouchableOpacity} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import styles from '../styles/Style';
 import GardenGallery from '../layouts/gallery/GardenGallery';
 import PlantGallery from '../layouts/gallery/PlantGallery';
 import React, { useState, useEffect} from 'react';
@@ -8,89 +8,58 @@ import strings from '../strings/string';
 
 const Galleries = ({route}) => {
   // TODO: view in gallery
-  const garden = route.params && route.params.garden ? route.params.garden : null;
+  const garden =
+    route.params && route.params.garden ? route.params.garden : null;
   const plant = route.params && route.params.plant ? route.params.plant : null;
-  const isGardenShown = route.params && route.params.showGarden !== null ? route.params.showGarden : false;
-  
-  const [showGarden, setShowGarden] = useState(true) // display gardens by default
+  const isGardenShown =
+    route.params && route.params.showGarden !== null
+      ? route.params.showGarden
+      : false;
+
+  const [showGarden, setShowGarden] = useState(true); // display gardens by default
 
   return (
-    <LinearGradient colors={['#FFFFFF', '#FFFFFF']} style={{height: '100%'}}>
-      <View style={{flex: 1}}>
-        <View
-          style={{
-            padding: 20,
-            flex: 3,
-          }}>
-          <Text
-            style={{
-              fontSize: 30,
-              color: 'white',
-              fontWeight: 'bold',
-              color: '#09A555',
-              marginBottom: 10,
-            }}>
-            {strings.gallery_title}
+    <LinearGradient colors={['#FFFFFF', '#FFFFFF']} className="h-full">
+      <View className="flex">
+        <View className="flex h-1/6 p-5">
+          <Text className="mb-2 text-lg text-center font-bold text-[#09A555]">
+          {strings.gallery_title}
           </Text>
 
-          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-            <View
-              style={{
-                flexDirection: 'row',
-                padding: 5,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 10,
-                backgroundColor: '#09A555',
-              }}>
+          <View className="flex flex-row justify-center">
+            <View className="p-2 flex flex-row items-center justify-center rounded-m">
               <TouchableOpacity
+                className="p-2 rounded-lg w-24"
                 style={{
-                  width: 100,
-                  padding: 5,
-                  backgroundColor: showGarden ? '#25596E': '#09A555',
-                  borderRadius: 5,
+                  backgroundColor: showGarden ? '#25596E' : '#09A555',
                 }}
                 onPress={() => setShowGarden(true)}>
-                <Text style={styles.bt1}> {strings.garden_button} </Text>
+                <Text className="text-white text-center"> {strings.garden_button} </Text>
               </TouchableOpacity>
 
-              <View
-                style={{
-                  backgroundColor: '#FFFFFF50',
-                  width: 2,
-                  height: 25,
-                  marginStart: 5,
-                  marginEnd: 5,
-                }}></View>
+              <View className="bg-[#FFFFFF50] w-1 h-8 mx-2"></View>
 
               <TouchableOpacity
+                className="p-2 rounded-lg w-24"
                 style={{
-                  width: 100,
-                  padding: 5,
-                  backgroundColor: !showGarden ? '#25596E': '#09A555',
-                  borderRadius: 5,
+                  backgroundColor: !showGarden ? '#25596E' : '#09A555',
                 }}
                 onPress={() => setShowGarden(false)}>
-                <Text style={styles.bt1}> {strings.plant_button} </Text>
+                <Text className="text-white text-center"> {strings.plant_button} </Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
 
-        <View
-          style={{
-            padding: 20,
-            flex: 20,
-            backgroundColor: '#89C6A7',
-            borderTopLeftRadius: 50,
-            borderTopRightRadius: 50,
-          }}>
-          {showGarden && <GardenGallery selectedGarden = {garden}></GardenGallery>}
+        <View className="flex h-5/6 p-5 bg-[#89C6A7] rounded-t-[40px] items-center">
+          {showGarden && (
+            <GardenGallery selectedGarden={garden}></GardenGallery>
+          )}
           {!showGarden && <PlantGallery></PlantGallery>}
         </View>
       </View>
     </LinearGradient>
   );
-}
+};
 
-export default Galleries
+export default Galleries;

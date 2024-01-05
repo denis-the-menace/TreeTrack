@@ -3,7 +3,7 @@ import { Menu, MenuOption, MenuOptions, MenuProvider, MenuTrigger } from "react-
 import { deleteGarden } from "../services/garden_services";
 import strings from '../strings/string';
 
-const {height} = Dimensions.get("window")
+const {height} = Dimensions.get('window');
 // delete garden -> bu islemin digerleri gibi child componentlarda olması lazım
 const handleDelete = async (gardenId, onUpdate) => {
   try {
@@ -11,92 +11,61 @@ const handleDelete = async (gardenId, onUpdate) => {
     ToastAndroid.show('Garden is deleted.', ToastAndroid.SHORT);
     onUpdate();
   } catch (error) {
-    console.log("Delete garden error: ", error)
+    console.log('Delete garden error: ', error);
   }
-}
+};
 
-const GardenCard = ({ navigation, garden, onUpdate }) => {
-  const garden_image =
-    !garden.image_url
-      ? 'https://cdn-icons-png.flaticon.com/512/3039/3039008.png'
-      : garden.image_url;
+const GardenCard = ({navigation, garden, onUpdate}) => {
+  const garden_image = !garden.image_url
+    ? 'https://cdn-icons-png.flaticon.com/512/3039/3039008.png'
+    : garden.image_url;
   return (
     <TouchableOpacity
-      onPress={()=>{navigation.navigate("ViewGarden", {garden, onUpdate})}}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          marginBottom: 10,
-        }}>
-        <View
-          style={{
-            width: '75%',
-            backgroundColor: '#FFF1DD',
-            padding: 10,
-            borderRadius: 10,
-          }}>
+      onPress={() => {
+        navigation.navigate('ViewGarden', {garden, onUpdate});
+      }}>
+      <View className="flex flex-row justify-center mb-2">
+        <View className="w-3/4 bg-white p-4 rounded-lg m-4">
           <Image
+            className="w-full"
             style={{
-              width: '100%',
               height: height * 0.25,
-              marginBottom: 10,
             }}
             source={{
               uri: garden_image,
             }}></Image>
 
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}>
-
-            <Text style={{ color: "#212121" }}>
-              {garden.name}
-            </Text>
-
+          <View className="flex flex-row justify-between items-center">
+            <Text className="text-[#212121] text-center">{garden.name}</Text>
 
             <Menu>
-              <MenuTrigger style={{}}>
+              <MenuTrigger>
                 <Image
-                  style={{ width: 22, height: 22 }}
-                  source={require('../images/icons/ic_options.png')}>
-
-                </Image>
+                  className="w-6 h-6"
+                  source={require('../images/icons/ic_options.png')}></Image>
               </MenuTrigger>
               <MenuOptions
                 optionsContainerStyle={{
-                  width: 150,
+                  width: '30%',
                   backgroundColor: '#FFF1DD',
-                  borderRadius: 5,
+                  borderRadius: 24,
                 }}>
-                <View style={{ borderColor: '#888888', borderWidth: 1 }}>
-                  <MenuOption onSelect={() => navigation.navigate("EditGarden", {garden, onUpdate})}>
-                    <Text style={{ textAlign: 'center', color: '#212121' }}>
-                      Edit
-                    </Text>
+                <View className="border-[#888888] border-4 rounded-3xl">
+                  <MenuOption
+                    className="border-[#888888] border-b-2"
+                    onSelect={() =>
+                      navigation.navigate('EditGarden', {garden, onUpdate})
+                    }>
+                    <Text className="text-center text-[#212121]">{strings.edit_pc}</Text>
                   </MenuOption>
-                  <View
-                    style={{ backgroundColor: '#888888', height: 1, width: '100%' }}
-                  />
-                  {/* <MenuOption onSelect={() => alert(`Rename`)}>
-                    <Text style={{ textAlign: 'center', color: '#212121' }}>
-                      Rename
-                    </Text>
-                  </MenuOption> */}
-                  <View
-                    style={{ backgroundColor: '#888888', height: 1, width: '100%' }}
-                  />
-                  <MenuOption onSelect={() => alert(`Share`)}>
-                    <Text style={{ textAlign: 'center', color: '#212121' }}>
-                    {strings.share_gc}
-                    </Text>
+                  <MenuOption
+                    className="border-[#888888] border-b-2"
+                    onSelect={() => alert(`Share`)}>
+                    <Text className="text-center text-[#212121]">{strings.share_gc}</Text>
                   </MenuOption>
-                  <View
-                    style={{ backgroundColor: '#888888', height: 1, width: '100%' }}
-                  />
-                  <MenuOption onSelect={() => handleDelete(garden.id, onUpdate)}>
-                    <Text style={{ textAlign: 'center', color: 'red' }}>
-                    {strings.delete_gc}
-                    </Text>
+                  <MenuOption
+                    onSelect={() => handleDelete(garden.id, onUpdate)}>
+                    <Text className="text-center text-[#C04444]">{strings.delete_gc}</Text>
                   </MenuOption>
                 </View>
               </MenuOptions>
@@ -106,6 +75,6 @@ const GardenCard = ({ navigation, garden, onUpdate }) => {
       </View>
     </TouchableOpacity>
   );
-}
+};
 
-export default GardenCard
+export default GardenCard;
