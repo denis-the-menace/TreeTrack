@@ -238,7 +238,7 @@ const MainMenuScreen = ({setIsSigned}) => {
       <Stack.Screen name="Gallery" component={Galleries} />
       <Stack.Screen
         name="Settings"
-        component={Settings}
+        component={SettingsStack}
         initialParams={{setIsSigned}}
       />
     </Stack.Navigator>
