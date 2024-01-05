@@ -65,8 +65,8 @@ const strings = {
 
   //Galleries
   gallery_title: 'GALLERY',
-  garden_button: 'Garden',
-  plant_button: 'Plant',
+  garden_button: ' Garden ',
+  plant_button: ' Plant ',
 
   //Home
   alreadyAccount: 'Already have an account?',
@@ -202,6 +202,7 @@ const strings = {
   //EmptyGarden--FilledGardens
   my_gardens_B: 'MY GARDENS',
   createGarden_eg: 'Create Garden',
+  addGarden_eg:'Add Garden',
 
   //EmptyPlants--FilledPlants
   my_plants_B: 'MY PLANTS',
