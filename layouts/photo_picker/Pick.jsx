@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from '../../styles/Style';
+import strings from '../../strings/string';
 
 const Pick = ({ unPick, image }) => {
   return (
@@ -13,7 +14,7 @@ const Pick = ({ unPick, image }) => {
 
       </Image>
       <TouchableOpacity onPress={unPick} style={styles.button}>
-        <Text style={styles.bt1}> Select Another Picture </Text>
+        <Text style={styles.bt1}> {strings.select_another_p} </Text>
       </TouchableOpacity>
     </View>
 

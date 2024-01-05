@@ -13,6 +13,7 @@ import React, { useState, useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { getPlantsOfGarden, isInsidePolygon } from '../services/garden_services';
 import { setMapPositionByGardenArea } from '../services/helper';
+import strings from '../strings/string';
 
 const EditPlantLocation = ({ navigation }) => {
   const [selectedMapType, setMapType] = useState('standard');
@@ -94,7 +95,7 @@ const EditPlantLocation = ({ navigation }) => {
   return (
     <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{ height: '100%' }}>
       <View style={styles.container}>
-        <Text style={styles.text}>edit plant location</Text>
+        <Text style={styles.text}>{strings.edit_plant_location}</Text>
 
         <Text
           style={{
@@ -189,7 +190,7 @@ const EditPlantLocation = ({ navigation }) => {
               }}
               onPress={handleCurrentLocationPress}>
               <Text style={{ color: '#212121', fontSize: 12, fontWeight: '500' }}>
-                Use Current Location
+              {strings.use_current_location}
               </Text>
             </TouchableOpacity>
           </View>
@@ -213,7 +214,7 @@ const EditPlantLocation = ({ navigation }) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{ color: 'white' }}>Standart</Text>
+            <Text style={{ color: 'white' }}>{strings.standard}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -224,7 +225,7 @@ const EditPlantLocation = ({ navigation }) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{ color: 'white' }}>Hybrid</Text>
+            <Text style={{ color: 'white' }}>{strings.hybrid}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -235,7 +236,7 @@ const EditPlantLocation = ({ navigation }) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{ color: 'white' }}>Satellite</Text>
+            <Text style={{ color: 'white' }}>{strings.satellite}</Text>
           </TouchableOpacity>
         </View>
 
@@ -249,7 +250,7 @@ const EditPlantLocation = ({ navigation }) => {
               onUpdate,
             }); // go back to edit page to save garden
           }}>
-          <Text style={styles.bt1}> Save Location </Text>
+          <Text style={styles.bt1}> {strings.save_location} </Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

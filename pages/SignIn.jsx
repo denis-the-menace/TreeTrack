@@ -1,5 +1,6 @@
 import LinearGradient from 'react-native-linear-gradient';
 import React, {useState} from 'react';
+import strings from '../strings/string';
 import {
   View,
   Text,
@@ -68,12 +69,12 @@ const SignIn = ({setIsSigned, navigation}) => {
       <LinearGradient
         colors={['#BAE9D1', '#36861C']}
         className="w-full mt-10 p-8 rounded-[32px] rounded-bl-none flex items-center">
-        <Text className="text-white text-xl mb-2 text-center">Welcome!</Text>
+        <Text className="text-white text-xl mb-2 text-center">{strings.welcome}!</Text>
 
         <TextInput
           value={email}
           onChangeText={setEmail}
-          placeholder="E-mail"
+          placeholder={strings.emailPlaceholder}
           placeholderTextColor={'#21212160'}
           className="bg-white rounded-full mt-2 pl-4 w-full text-black"
           style={{
@@ -84,7 +85,7 @@ const SignIn = ({setIsSigned, navigation}) => {
           <TextInput
             value={password}
             onChangeText={setPassword}
-            placeholder="Password"
+            placeholder={strings.passwordPlaceholder}
             placeholderTextColor={'#21212160'}
             secureTextEntry={!isPasswordVisible}
             className="bg-white rounded-full mt-2 pl-4 w-full text-black"
@@ -113,7 +114,7 @@ const SignIn = ({setIsSigned, navigation}) => {
         </View>
 
         <Text className="text-white text-sm underline mt-2 ml-2">
-          Forgot password?
+        {strings.forgotPassword}
         </Text>
 
         <View className="flex flex-row mt-2 justify-center items-center">
@@ -123,7 +124,7 @@ const SignIn = ({setIsSigned, navigation}) => {
             onValueChange={newValue => setToggleCheckBox(newValue)}
             tintColors={{true: 'white'}}
           />
-          <Text className="text-white text-sm">Remember me</Text>
+          <Text className="text-white text-sm">{strings.rememberMe}</Text>
         </View>
       </LinearGradient>
 
@@ -134,18 +135,18 @@ const SignIn = ({setIsSigned, navigation}) => {
           elevation: 5,
         }}>
         <Text className="text-lg text-center font-bold text-white">
-          SIGN IN
+        {strings.signIn_B}
         </Text>
       </TouchableOpacity>
 
       <Text className="text-black text-lg mt-4">
-        Don't you have an account?
+      {strings.dontHaveAccount}
       </Text>
 
       <Text
         onPress={() => navigation.navigate('SignUp', {setIsSigned: false})}
         className="text-lg underline font-bold text-[#36861C]">
-        {'\t'}Sign up
+        {'\t'}{strings.signUp}
       </Text>
     </View>
   );

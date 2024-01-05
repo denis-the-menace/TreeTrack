@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import {useRoute} from '@react-navigation/native';
 import { getPlantsOfGarden, isInsidePolygon } from '../services/garden_services';
 import { setMapPositionByGardenArea } from '../services/helper';
+import strings from '../strings/string';
 
 const AddPlantLocation = ({navigation}) => {
   const [selectedMapType, setMapType] = useState("standard");
@@ -79,7 +80,7 @@ const AddPlantLocation = ({navigation}) => {
   return (
     <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{height: '100%'}}>
       <View style={styles.container}>
-        <Text style={styles.text}>Select plant location</Text>
+        <Text style={styles.text}>{strings.select_plant_location}</Text>
 
         <Text
           style={{
@@ -87,7 +88,7 @@ const AddPlantLocation = ({navigation}) => {
             color: '#efefef',
             marginBottom: 10,
           }}>
-          Select new plant's location by tapping to map
+          {strings.select_location_instructions}
         </Text>
 
         <View style={{width: '100%', height: '50%'}}>
@@ -176,7 +177,7 @@ const AddPlantLocation = ({navigation}) => {
               }}
               onPress={handleCurrentLocationPress}>
               <Text style={{color: '#212121', fontSize: 12, fontWeight: '500'}}>
-                Use Current Location
+               {strings.current_location_selected}
               </Text>
             </TouchableOpacity>
           </View>
@@ -200,7 +201,7 @@ const AddPlantLocation = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>Standart</Text>
+            <Text style={{color: "white"}}>{strings.standard}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -211,7 +212,7 @@ const AddPlantLocation = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>Hybrid</Text>
+            <Text style={{color: "white"}}>{strings.hybrid}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -222,7 +223,7 @@ const AddPlantLocation = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>Satellite</Text>
+            <Text style={{color: "white"}}>{strings.satellite}</Text>
           </TouchableOpacity>
         </View>
         
@@ -230,7 +231,7 @@ const AddPlantLocation = ({navigation}) => {
         onPress={() => {
           navigation.navigate('CreatePlant', {"coordinates": selectedLocation, garden, onUpdate}); // go back to create page to save garden
         }}>
-          <Text style={styles.bt1}> Save Location </Text>
+          <Text style={styles.bt1}> {strings.save_location} </Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-
+import strings from '../strings/string';
 
 
 const Support = ({ navigation }) => {
@@ -21,7 +21,7 @@ const Support = ({ navigation }) => {
                 }}>
 
                     <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#09A555" }}>
-                        SUPPORT
+                    {strings.supportTitle_B}
                     </Text>
                 </View>
 
@@ -60,7 +60,7 @@ const Support = ({ navigation }) => {
                     borderTopLeftRadius: 50,
                     borderTopRightRadius: 50
                 }}>
-                    <Text style={{ color: "white", fontSize: 20, paddingLeft: 20, marginTop: 20 }}>Contact Us</Text>
+                    <Text style={{ color: "white", fontSize: 20, paddingLeft: 20, marginTop: 20 }}>{strings.contactUs}</Text>
                     <View
                         style={{
                             backgroundColor: "white",
@@ -70,13 +70,13 @@ const Support = ({ navigation }) => {
                             borderRadius: 10
 
                         }}>
-                        <Text style={{ color: "black" }}>Thank you for choosing Tree Track! Your feedback and inquiries are valuable to us. We're dedicated to providing you with the best gardening experience possible.
+                        <Text style={{ color: "black" }}>{strings.thankYouMessage}
                         </Text>
-                        <Text style={{ color: "black" }}>Our customer support team is available to assist you with any questions, concerns, or feedback you may have. Please feel free to reach out to us via email or phone.
+                        <Text style={{ color: "black" }}>{strings.customerSupport}
                         </Text>
 
                     </View>
-                    <Text style={{ color: "white", fontSize: 20, paddingLeft: 20, marginTop: 20 }}>Contact Via</Text>
+                    <Text style={{ color: "white", fontSize: 20, paddingLeft: 20, marginTop: 20 }}>{strings.contactInformation}</Text>
                     <View
                         style={{
                             backgroundColor: "white",
@@ -85,12 +85,12 @@ const Support = ({ navigation }) => {
                             paddingBottom: 10,
                             borderRadius: 10
                         }}>
-                        <Text style={{ color: "black" }}>Email: treetrack_info@gmail.com</Text>
+                        <Text style={{ color: "black" }}>{strings.email_support}</Text>
                         <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
-                        <Text style={{ color: "black" }}>Phone: +1234567890</Text>
+                        <Text style={{ color: "black" }}>{strings.phoneNumber_support}</Text>
                         <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
-                        <Text style={{ color: "black" }}>Address: Tree Track Company, 151. Street, No: 7840</Text>
-                        <Text style={{ color: 'black' ,textAlign:'right',paddingRight:5}}>Ankara, Türkiye</Text>
+                        <Text style={{ color: "black" }}>{strings.address_support}</Text>
+                        <Text style={{ color: 'black' ,textAlign:'right',paddingRight:5}}>{strings.ankara_turkey}</Text>
                         
                      
 

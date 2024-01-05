@@ -15,6 +15,7 @@ import storage from '@react-native-firebase/storage';
 import {insertNewPlant} from '../services/plant_services';
 import AutocompleteInput from 'react-native-autocomplete-input';
 import {getPlantTypes, searchPlantType} from '../services/plant_type_services';
+import strings from '../strings/string';
 
 const CreatePlant = ({route, navigation}) => {
   const onUpdate =
@@ -90,10 +91,10 @@ const CreatePlant = ({route, navigation}) => {
           {'\u003E'}
           {garden.name}{' '}
         </Text>
-        <Text style={styles.text}>Add a new plant</Text>
+        <Text style={styles.text}>{strings.add_new_plant}</Text>
         {/* add plant section */}
         <View>
-          <Text style={styles.t4}>Give a name to your plant</Text>
+          <Text style={styles.t4}>{strings.give_name_to_plant}</Text>
           <TextInput
             value={plantName}
             onChangeText={text => setPlantName(text)}
@@ -112,7 +113,7 @@ const CreatePlant = ({route, navigation}) => {
               elevation: 5,
               fontSize: 16,
             }}></TextInput>
-          <Text style={styles.t4}>Select plant type</Text>
+          <Text style={styles.t4}>{strings.select_plant_type}</Text>
           <View
             style={{
               width: '100%',
@@ -142,7 +143,7 @@ const CreatePlant = ({route, navigation}) => {
                 elevation: 5,
                 fontSize: 16,
               }}
-              placeholder="Enter plant type"
+              placeholder={strings.enter_plant_type}
               placeholderTextColor={'#21212160'}
               flatListProps={{
                 keyExtractor: (_, idx) => idx,
@@ -172,7 +173,7 @@ const CreatePlant = ({route, navigation}) => {
             padding: 10,
             width: '100%',
           }}>
-          <Text style={styles.t4}>Add location of your plant</Text>
+          <Text style={styles.t4}>{strings.add_location_plant}</Text>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <TouchableOpacity
               style={{
@@ -196,8 +197,7 @@ const CreatePlant = ({route, navigation}) => {
                   height: 25,
                 }}></Image>
               <Text style={{...styles.bt1, color: '#212121', marginLeft: 5}}>
-                Open Map
-              </Text>
+              {strings.open_map}              </Text>
             </TouchableOpacity>
             {plantLocation.length > 2 && (
               <Image
@@ -215,7 +215,7 @@ const CreatePlant = ({route, navigation}) => {
         <TouchableOpacity
               style={{...styles.button_right, width: 125}}
               onPress={addPlant}>
-              <Text style={{...styles.bt1}}>Add</Text>
+              <Text style={{...styles.bt1}}>{strings.add_button}</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

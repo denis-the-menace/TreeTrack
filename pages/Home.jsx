@@ -1,5 +1,6 @@
 import LinearGradient from 'react-native-linear-gradient';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
+import strings from '../strings/string';
 
 const Home = ({navigation}) => {
   return (
@@ -26,12 +27,12 @@ const Home = ({navigation}) => {
               }
               className="justify-center bg-white rounded-full mt-12 mx-8 h-16 w-3/4 shadow-md">
               <Text className="text-lg text-center font-bold text-green-600">
-                SIGN UP
+              {strings.signUp_B}
               </Text>
             </TouchableOpacity>
 
             <Text className="text-white text-xl mt-4 ml-4">
-              Already have an account?
+            {strings.alreadyAccount}
             </Text>
 
             <Text
@@ -39,7 +40,7 @@ const Home = ({navigation}) => {
                 navigation.navigate('SignIn', {setIsSigned: false})
               }
               className="text-white text-xl underline ml-2">
-              Sign in
+              {strings.signIn}
             </Text>
           </LinearGradient>
         </View>

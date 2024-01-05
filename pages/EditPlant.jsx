@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import styles from '../styles/Style';
 import { useRoute } from '@react-navigation/native';
 import { updatePlant } from '../services/plant_services';
+import strings from '../strings/string';
 
 const EditPlant = ({ navigation }) => {
     const route = useRoute();
@@ -48,8 +49,8 @@ const EditPlant = ({ navigation }) => {
                 <ScrollView>
                     <View style={{ marginBottom: 90 }}>
                         <Text style={styles.subtext}> &gt; {plant.name}</Text>
-                        <Text style={styles.text}>edit plant</Text>
-                        <Text style={styles.t4}>Edit plant name</Text>
+                        <Text style={styles.text}>{strings.edit_plant}</Text>
+                        <Text style={styles.t4}>{strings.edit_plant_name}</Text>
                         <TextInput
                             value={plantName}
                             onChangeText={text => setPlantNameValue(text)}
@@ -57,7 +58,7 @@ const EditPlant = ({ navigation }) => {
                             placeholderTextColor={'#21212160'}
                             style={styles.text_area}
                         />
-                        <Text style={styles.t4}>Edit location of your plant</Text>
+                        <Text style={styles.t4}>{strings.edit_location_plant}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <TouchableOpacity
                                 style={{
@@ -77,7 +78,7 @@ const EditPlant = ({ navigation }) => {
                                         height: 25,
                                     }}></Image>
                                 <Text style={{ ...styles.bt1, color: '#212121', marginLeft: 5 }}>
-                                    Open Map
+                                {strings.open_map}
                                 </Text>
                             </TouchableOpacity>
                             {Object.keys(plantNewLocation).length === 2 && (
@@ -92,7 +93,7 @@ const EditPlant = ({ navigation }) => {
                             )}
                         </View>
                         <TouchableOpacity style={styles.button_right} onPress={handleUpdatePlant}>
-                            <Text style={styles.bt1}> Update </Text>
+                            <Text style={styles.bt1}> {strings.update} </Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>

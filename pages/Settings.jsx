@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from "react-native"
 import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/Style";
+import strings from '../strings/string';
 
 const Settings = ({ navigation, route }) => {
 
@@ -19,7 +20,7 @@ const Settings = ({ navigation, route }) => {
           flex: 2,
         }}>
           <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#09A555" }}>
-            SETTINGS
+          {strings.settings}
           </Text>
 
         </View>
@@ -48,7 +49,7 @@ const Settings = ({ navigation, route }) => {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ color: "#25596E" }}> Profile </Text>
+              <Text style={{ color: "#25596E" }}> {strings.profile1} </Text>
 
               <Image
                 style={{
@@ -75,7 +76,7 @@ const Settings = ({ navigation, route }) => {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ color: "#25596E" }}> Preferences </Text>
+              <Text style={{ color: "#25596E" }}> {strings.preferences1} </Text>
 
               <Image
                 style={{
@@ -105,7 +106,7 @@ const Settings = ({ navigation, route }) => {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ color: "#25596E" }}> Privacy and Safety </Text>
+              <Text style={{ color: "#25596E" }}> {strings.privacyAndSafety1} </Text>
 
               <Image
                 style={{
@@ -130,7 +131,7 @@ const Settings = ({ navigation, route }) => {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ color: "#25596E" }}> Notifications </Text>
+              <Text style={{ color: "#25596E" }}> {strings.notifications1} </Text>
 
               <Image
                 style={{
@@ -160,7 +161,7 @@ const Settings = ({ navigation, route }) => {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ color: "#25596E" }}> Support </Text>
+              <Text style={{ color: "#25596E" }}> {strings.support1} </Text>
               <Image
                 style={{ marginEnd: 5 }}
                 source={require('../images/icons/ic_right_arrow.png')}

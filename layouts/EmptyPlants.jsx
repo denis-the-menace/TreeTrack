@@ -2,6 +2,7 @@ import { View, Text, Image } from "react-native"
 import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/Style";
 import { TouchableOpacity } from "react-native";
+import strings from '../strings/string';
 
 const EmptyPlants = ({ navigation, garden }) => {
 
@@ -16,7 +17,7 @@ const EmptyPlants = ({ navigation, garden }) => {
 			<View style={styles.container}>
 				<Text style={{ fontSize: 20, color: "white", fontWeight: "bold", color: "#FFF1DD" }}> {'\u003E'}{gardenName} </Text>
 				<Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#FFF1DD" }}>
-					my plants
+				{strings.my_plants_B}
 				</Text>
 
 				<View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
@@ -33,7 +34,7 @@ const EmptyPlants = ({ navigation, garden }) => {
 
 						</Image>
 					</TouchableOpacity>
-					<Text style={{ color: "#FFF1DD", fontSize: 20, fontWeight: "300", marginTop: 10 }}>create plant for garden</Text>
+					<Text style={{ color: "#FFF1DD", fontSize: 20, fontWeight: "300", marginTop: 10 }}>{strings.createPlantForGarden_eg}</Text>
 				</View>
 			</View>
 

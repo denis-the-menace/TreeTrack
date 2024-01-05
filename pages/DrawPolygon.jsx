@@ -9,6 +9,7 @@ import MapView, {
 } from 'react-native-maps';
 import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
+import strings from '../strings/string';
 
 const DrawPolygon = ({navigation, route}) => {
   const onUpdate = route.params && route.params.onUpdate ? route.params.onUpdate : () => {};
@@ -63,14 +64,14 @@ const DrawPolygon = ({navigation, route}) => {
       colors={['#D1A96DE5', '#DB966FE5']}
       style={{height: '100%'}}>
       <View style={{padding: 20, flex: 1, marginBottom: 110}}>
-        <Text style={styles.text}>add location</Text>
+        <Text style={styles.text}>{strings.add_location}</Text>
 
         <Text
           style={{
             fontSize: 15,
             color: '#FFF1DD',
           }}>
-          Tab to select corners of your garden
+          {strings.tab_to_select}
         </Text>
 
         <View
@@ -87,7 +88,7 @@ const DrawPolygon = ({navigation, route}) => {
           <TextInput
             multiline
             numberOfLines={4}
-            placeholder="Search..."
+            placeholder={strings.search_placeholder}
             style={{
               height: 40,
               color: '#C4C4C4',
@@ -142,7 +143,7 @@ const DrawPolygon = ({navigation, route}) => {
                 setCoordinates([...coordinates, currentPosition]);
               }}>
               <Text style={{color: '#212121', fontSize: 12, fontWeight: '500'}}>
-                Use Current Location
+              {strings.use_current_location}
               </Text>
             </TouchableOpacity>
           </View>
@@ -166,7 +167,7 @@ const DrawPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>Standart</Text>
+            <Text style={{color: "white"}}>{strings.standard}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -177,7 +178,7 @@ const DrawPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>Hybrid</Text>
+            <Text style={{color: "white"}}>{strings.hybrid}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -188,7 +189,7 @@ const DrawPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>Satellite</Text>
+            <Text style={{color: "white"}}>{strings.satellite}</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
@@ -196,7 +197,7 @@ const DrawPolygon = ({navigation, route}) => {
           onPress={() => {
             navigation.navigate('CreateGarden', {coordinates, onUpdate}); // go back to create page to save garden
           }}>
-          <Text style={styles.bt1}> Save Area </Text>
+          <Text style={styles.bt1}>  {strings.save_area} </Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

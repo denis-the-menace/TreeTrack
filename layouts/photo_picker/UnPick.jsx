@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import strings from '../../strings/string';
 import {
   View,
   Text,
@@ -14,14 +15,14 @@ const UnPick = ({openCamera, openGallery}) => {
           onPress={openCamera}
           title="Take a Photo"
           style={styles.button}>
-          <Text style={styles.bt1}> Take a Photo</Text>
+          <Text style={styles.bt1}> {strings.takePhoto_up}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={openGallery}
           title="Open Gallery"
           style={styles.button}>
-          <Text style={styles.bt1}> Select from Gallery </Text>
+          <Text style={styles.bt1}> {strings.select_from_gallery_up} </Text>
         </TouchableOpacity>
    
     </View>

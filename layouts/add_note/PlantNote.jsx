@@ -19,6 +19,7 @@ import storage from "@react-native-firebase/storage";
 import {useRoute} from '@react-navigation/native';
 import { insertPlantNote } from '../../services/plant_services';
 import { getPlantTypes, insertNewPlantType } from '../../services/plant_type_services';
+import strings from '../../strings/string';
 
 const PlantNote = ({navigation}) => {
   const [gardenList, setGardenList] = useState([]);
@@ -135,7 +136,7 @@ const PlantNote = ({navigation}) => {
       >
         <View style={{ marginBottom: 90, paddingHorizontal: 10 }}>
           <Text style={styles.t4}>
-            Add a photo of your plant
+          {strings.add_photo_pn}
           </Text>
           <PhotoPick
             onSelect={onSelectImage}
@@ -144,7 +145,7 @@ const PlantNote = ({navigation}) => {
             
           />
 
-          <Text style={styles.t4}>Select a garden</Text>
+          <Text style={styles.t4}>{strings.selectGarden_gn}</Text>
           <View style={styles.picker_view}>
             <Picker
               dropdownIconRippleColor={'rgba(202, 255, 222, 0.56)'}
@@ -168,7 +169,7 @@ const PlantNote = ({navigation}) => {
             </Picker>
           </View>
 
-          <Text style={styles.t4}>Enter your notes</Text>
+          <Text style={styles.t4}>{strings.enterNotes_gn}</Text>
           <KeyboardAvoidingView
             behavior="padding"
             keyboardVerticalOffset={10}
@@ -192,7 +193,7 @@ const PlantNote = ({navigation}) => {
               />
             </ScrollView>
 
-            <Text style={styles.t4}>Select a plant from garden</Text>
+            <Text style={styles.t4}>{strings.select_plant_pn}</Text>
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
               {/* Open Map Button */}
               <TouchableOpacity
@@ -222,7 +223,7 @@ const PlantNote = ({navigation}) => {
                 style={styles.button_right}
                 onPress={saveNote}
               >
-                <Text style={styles.bt1}> Save </Text>
+                <Text style={styles.bt1}> {strings.save_button} </Text>
               </TouchableOpacity>
             </View>
 

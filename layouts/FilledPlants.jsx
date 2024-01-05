@@ -5,6 +5,7 @@ import PlantCard from "./PlantCard";
 import { useState, useCallback } from "react";
 import { MenuProvider } from "react-native-popup-menu";
 import { getPlantsOfGarden } from "../services/garden_services";
+import strings from '../strings/string';
 
 const FilledPlants = ({ navigation, garden, plants, onUpdate }) => {
 	const [refreshing, setRefreshing] = useState(false);
@@ -29,7 +30,7 @@ const FilledPlants = ({ navigation, garden, plants, onUpdate }) => {
 				}}>
 					<Text style={{ fontSize: 20, fontWeight: "bold", color: "#3A7C5A" }}> {'\u003E'}{gardenName} </Text>
 					<Text style={{ fontSize: 30, fontWeight: "bold", color: "#09A555" }}>
-						my plants
+					{strings.my_plants_B}
 					</Text>
 
 				</View>

@@ -11,6 +11,7 @@ import React, {useState, useEffect} from 'react';
 import styles from "../../styles/Style";
 import { getGardenNotes, getUserGardenNames } from '../../services/garden_services';
 import { formatDate, sortNoteList } from '../../services/helper';
+import strings from '../../strings/string';
 
 const GardenGallery = ({selectedGarden}) => {
   console.log("selected garden: ", selectedGarden) // TODO - view in gallery
@@ -127,8 +128,8 @@ if (isLoading || filteredNoteList.length == 0) {
           </Picker>
         </View>
       </View>
-      {isLoading && <Text style={{color: '#efefef', padding: 10}}>Loading...</Text>}
-      {!isLoading && filteredNoteList.length == 0 && <Text style={{color: '#efefef', padding: 10}}>You do not have any garden note.</Text>}
+      {isLoading && <Text style={{color: '#efefef', padding: 10}}>{strings.loading_gg}</Text>}
+      {!isLoading && filteredNoteList.length == 0 && <Text style={{color: '#efefef', padding: 10}}> {strings.no_note_gg}</Text>}
     </View>
   );
 }

@@ -19,6 +19,7 @@ import {insertNewPlant} from '../services/plant_services';
 import {setMapPositionByGardenArea} from '../services/helper';
 import AutocompleteInput from 'react-native-autocomplete-input';
 import { getPlantTypes, insertNewPlantType, searchPlantType } from '../services/plant_type_services';
+import strings from '../strings/string';
 
 const SelectPlant = ({navigation}) => {
   const [selectedMapType, setMapType] = useState('standard');
@@ -187,8 +188,8 @@ const SelectPlant = ({navigation}) => {
   return (
     <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{height: '100%'}}>
       <View style={styles.container}>
-        <Text style={styles.subtext}> &gt; add photo</Text>
-        <Text style={styles.text}>select plant</Text>
+        <Text style={styles.subtext}> &gt; {strings.addPhoto}</Text>
+        <Text style={styles.text}>{strings.selectPlant}</Text>
 
         <Text
           style={{
@@ -196,7 +197,7 @@ const SelectPlant = ({navigation}) => {
             color: '#efefef',
             marginBottom: 10,
           }}>
-          Select a plant or tap to map to create new one
+          {strings.selectPlantOrMap}
         </Text>
 
         <View style={{width: '100%', height: '50%'}}>
@@ -267,7 +268,7 @@ const SelectPlant = ({navigation}) => {
               }}
               onPress={handleCurrentLocationPress}>
               <Text style={{color: '#212121', fontSize: 12, fontWeight: '500'}}>
-                Use Current Location
+              {strings.current_location_selected}
               </Text>
             </TouchableOpacity>
           </View>
@@ -291,7 +292,7 @@ const SelectPlant = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>Standart</Text>
+            <Text style={{color: 'white'}}>{strings.standard}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -302,7 +303,7 @@ const SelectPlant = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>Hybrid</Text>
+            <Text style={{color: 'white'}}>{strings.hybrid}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -313,7 +314,7 @@ const SelectPlant = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>Satellite</Text>
+            <Text style={{color: 'white'}}>{strings.satellite}</Text>
           </TouchableOpacity>
         </View>
         {/* modal for adding new plant */}
@@ -337,13 +338,13 @@ const SelectPlant = ({navigation}) => {
                       marginVertical: 10,
                     }}>
                     {' '}
-                    Enter New Plant's Detail
+                    {strings.enterNewPlantDetail}
                   </Text>
                   <TextInput
                     value={newPlantName}
                     onChangeText={text => setNewPlantName(text)}
                     placeholderTextColor={'#21212160'}
-                    placeholder="Enter Plant Name"
+                    placeholder={strings.enterPlantName}
                     style={{
                       borderWidth: 1,
                       borderColor: '#21212150',
@@ -386,7 +387,7 @@ const SelectPlant = ({navigation}) => {
                         borderWidth: 0,
                         backgroundColor: "#fff"
                       }}
-                      placeholder="Enter plant type"
+                      placeholder={strings.enterPlantType}
                       placeholderTextColor={'#21212160'}
                       flatListProps={{
                         keyExtractor: (_, idx) => idx,
@@ -424,7 +425,7 @@ const SelectPlant = ({navigation}) => {
                       }}
                       onPress={() => setModalVisible(!modalVisible)}>
                       <Text style={{color: '#212121', fontSize: 16}}>
-                        Cancel
+                      {strings.cancel}
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -436,7 +437,7 @@ const SelectPlant = ({navigation}) => {
                         marginTop: 15,
                       }}
                       onPress={addNewPlant}>
-                      <Text style={{color: '#fff', fontSize: 16}}>Add</Text>
+                      <Text style={{color: '#fff', fontSize: 16}}>{strings.add}</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -483,7 +484,7 @@ const SelectPlant = ({navigation}) => {
           onPress={() => {
             navigation.navigate('AddNote', {selectedPlant});
           }}>
-          <Text style={styles.bt1}> Select </Text>
+          <Text style={styles.bt1}> {strings.select} </Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

@@ -4,6 +4,7 @@ import styles from "../styles/Style";
 import GardenGallery from '../layouts/gallery/GardenGallery';
 import PlantGallery from '../layouts/gallery/PlantGallery';
 import React, { useState, useEffect} from 'react';
+import strings from '../strings/string';
 
 const Galleries = ({route}) => {
   // TODO: view in gallery
@@ -29,7 +30,7 @@ const Galleries = ({route}) => {
               color: '#09A555',
               marginBottom: 10,
             }}>
-            GALLERY
+            {strings.gallery_title}
           </Text>
 
           <View style={{flexDirection: 'row', justifyContent: 'center'}}>
@@ -50,7 +51,7 @@ const Galleries = ({route}) => {
                   borderRadius: 5,
                 }}
                 onPress={() => setShowGarden(true)}>
-                <Text style={styles.bt1}> Garden </Text>
+                <Text style={styles.bt1}> {strings.garden_button} </Text>
               </TouchableOpacity>
 
               <View
@@ -70,7 +71,7 @@ const Galleries = ({route}) => {
                   borderRadius: 5,
                 }}
                 onPress={() => setShowGarden(false)}>
-                <Text style={styles.bt1}> Plant </Text>
+                <Text style={styles.bt1}> {strings.plant_button} </Text>
               </TouchableOpacity>
             </View>
           </View>

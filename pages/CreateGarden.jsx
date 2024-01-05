@@ -12,6 +12,7 @@ import React, {useState, useEffect} from 'react';
 import {insertGarden} from '../services/garden_services';
 import AutocompleteInput from 'react-native-autocomplete-input';
 import { getGardenTypes, searchGardenType } from '../services/garden_type_sevice';
+import strings from '../strings/string';
 
 const CreateGarden = ({route, navigation}) => {
   const onUpdate =
@@ -76,15 +77,15 @@ const CreateGarden = ({route, navigation}) => {
       colors={['#D1A96DE5', '#DB966FE5']}
       style={{height: '100%'}}>
       <View style={{padding: 20, flex: 1, marginBottom: 110}}>
-        <Text style={styles.text}>Add a new garden</Text>
+        <Text style={styles.text}>{strings.add_new_garden}</Text>
         {/* add garden section */}
         <View>
-          <Text style={styles.t4}>Give a name to your garden</Text>
+          <Text style={styles.t4}>{strings.give_name_to_garden}</Text>
           <TextInput
             value={gardenName}
             onChangeText={text => setGardenName(text)}
             placeholderTextColor={'#21212160'}
-            placeholder="Garden Name"
+            placeholder={strings.garden_name_placeholder}
             style={{
               width: '100%',
               height: 42,
@@ -98,7 +99,7 @@ const CreateGarden = ({route, navigation}) => {
               elevation: 5,
               fontSize: 16,
             }}></TextInput>
-          <Text style={styles.t4}>Select garden type</Text>
+          <Text style={styles.t4}>{strings.select_garden_type}</Text>
           <View
             style={{
               width: '100%',
@@ -128,7 +129,7 @@ const CreateGarden = ({route, navigation}) => {
                 elevation: 5,
                 fontSize: 16,
               }}
-              placeholder="Enter garden type"
+              placeholder={strings.enter_garden_type}
               placeholderTextColor={'#21212160'}
               flatListProps={{
                 keyExtractor: (_, idx) => idx,
@@ -157,7 +158,7 @@ const CreateGarden = ({route, navigation}) => {
               padding: 10,
               width: '100%',
             }}>
-            <Text style={styles.t4}>Add location of your garden</Text>
+            <Text style={styles.t4}>{strings.add_location_garden}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <TouchableOpacity
                 style={{
@@ -177,7 +178,7 @@ const CreateGarden = ({route, navigation}) => {
                     height: 25,
                   }}></Image>
                 <Text style={{...styles.bt1, color: '#212121', marginLeft: 5}}>
-                  Open Map
+                {strings.open_map}
                 </Text>
               </TouchableOpacity>
               {polygon.length > 2 && (
@@ -196,7 +197,7 @@ const CreateGarden = ({route, navigation}) => {
         <TouchableOpacity
             style={{...styles.button_right, width: 125}}
             onPress={addGarden}>
-            <Text style={{...styles.bt1}}>Save</Text>
+            <Text style={{...styles.bt1}}>{strings.save_button}</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

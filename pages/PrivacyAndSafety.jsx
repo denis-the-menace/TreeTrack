@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, ScrollView } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-
+import strings from '../strings/string';
 
 
 const PrivacyAndSafety = ({ navigation }) => {
@@ -24,7 +24,7 @@ const PrivacyAndSafety = ({ navigation }) => {
                     }}>
 
                         <Text style={{ fontSize: 30, fontWeight: "bold", color: "#09A555" }}>
-                            PRIVACY AND SAFETY
+                        {strings.privacyAndSafety}
                         </Text>
                     </View>
 
@@ -63,7 +63,7 @@ const PrivacyAndSafety = ({ navigation }) => {
                         borderTopLeftRadius: 50,
                         borderTopRightRadius: 50
                     }}>
-                        <Text style={{ color: "white", fontSize: 20, paddingLeft: 20, marginTop: 20 }}>Privacy Policy</Text>
+                        <Text style={{ color: "white", fontSize: 20, paddingLeft: 20, marginTop: 20 }}>{strings.privacyPolicy}</Text>
                         <View
                             style={{
                                 backgroundColor: "white",
@@ -73,24 +73,24 @@ const PrivacyAndSafety = ({ navigation }) => {
                                 borderRadius: 10
 
                             }}>
-                            <Text style={{ color: "black" }}>Your Information:</Text>
+                            <Text style={{ color: "black" }}>{strings.dataInformation}</Text>
                             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>We collect minimal personal information required to provide you with the best possible service. This may include your name, email address, location, and device information. Rest assured, we do not sell or share this information with third parties without your consent.</Text>
+                            <Text style={{ color: "black" }}>{strings.text1}</Text>
                             <View style={{ marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>Data Security:</Text>
+                            <Text style={{ color: "black" }}>{strings.dataSecurity}</Text>
                             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>Safeguarding your data is our priority. We employ industry-standard security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction.</Text>
+                            <Text style={{ color: "black" }}>{strings.text2}</Text>
                             <View style={{ marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>Usage of Information:</Text>
+                            <Text style={{ color: "black" }}>{strings.usageInformation}:</Text>
                             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>The data we collect is utilized to enhance our services, personalize your experience, and improve our application. This includes providing tailored content, troubleshooting issues, and analyzing trends to offer a seamless user experience.</Text>
+                            <Text style={{ color: "black" }}>{strings.text3}</Text>
                             <View style={{ marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>Cookies:</Text>
+                            <Text style={{ color: "black" }}>{strings.cookies}</Text>
                             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>Our application may use cookies or similar technologies to improve functionality, personalize content, and understand user behavior. You have the option to manage cookie preferences within the app settings.</Text>
+                            <Text style={{ color: "black" }}>{strings.text4}</Text>
 
                         </View>
-                        <Text style={{ color: "white", fontSize: 20, paddingLeft: 20, marginTop: 20 }}>Safety Measures</Text>
+                        <Text style={{ color: "white", fontSize: 20, paddingLeft: 20, marginTop: 20 }}>{strings.safetyMeasures}</Text>
                         <View
                             style={{
                                 backgroundColor: "white",
@@ -100,17 +100,17 @@ const PrivacyAndSafety = ({ navigation }) => {
                                 borderRadius: 10,
                                 marginBottom:70
                             }}>
-                            <Text style={{ color: "black" }}>User Conduct:</Text>
+                            <Text style={{ color: "black" }}>{strings.userConduct}</Text>
                             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>While using Tree Track, we encourage responsible and respectful behavior. Any misuse, abusive conduct, or violation of community guidelines may result in suspension or termination of your account.</Text>
+                            <Text style={{ color: "black" }}>{strings.text5}</Text>
                             <View style={{ marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>Security Alerts:</Text>
+                            <Text style={{ color: "black" }}>{strings.securityAlerts}</Text>
                             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>In case of any security breaches or suspicious activities, we commit to promptly informing users about potential risks and taking necessary actions to mitigate them.</Text>
+                            <Text style={{ color: "black" }}>{strings.text6}</Text>
                             <View style={{ marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black" }}>Updates to Policy:</Text>
+                            <Text style={{ color: "black" }}>{strings.updatesPolicy}</Text>
                             <View style={{ height: 1, backgroundColor: "gray", marginTop: 5, marginBottom: 5 }}></View>
-                            <Text style={{ color: "black"}}>We may periodically update our Privacy and Safety policies. It's advisable to review these policies to stay informed about how we handle your data.</Text>
+                            <Text style={{ color: "black"}}>{strings.text7}</Text>
                             
                         </View>
                     </View>

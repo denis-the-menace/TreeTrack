@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import styles from '../styles/Style';
 import { useRoute } from '@react-navigation/native';
 import { updateGarden } from '../services/garden_services';
+import strings from '../strings/string';
 
 const EditGarden = ({ navigation }) => {
     const route = useRoute();
@@ -50,8 +51,8 @@ const EditGarden = ({ navigation }) => {
                 <ScrollView>
                     <View style={{ marginBottom: 90 }}>
                         <Text style={styles.subtext}> &gt; {garden.name}</Text>
-                        <Text style={styles.text}>Edit garden</Text>
-                        <Text style={styles.t4}>Edit garden name</Text>
+                        <Text style={styles.text}>{strings.edit_garden}</Text>
+                        <Text style={styles.t4}>{strings.edit_garden_name}</Text>
                         <TextInput
                             value={gardenName}
                             onChangeText={text => setGardenName(text)}
@@ -59,7 +60,7 @@ const EditGarden = ({ navigation }) => {
                             placeholderTextColor={'#21212160'}
                             style={styles.text_area}
                         />
-                        <Text style={styles.t4}>Edit area of your garden</Text>
+                        <Text style={styles.t4}>{strings.edit_area_garden}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <TouchableOpacity
                                 style={{
@@ -79,13 +80,13 @@ const EditGarden = ({ navigation }) => {
                                         height: 25,
                                     }}></Image>
                                 <Text style={{ ...styles.bt1, color: '#212121', marginLeft: 5 }}>
-                                    Open Map
+                                {strings.open_map}
                                 </Text>
                             </TouchableOpacity>
                             
                         </View>
                         <TouchableOpacity style={styles.button_right} onPress={handleUpdateGarden}>
-                            <Text style={styles.bt1}> Update </Text>
+                            <Text style={styles.bt1}> {strings.update} </Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>

@@ -5,6 +5,7 @@ import styles from '../../styles/Style';
 import { getPlantNotes } from '../../services/plant_services';
 import { formatDate, sortNoteList } from '../../services/helper';
 import { getUserGardenNames } from '../../services/garden_services';
+import strings from '../../strings/string';
 
 const PlantGallery = () => {
   const [plantNoteList, setNoteList] = useState([]);
@@ -119,8 +120,8 @@ const PlantGallery = () => {
             </Picker>
           </View>
         </View>       
-      {isLoading && <Text style={{color: '#efefef', padding: 10}}>Loading...</Text>}
-      {!isLoading && filteredNoteList.length == 0 && <Text style={{color: '#efefef', padding: 10}}>You do not have any plant note.</Text>}
+      {isLoading && <Text style={{color: '#efefef', padding: 10}}>{strings.loading_gg}</Text>}
+      {!isLoading && filteredNoteList.length == 0 && <Text style={{color: '#efefef', padding: 10}}>{strings.no_plant_pg}</Text>}
       </View>
     );
   }

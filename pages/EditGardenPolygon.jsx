@@ -17,6 +17,7 @@ import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import { setMapPositionByGardenArea } from '../services/helper';
 import { getPlantsOfGarden } from '../services/garden_services';
+import strings from '../strings/string';
 
 const EditGardenPolygon = ({navigation, route}) => {
   const onUpdate =
@@ -87,20 +88,20 @@ const EditGardenPolygon = ({navigation, route}) => {
   else{
     ToastAndroid.show("This garden's area is not declared.", ToastAndroid.SHORT)
   }
-
+  
   return (
     <LinearGradient
       colors={['#D1A96DE5', '#DB966FE5']}
       style={{height: '100%'}}>
       <View style={{padding: 20, flex: 1, marginBottom: 110}}>
-        <Text style={styles.text}>edit garden area</Text>
+        <Text style={styles.text}>{strings.edit_garden_area}</Text>
 
         <Text
           style={{
             fontSize: 15,
             color: '#FFF1DD',
           }}>
-          Tab corners to remove or 
+          {strings.tab_corners_remove}
         </Text>
 
         <View style={{width: '100%', height: '60%', marginVertical: 5}}>
@@ -170,7 +171,7 @@ const EditGardenPolygon = ({navigation, route}) => {
                 setCoordinates([...coordinates, currentPosition]);
               }}>
               <Text style={{color: '#212121', fontSize: 12, fontWeight: '500'}}>
-                Use Current Location
+              {strings.use_current_location}
               </Text>
             </TouchableOpacity>
           </View>
@@ -194,7 +195,7 @@ const EditGardenPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>Standart</Text>
+            <Text style={{color: 'white'}}>{strings.standard}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -205,7 +206,7 @@ const EditGardenPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>Hybrid</Text>
+            <Text style={{color: 'white'}}>{strings.hybrid}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -216,7 +217,7 @@ const EditGardenPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>Satellite</Text>
+            <Text style={{color: 'white'}}>{strings.satellite}</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
@@ -224,7 +225,7 @@ const EditGardenPolygon = ({navigation, route}) => {
           onPress={() => {
             navigation.navigate('EditGarden', {polygon: coordinates, garden, onUpdate}); // go back to edit garden page
           }}>
-          <Text style={styles.bt1}> Save Area </Text>
+          <Text style={styles.bt1}> {strings.save_area} </Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

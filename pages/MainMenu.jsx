@@ -3,6 +3,7 @@ import { Animated, View, Image, Dimensions, TouchableOpacity, Text, ScrollView }
 import LinearGradient from 'react-native-linear-gradient';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import strings from '../strings/string';
 
 const MainMenu = ({ navigation }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -79,11 +80,11 @@ const MainMenu = ({ navigation }) => {
                         paddingTop: 10,
 
                     }}>
-                    <Text style={{ color: 'black', textAlign: "center" }}>Tree Track: Discover Nature, Protect Your Plants</Text>
+                    <Text style={{ color: 'black', textAlign: "center" }}> {strings.appName}</Text>
                     <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-                    <Text style={{ color: 'black' }}>Hello, {firstName} {lastName}</Text>
+                    <Text style={{ color: 'black' }}>{strings.helloMessage} {firstName} {lastName}</Text>
                     <Text style={{ color: 'black' }}>
-                        Tree Track is the perfect app for anyone who wants to be in touch with nature and keep track of their plants. Determine the boundaries of your garden on the map and create your garden. Then, take photos of the plants in your garden, add notes and monitor their development.</Text>
+                    {strings.discoverNatureDescription}</Text>
                 </View>
                 {/* MainMenu içeriğini buraya ekle */}
                 <View style={{
@@ -114,7 +115,7 @@ const MainMenu = ({ navigation }) => {
                                 justifyContent: "space-between"
                             }}
                         >
-                            <Text style={{ color: "#25596E" }}> Add Note </Text>
+                            <Text style={{ color: "#25596E" }}> {strings.addNote_mm} </Text>
 
                             <Image
                                 style={{
@@ -144,7 +145,7 @@ const MainMenu = ({ navigation }) => {
                                 justifyContent: "space-between"
                             }}
                         >
-                            <Text style={{ color: "#25596E" }}> Open Map </Text>
+                            <Text style={{ color: "#25596E" }}> {strings.openMap_mm} </Text>
 
                             <Image
                                 style={{
@@ -174,7 +175,7 @@ const MainMenu = ({ navigation }) => {
                                 justifyContent: "space-between"
                             }}
                         >
-                            <Text style={{ color: "#25596E" }}> My Gardens </Text>
+                            <Text style={{ color: "#25596E" }}> {strings.myGardens_mm} </Text>
 
                             <Image
                                 style={{
@@ -202,7 +203,7 @@ const MainMenu = ({ navigation }) => {
                                 justifyContent: "space-between"
                             }}
                         >
-                            <Text style={{ color: "#25596E" }}> Gallery </Text>
+                            <Text style={{ color: "#25596E" }}> {strings.gallery_mm} </Text>
 
                             <Image
                                 style={{
@@ -232,7 +233,7 @@ const MainMenu = ({ navigation }) => {
 
                             }}
                         >
-                            <Text style={{ color: "#25596E" }}> Settings </Text>
+                            <Text style={{ color: "#25596E" }}> {strings.settings_mm} </Text>
 
                             <Image
                                 style={{

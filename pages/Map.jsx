@@ -3,6 +3,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from '../styles/Style';
 import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
+import strings from '../strings/string';
 // import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import MapView, {
   PROVIDER_GOOGLE,
@@ -86,7 +87,7 @@ const Map = () => {
       colors={['#D1A96DE5', '#DB966FE5']}
       style={{height: '100%'}}>
       <View style={styles.container}>
-        <Text style={styles.text}>MAP</Text>
+        <Text style={styles.text}>{strings.mapTitle}</Text>
 
         {/* TODO: search bar - google cloud gerekli*/}
         <TextInput
@@ -96,7 +97,7 @@ const Map = () => {
             marginBottom: 5,
             color: "#212121"
           }}
-          placeholder="Search address"
+          placeholder={strings.searchAddressPlaceholder}
           placeholderTextColor={"#21212190"}
           value={searchText}
           onChangeText={setSearchText}
@@ -154,7 +155,7 @@ const Map = () => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>Standart</Text>
+            <Text style={{color: 'white'}}>{strings.standard}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -165,7 +166,7 @@ const Map = () => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>Hybrid</Text>
+            <Text style={{color: 'white'}}>{strings.hybrid}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -176,7 +177,7 @@ const Map = () => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>Satellite</Text>
+            <Text style={{color: 'white'}}>{strings.satellite}</Text>
           </TouchableOpacity>
         </View>
 

@@ -6,6 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import styles from '../styles/Style';
+import strings from '../strings/string';
 const defaultProfileImage = require('../images/defaultUser.png');
 const editIcon = require('../images/icons/plus3.png');
 
@@ -156,7 +157,7 @@ const Profile = ({ route }) => {
           backgroundColor: isModalVisible ? '#FFFFFF130' : '#FFFFFF',
         }}>
           <Text style={{ fontSize: 30, color: 'white', fontWeight: 'bold', color: isModalVisible ? '#09A55580' : '#09A555' }}>
-            PROFILE
+          {strings.profile}
           </Text>
         </View>
         <View
@@ -207,7 +208,7 @@ const Profile = ({ route }) => {
           borderTopLeftRadius: 50,
           borderTopRightRadius: 50
         }}>
-          <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20, marginTop: 75 }}>Gardener Information</Text>
+          <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20, marginTop: 75 }}>{strings.gardenerInformation}</Text>
           <View
             style={{
               backgroundColor: isModalVisible ? '#FFFFFF80' : '#FFFFFF',
@@ -222,7 +223,7 @@ const Profile = ({ route }) => {
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
             <Text style={{ color: 'black' }}>{email}</Text>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>Home Garden</Text>
+            <Text style={{ color: 'black' }}>{strings.homeGarden}</Text>
           </View>
           <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20, marginTop: 20 }}>Social</Text>
           <View
@@ -233,13 +234,13 @@ const Profile = ({ route }) => {
               paddingBottom: 10,
               borderRadius: 10
             }}>
-            <Text style={{ color: 'black' }}>Share Sprout Profile</Text>
+            <Text style={{ color: 'black' }}>{strings.shareProfile}</Text>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>Connect Instagram</Text>
+            <Text style={{ color: 'black' }}>{strings.connectInstagram}</Text>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>Connect Twitter</Text>
+            <Text style={{ color: 'black' }}>{strings.connectTwitter}</Text>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>Connect Pinterest</Text>
+            <Text style={{ color: 'black' }}>{strings.connectPinterest}</Text>
           </View>
           <TouchableOpacity
             onPress={handleSignOut}
@@ -252,7 +253,7 @@ const Profile = ({ route }) => {
               elevation: 5,
               justifyContent: 'center'
             }}>
-            <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>LOG OUT</Text>
+            <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>{strings.logOut}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -283,21 +284,21 @@ const Profile = ({ route }) => {
                   onPress={handleTakePhoto}
                   style={[styles.button, { marginTop: 15 }]}
                 >
-                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>TAKE A PHOTO</Text>
+                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>{strings.takePhoto}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={handleChoosePhoto}
                   style={styles.button}
                 >
-                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>SELECT FROM GALLERY</Text>
+                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>{strings.selectFromGallery}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={handleRemovePhoto}
                   style={styles.button}
                 >
-                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>REMOVE PHOTO</Text>
+                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>{strings.removePhoto}</Text>
                 </TouchableOpacity>
               </View>
             </TouchableWithoutFeedback>
