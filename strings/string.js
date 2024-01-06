@@ -62,6 +62,12 @@ const strings = {
   edit_plant_location: 'Edit plant location',
   plant_location_changed: 'Plant location is changed',
 
+  //ForgotPassword
+  password_email_message: 'Password reset email sent successfully.',
+  enter_email_message: 'Please enter your email address.',
+  forgot_password: 'Forgot Password',
+  send_reset_email: 'SEND RESET EMAİL',
+  back_to_sign_in: 'Back to Sign In',
 
   //Galleries
   gallery_title: 'GALLERY',
