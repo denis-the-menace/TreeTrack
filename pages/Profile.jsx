@@ -38,15 +38,6 @@ const Profile = ({ route }) => {
     setModalVisible(!isModalVisible);
   };
 
-  const handleSignOut = () => {
-    auth()
-      .signOut()
-      .then(async () => {
-        setIsSigned(false);
-        console.log('User signed out!');
-      });
-  };
-
   const handleChoosePhoto = () => {
     ImageCropPicker.openPicker({
       width: 300,
@@ -242,19 +233,6 @@ const Profile = ({ route }) => {
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
             <Text style={{ color: 'black' }}>{strings.connectPinterest}</Text>
           </View>
-          <TouchableOpacity
-            onPress={handleSignOut}
-            style={{
-              height: 50,
-              backgroundColor: 'white',
-              borderRadius: 50,
-              marginTop: 15,
-              width: '100%',
-              elevation: 5,
-              justifyContent: 'center'
-            }}>
-            <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>{strings.logOut}</Text>
-          </TouchableOpacity>
         </View>
       </View>
       <Modal
