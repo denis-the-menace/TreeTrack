@@ -1,10 +1,9 @@
-import { View, Text, Image, RefreshControl, ScrollView } from "react-native"
-import LinearGradient from "react-native-linear-gradient";
-import { TouchableOpacity } from "react-native";
-import GardenCard from "./GardenCard";
-import { MenuProvider } from "react-native-popup-menu";
-import { useState, useCallback } from "react";
-import { getUserGardens } from "../services/garden_services";
+import {View, Text, Image, RefreshControl, ScrollView} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import {TouchableOpacity} from 'react-native';
+import GardenCard from './GardenCard';
+import {useState, useCallback} from 'react';
+import {getUserGardens} from '../services/garden_services';
 import strings from '../strings/string';
 
 const FilledGardens = ({navigation, gardens, onUpdate}) => {
@@ -20,7 +19,9 @@ const FilledGardens = ({navigation, gardens, onUpdate}) => {
     <LinearGradient colors={['#FFFFFF', '#FFFFFF']} className="h-full">
       <View className="flex">
         <View className="flex p-5 h-[10%]">
-          <Text className="font-bold text-3xl text-[#9E673D]">{strings.my_gardens_B}</Text>
+          <Text className="font-bold text-3xl text-[#9E673D]">
+            {strings.my_gardens_B}
+          </Text>
         </View>
         <View className="h-[90%]">
           <LinearGradient
@@ -31,16 +32,14 @@ const FilledGardens = ({navigation, gardens, onUpdate}) => {
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }>
-              <MenuProvider>
-                {gardenList.map(garden => (
-                  <GardenCard
-                    navigation={navigation}
-                    key={garden.id}
-                    garden={garden}
-                    onUpdate={onUpdate}
-                  />
-                ))}
-              </MenuProvider>
+              {gardenList.map(garden => (
+                <GardenCard
+                  navigation={navigation}
+                  key={garden.id}
+                  garden={garden}
+                  onUpdate={onUpdate}
+                />
+              ))}
             </ScrollView>
 
             <TouchableOpacity

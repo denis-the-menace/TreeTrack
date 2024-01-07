@@ -1,16 +1,17 @@
 const strings = {
   app_name: 'Tree Track',
 
-  //AddNote 
+  //AddNote
   add_note_B: 'ADD NOTE',
-  no_garden_message: 'You do not have any garden. To add note, please add a garden.',
+  no_garden_message:
+    'You do not have any garden. To add note, please add a garden.',
   add_garden_button: 'Add Garden',
   plant: 'Plant',
   garden: 'Garden',
 
   //AddPlantLocation
   select_plant_location: 'Select plant location',
-  select_location_instructions: 'Select new plant\'s location by tapping to map',
+  select_location_instructions: "Select new plant's location by tapping to map",
   current_location_selected: 'Use Current Location',
   standard: 'Standart',
   hybrid: 'Hybrid',
@@ -37,12 +38,12 @@ const strings = {
   save_button: ' Save ',
 
   //CreatePlant
-  add_new_plant: "Add a new plant",
-  give_name_to_plant: "Give a name to your plant",
-  select_plant_type: "Select plant type",
-  enter_plant_type: "Enter plant type",
-  add_location_plant: "Add location of your plant",
-  add_button: "Add",
+  add_new_plant: 'Add a new plant',
+  give_name_to_plant: 'Give a name to your plant',
+  select_plant_type: 'Select plant type',
+  enter_plant_type: 'Enter plant type',
+  add_location_plant: 'Add location of your plant',
+  add_button: 'Add',
 
   //DrawPolygon
   add_location: 'Add location',
@@ -60,7 +61,6 @@ const strings = {
   //EditGardenPolygon
   edit_garden_area: 'Edit garden area',
   tab_corners_remove: 'Tab corners to remove or',
-
 
   //EditPlant
   edit_plant: 'Edit plant',
@@ -113,13 +113,20 @@ const strings = {
   userConduct: 'User Conduct:',
   securityAlerts: 'Security Alerts:',
   updatesPolicy: 'Updates to Policy:',
-  text1: 'We collect minimal personal information required to provide you with the best possible service. This may include your name, email address, location, and device information. Rest assured, we do not sell or share this information with third parties without your consent.',
-  text2: 'Safeguarding your data is our priority. We employ industry-standard security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction.',
-  text3: 'The data we collect is utilized to enhance our services, personalize your experience, and improve our application. This includes providing tailored content, troubleshooting issues, and analyzing trends to offer a seamless user experience.',
-  text4: 'Our application may use cookies or similar technologies to improve functionality, personalize content, and understand user behavior. You have the option to manage cookie preferences within the app settings.',
-  text5: 'While using Tree Track, we encourage responsible and respectful behavior. Any misuse, abusive conduct, or violation of community guidelines may result in suspension or termination of your account.',
-  text6: 'In case of any security breaches or suspicious activities, we commit to promptly informing users about potential risks and taking necessary actions to mitigate them.',
-  text7: 'We may periodically update our Privacy and Safety policies. It\'s advisable to review these policies to stay informed about how we handle your data.',
+  text1:
+    'We collect minimal personal information required to provide you with the best possible service. This may include your name, email address, location, and device information. Rest assured, we do not sell or share this information with third parties without your consent.',
+  text2:
+    'Safeguarding your data is our priority. We employ industry-standard security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction.',
+  text3:
+    'The data we collect is utilized to enhance our services, personalize your experience, and improve our application. This includes providing tailored content, troubleshooting issues, and analyzing trends to offer a seamless user experience.',
+  text4:
+    'Our application may use cookies or similar technologies to improve functionality, personalize content, and understand user behavior. You have the option to manage cookie preferences within the app settings.',
+  text5:
+    'While using Tree Track, we encourage responsible and respectful behavior. Any misuse, abusive conduct, or violation of community guidelines may result in suspension or termination of your account.',
+  text6:
+    'In case of any security breaches or suspicious activities, we commit to promptly informing users about potential risks and taking necessary actions to mitigate them.',
+  text7:
+    "We may periodically update our Privacy and Safety policies. It's advisable to review these policies to stay informed about how we handle your data.",
 
   //Profile
   profile: 'PROFILE',
@@ -175,8 +182,6 @@ const strings = {
   termsAndConditions1: 'Terms and conditions',
   signUp_B: 'SIGN UP',
 
-
-
   //Support
   supportTitle_B: 'SUPPORT',
   contactUs: 'Contact Us',
@@ -219,29 +224,29 @@ const strings = {
   //EmptyGarden--FilledGardens
   my_gardens_B: 'MY GARDENS',
   createGarden_eg: 'Create Garden',
-  addGarden_eg:'Add Garden',
+  addGarden_eg: 'Add Garden',
 
   //EmptyPlants--FilledPlants
   my_plants_B: 'MY PLANTS',
   createPlantForGarden_eg: 'Create Plant for Garden',
 
   //GardenCard
-  share_gc:'Share',
-  delete_gc:'Delete',
+  edit_gc: 'EDIT GARDEN',
+  share_gc: 'SHARE GARDEN',
+  delete_gc: 'DELETE GARDEN',
 
   //PlantCard
-  edit_pc:'Edit',
+  edit_pc: 'EDIT PLANT',
+  share_pc: 'SHARE PLANT',
+  delete_pc: 'DELETE PLANT',
 
   //Pick
-  select_another_p:' Select Another Picture ',
+  select_another_p: ' Select Another Picture ',
 
   //UnPick
-  takePhoto_up:' Take a Photo ',
-  select_from_gallery_up:' Select From Gallery '
-
+  takePhoto_up: ' Take a Photo ',
+  select_from_gallery_up: ' Select From Gallery ',
 };
-
-
 
 //{strings.edit_garden_area}
 export default strings;

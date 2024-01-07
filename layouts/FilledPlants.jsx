@@ -1,10 +1,10 @@
-import { View, Text, Image, RefreshControl, ScrollView } from "react-native"
-import LinearGradient from "react-native-linear-gradient";
-import { TouchableOpacity } from "react-native";
-import PlantCard from "./PlantCard";
-import { useState, useCallback } from "react";
-import { MenuProvider } from "react-native-popup-menu";
-import { getPlantsOfGarden } from "../services/garden_services";
+import {View, Text, Image, RefreshControl, ScrollView} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import {TouchableOpacity} from 'react-native';
+import PlantCard from './PlantCard';
+import {useState, useCallback} from 'react';
+import {MenuProvider} from 'react-native-popup-menu';
+import {getPlantsOfGarden} from '../services/garden_services';
 import strings from '../strings/string';
 
 const FilledPlants = ({navigation, garden, plants, onUpdate}) => {
@@ -21,11 +21,11 @@ const FilledPlants = ({navigation, garden, plants, onUpdate}) => {
     <LinearGradient colors={['#FFFFFF', '#FFFFFF']} className="h-full">
       <View className="flex">
         <View className="flex p-5 h-[13%]">
-          <Text className="font-bold text-2xl text-[#3A7C5A]">
+          <Text className="font-bold text-2xl text-[#3A7C5A] mb-2">
             {gardenName}
           </Text>
           <Text className="font-bold text-3xl text-[#09A555]">
-          {strings.my_plants_B}
+            {strings.my_plants_B}
           </Text>
         </View>
         <View className="h-[90%]">
@@ -37,17 +37,15 @@ const FilledPlants = ({navigation, garden, plants, onUpdate}) => {
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }>
-              <MenuProvider>
-                {plantList.map(plant => (
-                  <PlantCard
-                    navigation={navigation}
-                    key={plant.name}
-                    plant={plant}
-                    garden={garden}
-                    onUpdate={onUpdate}
-                  />
-                ))}
-              </MenuProvider>
+              {plantList.map(plant => (
+                <PlantCard
+                  navigation={navigation}
+                  key={plant.name}
+                  plant={plant}
+                  garden={garden}
+                  onUpdate={onUpdate}
+                />
+              ))}
             </ScrollView>
 
             <TouchableOpacity
@@ -58,7 +56,7 @@ const FilledPlants = ({navigation, garden, plants, onUpdate}) => {
                   {onUpdate: onUpdate},
                 );
               }}
-              className="absolute bg-[#FFF1DD] p-2 rounded-full right-4 bottom-36">
+              className="absolute p-2 rounded-full right-4 bottom-36">
               <Image
                 source={require('../images/icons/plus3.png')}
                 resizeMode="stretch"
