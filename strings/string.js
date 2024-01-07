@@ -17,6 +17,15 @@ const strings = {
   satellite: 'Satellite',
   save_location: 'Save Location',
 
+  //ChangePassword
+  enter_current_password: 'Enter current password',
+  password_min_length: 'Password must be at least 6 characters',
+  change_successfully: 'Password changed successfully',
+  password_not_match: 'New passwords do not match',
+  password_error_message: 'Please check your current password.',
+  enter_password_information: 'Enter Password Information',
+  update_button: 'UPDATE',
+
   //CreateGarden
   add_new_garden: 'Add a new garden',
   give_name_to_garden: 'Give a name to your garden',
@@ -116,6 +125,7 @@ const strings = {
   profile: 'PROFILE',
   gardenerInformation: 'Gardener Information',
   homeGarden: 'Home Garden',
+  social: 'Social',
   shareProfile: 'Share Sprout Profile',
   connectInstagram: 'Connect Instagram',
   connectTwitter: 'Connect Twitter',
@@ -124,6 +134,7 @@ const strings = {
   removePhoto: 'REMOVE PHOTO',
   takePhoto: 'TAKE A PHOTO',
   selectFromGallery: 'SELECT FROM GALLERY',
+  changePassword: 'CHANGE PASSWORD',
 
   //SelectPlant
   addPhoto: ' Add photo',

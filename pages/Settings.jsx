@@ -26,7 +26,7 @@ const Settings = ({ navigation, route }) => {
 
         <View style={{
           padding: 20,
-          flex: 2,
+          flex: 1,
         }}>
           <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#09A555" }}>
           {strings.settings}
