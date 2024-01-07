@@ -25,6 +25,7 @@ import EditGardenPolygon from '../pages/EditGardenPolygon';
 import Support from '../pages/Support';
 import PrivacyAndSafety from '../pages/PrivacyAndSafety';
 import MainMenu from '../pages/MainMenu';
+import ChangePassword from '../pages/ChangePassword';
 
 const {width, height} = Dimensions.get('window');
 const Tab = createBottomTabNavigator();
@@ -221,6 +222,7 @@ const SettingsStack = ({setIsSigned}) => {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Support" component={Support} />
       <Stack.Screen name="PrivacyAndSafety" component={PrivacyAndSafety} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
     </Stack.Navigator>
   );
 };

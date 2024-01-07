@@ -113,7 +113,9 @@ const SignIn = ({setIsSigned, navigation}) => {
           </TouchableOpacity>
         </View>
 
-        <Text className="text-white text-sm underline mt-2 ml-2">
+        <Text 
+        onPress={() => navigation.navigate('ForgotPassword')}
+        className="text-white text-sm underline mt-2 ml-2">
         {strings.forgotPassword}
         </Text>
 

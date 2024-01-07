@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, Modal, TouchableWithoutFeedback, ToastAndroid, Alert } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Modal, TextInput, ToastAndroid, Alert, TouchableWithoutFeedback } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -9,8 +9,10 @@ import styles from '../styles/Style';
 import strings from '../strings/string';
 const defaultProfileImage = require('../images/defaultUser.png');
 const editIcon = require('../images/icons/plus3.png');
+const editIconGreen = require('../images/icons/edit.png');
+const checkIcon = require('../images/icons/update.png');
 
-const Profile = ({ route }) => {
+const Profile = ({ navigation, route }) => {
   const { setIsSigned } = route.params;
   const currentUser = auth().currentUser;
   const [firstName, setFirstName] = useState('Name');
@@ -19,6 +21,8 @@ const Profile = ({ route }) => {
   const [profileImage, setProfileImage] = useState(null);
   // Saydamlik ozelligi icin baska bir cozum var mi?
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isEditingName, setEditingName] = useState(false);
+  const [isEditingSurname, setEditingSurname] = useState(false);
 
   useEffect(() => {
     const ref = firestore().collection('users').doc(currentUser.uid);
@@ -36,15 +40,6 @@ const Profile = ({ route }) => {
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
-  };
-
-  const handleSignOut = () => {
-    auth()
-      .signOut()
-      .then(async () => {
-        setIsSigned(false);
-        console.log('User signed out!');
-      });
   };
 
   const handleChoosePhoto = () => {
@@ -145,6 +140,19 @@ const Profile = ({ route }) => {
     }
   };
 
+  const handleUpdate = () => {
+    setEditingName(!isEditingName)
+    setEditingSurname(!isEditingSurname);
+
+    if (isEditingName || isEditingSurname) {
+      firestore().collection('users').doc(currentUser.uid).update({
+        name: firstName,
+        lastName: lastName,
+      });
+      ToastAndroid.show('Profile updated successfully', ToastAndroid.SHORT);
+    }
+  };
+
   return (
     <LinearGradient
       colors={['#FFFFFF', '#FFFFFF']}
@@ -157,7 +165,7 @@ const Profile = ({ route }) => {
           backgroundColor: isModalVisible ? '#FFFFFF130' : '#FFFFFF',
         }}>
           <Text style={{ fontSize: 30, color: 'white', fontWeight: 'bold', color: isModalVisible ? '#09A55580' : '#09A555' }}>
-          {strings.profile}
+            {strings.profile}
           </Text>
         </View>
         <View
@@ -174,7 +182,7 @@ const Profile = ({ route }) => {
             right: 25,
             zIndex: 1,
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
         >
           <TouchableOpacity onPress={toggleModal}>
@@ -208,7 +216,20 @@ const Profile = ({ route }) => {
           borderTopLeftRadius: 50,
           borderTopRightRadius: 50
         }}>
-          <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20, marginTop: 75 }}>{strings.gardenerInformation}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 75 }}>
+            <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20 }}>{strings.gardenerInformation}</Text>
+            <TouchableOpacity onPress={() => handleUpdate()}>
+              <Image
+                source={isEditingSurname || isEditingName ? checkIcon : editIconGreen}
+                style={{
+                  width: 25,
+                  height: 25,
+                  marginBottom: 5,
+                  marginLeft: 10,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
           <View
             style={{
               backgroundColor: isModalVisible ? '#FFFFFF80' : '#FFFFFF',
@@ -217,15 +238,38 @@ const Profile = ({ route }) => {
               paddingBottom: 10,
               borderRadius: 10
             }}>
-            <Text style={{ color: 'black' }}>{firstName}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ color: 'black' }}>{strings.name} </Text>
+              {isEditingName ? (
+                <TextInput
+                  style={{ flex: 1, color: 'black' }}
+                  value={firstName}
+                  onChangeText={setFirstName}
+                />
+              ) : (
+                <Text style={{ flex: 1, color: 'black' }}>{firstName}</Text>
+              )}
+            </View>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>{lastName}</Text>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ color: 'black' }}>{strings.surname} </Text>
+              {isEditingSurname ? (
+                <TextInput
+                  style={{ flex: 1, color: 'black' }}
+                  value={lastName}
+                  onChangeText={setLastName}
+                />
+              ) : (
+                <Text style={{ flex: 1, color: 'black' }}>{lastName}</Text>
+              )}
+            </View>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>{email}</Text>
+            <Text style={{ color: 'black' }}>{strings.email} {email}</Text>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
             <Text style={{ color: 'black' }}>{strings.homeGarden}</Text>
           </View>
-          <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20, marginTop: 20 }}>Social</Text>
+          <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20, marginTop: 20 }}>{strings.social}</Text>
           <View
             style={{
               backgroundColor: isModalVisible ? '#FFFFFF80' : '#FFFFFF',
@@ -243,19 +287,21 @@ const Profile = ({ route }) => {
             <Text style={{ color: 'black' }}>{strings.connectPinterest}</Text>
           </View>
           <TouchableOpacity
-            onPress={handleSignOut}
-            style={{
-              height: 50,
-              backgroundColor: 'white',
-              borderRadius: 50,
-              marginTop: 15,
-              width: '100%',
-              elevation: 5,
-              justifyContent: 'center'
-            }}>
-            <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>{strings.logOut}</Text>
-          </TouchableOpacity>
+          onPress={() => navigation.navigate('ChangePassword')}
+          style={{
+            height: 50,
+            backgroundColor: 'white',
+            borderRadius: 50,
+            marginTop: 50,
+            width: '100%',
+            elevation: 5,
+            justifyContent: 'center'
+          }}
+        >
+          <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>{strings.changePassword}</Text>
+        </TouchableOpacity>
         </View>
+
       </View>
       <Modal
         animationType='slide'
@@ -265,7 +311,7 @@ const Profile = ({ route }) => {
       >
         <TouchableWithoutFeedback onPress={toggleModal}>
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableWithoutFeedback onPress={() => { /* Boş bırak */ }}>
+            <TouchableWithoutFeedback onPress={() => {  }}>
               <View
                 style={{
                   width: 300,

@@ -1,12 +1,21 @@
 import { View, Text, TouchableOpacity, Image } from "react-native"
 import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/Style";
+import auth from '@react-native-firebase/auth';
 import strings from '../strings/string';
 
 const Settings = ({ navigation, route }) => {
 
   const { setIsSigned } = route.params;
 
+  const handleSignOut = () => {
+    auth()
+      .signOut()
+      .then(async () => {
+        setIsSigned(false);
+        console.log('User signed out!');
+      });
+  };
   return (
 
     <LinearGradient
@@ -17,7 +26,7 @@ const Settings = ({ navigation, route }) => {
 
         <View style={{
           padding: 20,
-          flex: 2,
+          flex: 1,
         }}>
           <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#09A555" }}>
           {strings.settings}
@@ -167,6 +176,20 @@ const Settings = ({ navigation, route }) => {
                 source={require('../images/icons/ic_right_arrow.png')}
               />
             </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={handleSignOut}
+            style={{
+              height: 50,
+              backgroundColor: 'white',
+              borderRadius: 50,
+              marginTop: 15,
+              width: '100%',
+              elevation: 5,
+              justifyContent: 'center'
+            }}>
+            <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>{strings.logOut}</Text>
           </TouchableOpacity>
 
         </View>
