@@ -43,7 +43,7 @@ const SelectPlant = ({navigation}) => {
       setPlantTypes(searchPlantTypeResult.plantTypes)
       const ref_id = await insertNewPlant(newPlant);
       setModalVisible(!modalVisible);
-      ToastAndroid.show('New plant is saved.', ToastAndroid.SHORT);
+      ToastAndroid.show(strings.toast1_selectPlant, ToastAndroid.SHORT);
       newPlant = {...newPlant, id: ref_id};
       // console.log('Inserted newPlant: ', newPlant);
       plants.push(newPlant);
@@ -99,8 +99,8 @@ const SelectPlant = ({navigation}) => {
     const isInsideGarden = isInsidePolygon(e.nativeEvent.coordinate, polygon);
     if (isInsideGarden) {
       Alert.alert(
-        'Add New Plant',
-        `Do you want to add a new plant?`,
+        strings.alert1_selectPlant,
+        strings.alert2_selectPlant,
         [
           {
             text: 'Cancel',
@@ -124,8 +124,8 @@ const SelectPlant = ({navigation}) => {
     const isInsideGarden = isInsidePolygon(currentPosition, polygon);
     if (isInsideGarden) {
       Alert.alert(
-        'Add New Plant',
-        `Do you want to add a new plant?`,
+        strings.alert1_selectPlant,
+        strings.alert2_selectPlant,
         [
           {
             text: 'Cancel',
@@ -144,7 +144,7 @@ const SelectPlant = ({navigation}) => {
       );
     } else {
       ToastAndroid.show(
-        'Your current location is not inside of this garden. New plant cannot be inserted.',
+        strings.toast2_selectPlant,
         ToastAndroid.LONG,
       );
     }
@@ -159,13 +159,13 @@ const SelectPlant = ({navigation}) => {
     region = setMapPositionByGardenArea(polygon);
   } else {
     ToastAndroid.show(
-      "This garden's area is not declared.",
+      strings.toast4_apl,
       ToastAndroid.SHORT,
     );
   }
-  let initialMessage = 'You did not select any plant';
+  let initialMessage = strings.initialMessage1;
   if (plants.length == 0) {
-    initialMessage = 'This garden has no plant';
+    initialMessage = strings.initialMessage2;
   }
   const [selectedPlant, setSelectedPlant] = useState(null);
   

@@ -41,8 +41,8 @@ const DrawPolygon = ({navigation, route}) => {
    // asks user to remove this point, when a marker is pressed
    const handleMarkerPress = (coordinate, index) => {
      Alert.alert(
-       'Remove Corner',
-       `Do you want to remove this corner from garden are?`,
+       strings.alert1_dp,
+       strings.alert2_dp,
        [
          {
            text: 'Cancel',

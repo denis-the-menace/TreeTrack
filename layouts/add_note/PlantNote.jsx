@@ -89,7 +89,7 @@ const PlantNote = ({navigation}) => {
  const saveNote = async () => {
     if (!selectedPlant) {
       ToastAndroid.show(
-        'You must select a plant to save note.',
+        strings.toast1_plantNote,
         ToastAndroid.LONG,
       );
     } else {

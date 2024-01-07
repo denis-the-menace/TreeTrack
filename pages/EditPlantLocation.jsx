@@ -58,10 +58,10 @@ const EditPlantLocation = ({ navigation }) => {
     if (isInsideGarden) {
       setPlantList(plants.filter(p => p.id !== updatedPlant.id))
       setSelectedLocation(e.nativeEvent.coordinate);
-      ToastAndroid.show('Plant location is changed', ToastAndroid.SHORT);
+      ToastAndroid.show(strings.plant_location_changed, ToastAndroid.SHORT);
     } else {
       ToastAndroid.show(
-        'Selected location is not inside of this garden.',
+        strings.toast1_editlocation,
         ToastAndroid.LONG,
       );
     }
@@ -72,10 +72,10 @@ const EditPlantLocation = ({ navigation }) => {
     if (isInsideGarden) {
       setPlantList(plants.filter(p => p.id !== updatedPlant.id))
       setSelectedLocation(currentPosition);
-      ToastAndroid.show('Plant location is changed.', ToastAndroid.SHORT);
+      ToastAndroid.show(strings.plant_location_changed, ToastAndroid.SHORT);
     } else {
       ToastAndroid.show(
-        'Your current location is not inside of this garden.',
+        strings.toast2_editlocation,
         ToastAndroid.LONG,
       );
     }
@@ -87,7 +87,7 @@ const EditPlantLocation = ({ navigation }) => {
     region = setMapPositionByGardenArea(polygon);
   } else {
     ToastAndroid.show(
-      "This garden's area is not declared.",
+      strings.toast3_editlocation,
       ToastAndroid.SHORT,
     );
   }
@@ -130,7 +130,7 @@ const EditPlantLocation = ({ navigation }) => {
                 }}
                 onPress={() => {
                   ToastAndroid.show(
-                    'Select another location.',
+                    strings.toast2_egp,
                     ToastAndroid.LONG,
                   );
                 }}

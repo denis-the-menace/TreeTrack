@@ -47,7 +47,7 @@ const CreateGarden = ({route, navigation}) => {
       // if new type is inserted, update the list
       setGardenTypes(searchGardenTypeResult.gardenTypes);
       await insertGarden(gardenData);
-      ToastAndroid.show('Garden is saved.', ToastAndroid.SHORT);
+      ToastAndroid.show(strings.toast1_cg, ToastAndroid.SHORT);
       onUpdate();
       navigation.navigate('GardensStack', {screen: 'Gardens'});
     } catch (error) {

@@ -53,7 +53,7 @@ const CreatePlant = ({route, navigation}) => {
       // if new type is inserted, update the list
       setPlantTypes(searchPlantTypeResult.plantTypes);
       await insertNewPlant(plantData);
-      ToastAndroid.show('Plant is added.', ToastAndroid.SHORT);
+      ToastAndroid.show(strings.toast1_cp, ToastAndroid.SHORT);
       onUpdate();
       navigation.navigate('Plants', {garden});
     } catch (error) {

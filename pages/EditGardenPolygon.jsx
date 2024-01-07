@@ -60,8 +60,8 @@ const EditGardenPolygon = ({navigation, route}) => {
   // asks user to remove this point, when a marker is pressed
   const handleMarkerPress = (coordinate, index) => {
     Alert.alert(
-      'Remove Corner',
-      `Do you want to remove this corner from garden are?`,
+      strings.alert1_dp,
+      strings.alert2_dp,
       [
         {
           text: 'Cancel',
@@ -86,7 +86,7 @@ const EditGardenPolygon = ({navigation, route}) => {
     region = setMapPositionByGardenArea(polygon);
   }
   else{
-    ToastAndroid.show("This garden's area is not declared.", ToastAndroid.SHORT)
+    ToastAndroid.show(strings.toast1_egp, ToastAndroid.SHORT)
   }
   
   return (
@@ -128,7 +128,7 @@ const EditGardenPolygon = ({navigation, route}) => {
                 }}
                 onPress={() => {
                   ToastAndroid.show(
-                    'Select another location.',
+                    strings.toast2_egp,
                     ToastAndroid.LONG,
                   );
                 }}

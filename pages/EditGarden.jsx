@@ -33,7 +33,7 @@ const EditGarden = ({ navigation }) => {
         }
         try {
             await updateGarden(garden.id, updated_garden)
-            ToastAndroid.show("Garden is updated.", ToastAndroid.SHORT)
+            ToastAndroid.show(strings.toast1_eg, ToastAndroid.SHORT)
             navigation.navigate("Gardens")
             // TODO: Navigate?
         } catch (error) {

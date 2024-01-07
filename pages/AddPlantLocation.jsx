@@ -51,9 +51,9 @@ const AddPlantLocation = ({navigation}) => {
     const isInsideGarden = isInsidePolygon(e.nativeEvent.coordinate, polygon);
     if(isInsideGarden){
       setSelectedLocation(e.nativeEvent.coordinate)
-      ToastAndroid.show("Plant location is selected", ToastAndroid.SHORT)
+      ToastAndroid.show(strings.toast1_apl, ToastAndroid.SHORT)
     }else{
-      ToastAndroid.show("Selected location is not inside of this garden.", ToastAndroid.LONG)
+      ToastAndroid.show(strings.toast2_apl, ToastAndroid.LONG)
     }
    
   };
@@ -62,9 +62,9 @@ const AddPlantLocation = ({navigation}) => {
     const isInsideGarden = isInsidePolygon(currentPosition, polygon)
     if(isInsideGarden){
       setSelectedLocation(currentPosition)
-        ToastAndroid.show("Plant location is selected", ToastAndroid.SHORT)
+        ToastAndroid.show(strings.toast1_apl, ToastAndroid.SHORT)
     }else{
-        ToastAndroid.show("Your current location is not inside of this garden.", ToastAndroid.LONG)
+        ToastAndroid.show(strings.toast3_apl, ToastAndroid.LONG)
     }
   }
 
@@ -74,7 +74,7 @@ const AddPlantLocation = ({navigation}) => {
     region = setMapPositionByGardenArea(polygon);
   }
   else{
-    ToastAndroid.show("This garden's area is not declared.", ToastAndroid.SHORT)
+    ToastAndroid.show(strings.toast4_apl, ToastAndroid.SHORT)
   }
 
   return (
@@ -114,7 +114,7 @@ const AddPlantLocation = ({navigation}) => {
                   longitude: plant.location.longitude,
                 }}
                 onPress={() => {
-                  ToastAndroid.show("Select another location for new plant.", ToastAndroid.LONG)
+                  ToastAndroid.show(strings.toast5_apl, ToastAndroid.LONG)
                 }}
                 style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Text 

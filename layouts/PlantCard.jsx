@@ -22,7 +22,7 @@ const {height} = Dimensions.get('window');
 const handleDelete = async (plantId, onUpdate) => {
   try {
     await deletePlant(plantId);
-    ToastAndroid.show('Plant is deleted.', ToastAndroid.SHORT);
+    ToastAndroid.show(strings.toast1_plantCard, ToastAndroid.SHORT);
     onUpdate();
   } catch (error) {
     console.log('Delete plant error: ', error);

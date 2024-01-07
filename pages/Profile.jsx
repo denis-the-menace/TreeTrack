@@ -117,7 +117,7 @@ const Profile = ({ route }) => {
     if (profileImage) {
       Alert.alert(
         '',
-        'Are you sure you want to remove your profile photo?',
+        strings.alert1_profile,
         [
           {
             text: 'Cancel',
@@ -140,7 +140,7 @@ const Profile = ({ route }) => {
     }
     else {
       ToastAndroid.show(
-        'There is no profile photo to remove', ToastAndroid.SHORT
+        strings.toast1_profile, ToastAndroid.SHORT
       );
     }
   };

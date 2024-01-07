@@ -16,6 +16,12 @@ const strings = {
   hybrid: 'Hybrid',
   satellite: 'Satellite',
   save_location: 'Save Location',
+  toast1_apl:'Plant location is selected',
+  toast2_apl:'Selected location is not inside of this garden.',
+  toast3_apl:'Your current location is not inside of this garden.',
+  toast4_apl:"This garden's area is not declared.",
+  toast5_apl:'Select another location for new plant.',
+
 
   //CreateGarden
   add_new_garden: 'Add a new garden',
@@ -26,6 +32,8 @@ const strings = {
   add_location_garden: 'Add location of your garden',
   open_map: 'Open Map',
   save_button: ' Save ',
+  toast1_cg:'Garden is saved.',
+  
 
   //CreatePlant
   add_new_plant: "Add a new plant",
@@ -34,6 +42,7 @@ const strings = {
   enter_plant_type: "Enter plant type",
   add_location_plant: "Add location of your plant",
   add_button: "Add",
+  toast1_cp:'Plant is added.',
 
   //DrawPolygon
   add_location: 'Add location',
@@ -41,27 +50,34 @@ const strings = {
   search_placeholder: 'Search...',
   use_current_location: 'Use Current Location',
   save_area: 'Save Area',
+  alert1_dp:'Remove Corner',
+  alert2_dp:'Do you want to remove this corner from garden area?',
 
   //EditGarden
   edit_garden: 'Edit garden',
   edit_garden_name: 'Edit garden name',
   edit_area_garden: 'Edit area of your garden',
   update: 'Update',
+  toast1_eg:'Garden is updated.',
 
   //EditGardenPolygon
   edit_garden_area: 'Edit garden area',
   tab_corners_remove: 'Tab corners to remove or',
-
+  toast1_egp:"This garden's area is not declared.",
+  toast2_egp:'Select another location.',
 
   //EditPlant
   edit_plant: 'Edit plant',
   edit_plant_name: 'Edit plant name',
   edit_location_plant: 'Edit location of your plant',
+  toast1_editplant:"Plant is updated.",
 
   //EditPlantLocation
   edit_plant_location: 'Edit plant location',
   plant_location_changed: 'Plant location is changed',
-
+  toast1_editlocation:'Selected location is not inside of this garden.',
+  toast2_editlocation:'Your current location is not inside of this garden.',
+  toast3_editlocation:"This garden's area is not declared.",
 
   //Galleries
   gallery_title: 'GALLERY',
@@ -118,6 +134,8 @@ const strings = {
   removePhoto: 'REMOVE PHOTO',
   takePhoto: 'TAKE A PHOTO',
   selectFromGallery: 'SELECT FROM GALLERY',
+  alert1_profile:'Are you sure you want to remove your profile photo?',
+  toast1_profile:'There is no profile photo to remove.',
 
   //SelectPlant
   addPhoto: ' Add photo',
@@ -129,6 +147,12 @@ const strings = {
   cancel: 'Cancel',
   add: 'Add',
   select: 'Select',
+  toast1_selectPlant:'New plant is saved.',
+  toast2_selectPlant:'Your current location is not inside of this garden. New plant cannot be inserted.',
+  initialMessage1:'You did not select any plant',
+  initialMessage2:'This garden has no plant',
+  alert1_selectPlant:'Add New Plant',
+  alert2_selectPlant:'Do you want to add a new plant?',
 
   //Settings
   settings: 'SETTINGS',
@@ -147,6 +171,10 @@ const strings = {
   signIn_B: 'SIGN IN',
   dontHaveAccount: "Don't you have an account?",
   signUp: 'Sign up',
+  toast1_signIn:'User does not exist!',
+  toast2_signIn:'User signed in successfully.',
+  toast3_signIn:'Email and password cannot be empty!',
+  toast4_signIn:'Please, read and confirm the terms and conditions!',
 
   //SignUp
   welcome: 'Welcome!',
@@ -157,6 +185,9 @@ const strings = {
   termsAndConditions: 'I accept the',
   termsAndConditions1: 'Terms and conditions',
   signUp_B: 'SIGN UP',
+  toast1_signUp:'Passwords do not match!',
+  toast2_signUp:'User signed up!',
+  toast3_signUp:'Please fill the form correctly!',
 
 
 
@@ -189,10 +220,12 @@ const strings = {
   gardenPhoto_gn: 'Add a photo of your Garden',
   selectGarden_gn: 'Select a Garden',
   enterNotes_gn: 'Enter your Notes',
+  
 
   //PlantNote
   add_photo_pn: 'Add a photo of your plant',
   select_plant_pn: 'Select a plant from Garden',
+  toast1_plantNote:'You must select a plant to save note.',
 
   //GardenGallery-PlantGallery
   loading_gg: 'Loading...',
@@ -211,9 +244,11 @@ const strings = {
   //GardenCard
   share_gc:'Share',
   delete_gc:'Delete',
+  toast1_gardenCard:'Garden is deleted.',
 
   //PlantCard
   edit_pc:'Edit',
+  toast1_plantCard:'Plant is deleted.',
 
   //Pick
   select_another_p:' Select Another Picture ',

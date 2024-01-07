@@ -32,13 +32,13 @@ const SignIn = ({setIsSigned, navigation}) => {
         const firestoreDocument = await usersRef.get();
 
         if (!firestoreDocument.exists) {
-          ToastAndroid.show('User does not exist!', ToastAndroid.SHORT);
+          ToastAndroid.show(strings.toast1_signIn, ToastAndroid.SHORT);
         }
 
         setIsSigned(true);
         await saveUserId(uid, toggleCheckBox);
         console.log('inside handleLogin ', uid, toggleCheckBox);
-        ToastAndroid.show('User signed in successfully.', ToastAndroid.SHORT);
+        ToastAndroid.show(strings.toast2_signIn, ToastAndroid.SHORT);
       } catch (error) {
         console.error(error);
         if (error.message) {
@@ -47,12 +47,12 @@ const SignIn = ({setIsSigned, navigation}) => {
       }
     } else if (email === '' || password === '') {
       ToastAndroid.show(
-        'Email and password cannot be empty!',
+        strings.toast3_signIn,
         ToastAndroid.SHORT,
       );
     } else {
       ToastAndroid.show(
-        'Please, read and confirm the terms and conditions!',
+        strings.toast4_signIn,
         ToastAndroid.SHORT,
       );
     }

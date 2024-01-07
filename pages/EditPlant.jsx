@@ -32,7 +32,7 @@ const EditPlant = ({ navigation }) => {
             updated_plant.name = plantName
         try {
             await updatePlant(plant.id, updated_plant)
-            ToastAndroid.show("Plant is updated.", ToastAndroid.SHORT)
+            ToastAndroid.show(strings.toast1_editplant, ToastAndroid.SHORT)
         } catch (error) {
             console.log("Error update plant: ", error)
         }

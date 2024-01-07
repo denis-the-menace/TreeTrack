@@ -28,7 +28,7 @@ const SignUp = ({setIsSigned, navigation}) => {
   const handleSignUp = async () => {
     if (toggleCheckBox && email !== '' && name !== '' && password !== '') {
       if (password !== confirmPassword) {
-        ToastAndroid.show('Passwords do not match!', ToastAndroid.SHORT);
+        ToastAndroid.show(strings.toast1_signUp, ToastAndroid.SHORT);
         return;
       }
 
@@ -50,7 +50,7 @@ const SignUp = ({setIsSigned, navigation}) => {
         await saveUserId(uid, toggleCheckBox);
 
         console.log('User signed up!');
-        ToastAndroid.show('User signed up!', ToastAndroid.SHORT);
+        ToastAndroid.show(strings.toast2_signUp, ToastAndroid.SHORT);
       } catch (error) {
         console.error(error);
         if (error.message) {
@@ -58,10 +58,10 @@ const SignUp = ({setIsSigned, navigation}) => {
         }
       }
     } else if (email === '' || password === '' || name === '') {
-      ToastAndroid.show('Please fill the form correctly!', ToastAndroid.SHORT);
+      ToastAndroid.show(strings.toast3_signUp, ToastAndroid.SHORT);
     } else {
       ToastAndroid.show(
-        'Please, read and confirm the terms and conditions!',
+        strings.toast4_signIn,
         ToastAndroid.SHORT,
       );
     }
