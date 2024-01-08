@@ -25,47 +25,40 @@ const SignUp = ({setIsSigned, navigation}) => {
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState(false);
 
-  const handleSignUp = async () => {
-    if (toggleCheckBox && email !== '' && name !== '' && password !== '') {
-      if (password !== confirmPassword) {
-        ToastAndroid.show(strings.toast1_signUp, ToastAndroid.SHORT);
-        return;
-      }
-
-      try {
-        const response = await auth().createUserWithEmailAndPassword(
-          email,
-          password,
-        );
-        const {uid, email} = response.user;
-        const ref = firestore().collection('users').doc(uid);
-
-        await ref.set({
-          user_uid: uid,
-          name: name,
-          email: email,
-        });
-
-        setIsSigned(true);
-        await saveUserId(uid, toggleCheckBox);
-
-        console.log('User signed up!');
-        ToastAndroid.show(strings.toast2_signUp, ToastAndroid.SHORT);
-      } catch (error) {
-        console.error(error);
-        if (error.message) {
-          ToastAndroid.show(error.message.split('] ')[1], ToastAndroid.SHORT);
+    const handleSignUp = () => {
+      if (toggleCheckBox && email != '' && name != '' && password != '') {
+        if (password !== confirmPassword) {
+          ToastAndroid.show(strings.toast1_signUp, ToastAndroid.SHORT);
+          return;
         }
+        auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(async (response) => {
+            const { uid, email } = response.user;
+            const ref = firestore().collection('users').doc(uid)
+            ref.set({
+              "user_uid": uid,
+              "name": name,
+              "email": email,
+            })
+            setIsSigned(true);
+            await saveUserId(uid, toggleCheckBox);
+            console.log('User signed up!');
+            ToastAndroid.show(strings.toast2_signUp, ToastAndroid.SHORT);
+  
+            })
+          .catch((error) => {
+            console.log(error);
+            ToastAndroid.show(error.message.split('] ')[1], ToastAndroid.SHORT);
+          });
       }
-    } else if (email === '' || password === '' || name === '') {
-      ToastAndroid.show(strings.toast3_signUp, ToastAndroid.SHORT);
-    } else {
-      ToastAndroid.show(
-        strings.toast4_signIn,
-        ToastAndroid.SHORT,
-      );
-    }
-  };
+      else if (email == '' || password == '' || name == '') {
+        ToastAndroid.show(strings.toast3_signUp, ToastAndroid.SHORT);
+      }
+      else {
+        ToastAndroid.show('Please, read and confirm the terms and conditions!', ToastAndroid.SHORT);
+      }
+    };
 
   return (
     <View className="flex p-8 justify-center items-center bg-white h-full">
