@@ -1,4 +1,5 @@
 import {Dimensions} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const formatDate = date => {
   if (date) {
@@ -44,4 +45,35 @@ export const setMapPositionByGardenArea = polygon => {
   const longitudeDelta = (maxLongitude - minLongitude) * aspectRatio;
 
   return {latitude, longitude, latitudeDelta, longitudeDelta};
+};
+
+// kullanıcının kendi hesabını siler
+export const deleteAccount = async (userId) => {
+  try {
+    // Kullanıcı bilgilerini al
+    const storedUserId = await getFromStorage('userId');
+
+    // Kayıtlı kullanıcı kimliğiyle parametre olarak gelen userId karşılaştırılır
+    if (storedUserId && storedUserId === userId.toString()) {
+      // Kullanıcı kimliği eşleşiyorsa, bilgileri sil
+      await AsyncStorage.removeItem('userId');
+      await AsyncStorage.removeItem('remember_auth');
+      console.log('User account deleted successfully!');
+    } else {
+      console.log('User account deletion failed. Invalid user ID.');
+    }
+  } catch (error) {
+    console.log('Error deleting user account: ', error);
+  }
+};
+
+export const getFromStorage = async (key) => {
+  try {
+    const value = await AsyncStorage.getItem(key);
+    if (value !== null) {
+      return value;
+    }
+  } catch (error) {
+    console.log(`Error retrieving ${key}: ${error}`);
+  }
 };

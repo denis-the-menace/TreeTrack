@@ -1,8 +1,9 @@
-import { View, Text, TouchableOpacity, Image } from "react-native"
+import { View, Text, TouchableOpacity, Image, Alert } from "react-native"
 import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/Style";
 import auth from '@react-native-firebase/auth';
 import strings from '../strings/string';
+import {deleteAccount} from '../services/helper'
 
 const Settings = ({ navigation, route }) => {
 
@@ -16,6 +17,36 @@ const Settings = ({ navigation, route }) => {
         console.log('User signed out!');
       });
   };
+
+  const handleDeleteAccount = async () => {
+    try {
+      const user = auth().currentUser;
+      const userId = user ? user.uid : null;
+  
+      if (userId) {
+        // Delete account from Firebase
+        await user.delete();
+  
+        // Clear user-related information from AsyncStorage
+        await deleteAccount(userId);
+  
+        // Sign out the user
+        await auth().signOut();
+  
+        // Update the authentication state
+        setIsSigned(false);
+  
+        // Alert and navigate to SignUp screen
+        Alert.alert('Success', 'Account deleted successfully!');
+        navigation.navigate('SignUp');
+      } else {
+        Alert.alert('Error', 'Error deleting account. User not authenticated.');
+      }
+    } catch (error) {
+      Alert.alert('Error', `Error deleting user account: ${error}`);
+    }
+  };
+
   return (
 
     <LinearGradient
@@ -191,6 +222,41 @@ const Settings = ({ navigation, route }) => {
             }}>
             <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>{strings.logOut}</Text>
           </TouchableOpacity>
+
+          {/* Delete Account butonu */}
+        <TouchableOpacity
+          onPress={() => {
+            // Kullanıcıya silme işlemini onaylama mesajı göster
+            Alert.alert(
+              'Delete Account',
+              'Are you sure you want to delete your account?',
+              [
+                {
+                  text: 'Cancel',
+                  style: 'cancel',
+                },
+                {
+                  text: 'Delete',
+                  onPress: handleDeleteAccount,
+                  style: 'destructive',
+                },
+              ],
+            );
+          }}
+          style={{
+            height: 50,
+            backgroundColor: 'white',
+            borderRadius: 50,
+            marginTop: 15,
+            width: '100%',
+            elevation: 5,
+            justifyContent: 'center',
+          }}>
+          <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>
+            DELETE ACCOUNT
+          </Text>
+        </TouchableOpacity>
+
 
         </View>
 
