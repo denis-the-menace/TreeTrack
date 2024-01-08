@@ -40,10 +40,10 @@ const Settings = ({ navigation, route }) => {
         Alert.alert('Success', 'Account deleted successfully!');
         navigation.navigate('SignUp');
       } else {
-        Alert.alert('Error', 'Error deleting account. User not authenticated.');
+        console.log('User not authenticated:', user);
       }
     } catch (error) {
-      Alert.alert('Error', `Error deleting user account: ${error}`);
+      console.error('Error deleting user account:', error);
     }
   };
 
