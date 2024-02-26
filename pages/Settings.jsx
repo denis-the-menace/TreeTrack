@@ -103,6 +103,10 @@ const Settings = ({ navigation, route }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            
+            onPress={() => {
+              navigation.navigate("Preferences");
+            }}
             style={{
               padding: 10,
               borderRadius: 50,

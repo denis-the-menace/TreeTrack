@@ -13,7 +13,7 @@ const editIconGreen = require('../images/icons/edit.png');
 const checkIcon = require('../images/icons/update.png');
 
 const Profile = ({ navigation, route }) => {
-  const { setIsSigned } = route.params;
+  
   const currentUser = auth().currentUser;
   const [firstName, setFirstName] = useState('Name');
   const [lastName, setLastName] = useState('');

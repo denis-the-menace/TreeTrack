@@ -24,6 +24,7 @@ import EditGarden from '../pages/EditGarden';
 import EditGardenPolygon from '../pages/EditGardenPolygon';
 import Support from '../pages/Support';
 import PrivacyAndSafety from '../pages/PrivacyAndSafety';
+import Preferences from '../pages/Preferences';
 import MainMenu from '../pages/MainMenu';
 import ChangePassword from '../pages/ChangePassword';
 
@@ -220,6 +221,7 @@ const SettingsStack = ({setIsSigned}) => {
         initialParams={{setIsSigned}}
       />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Preferences" component={Preferences} />
       <Stack.Screen name="Support" component={Support} />
       <Stack.Screen name="PrivacyAndSafety" component={PrivacyAndSafety} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />

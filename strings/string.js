@@ -281,6 +281,11 @@ const strings = {
   //UnPick
   takePhoto_up: ' Take a Photo ',
   select_from_gallery_up: ' Select From Gallery ',
+
+  //Preferences
+  language: 'Language',
+  turkish: 'Turkish',
+  english: 'English',
 };
 
 //{strings.edit_garden_area}

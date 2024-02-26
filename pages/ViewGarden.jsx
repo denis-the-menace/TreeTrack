@@ -226,7 +226,7 @@ const ViewGarden = ({ navigation, route }) => {
           <TouchableOpacity
             onPress={() => {navigation.navigate('Map', { garden }); }}
             style={{ ...styles.button_right, marginTop: 5, marginBottom: 25, marginHorizontal: 10 }}>
-            <Text style={styles.bt1}> {strings.displayInMap_vg}p </Text>
+            <Text style={styles.bt1}> {strings.displayInMap_vg} </Text>
           </TouchableOpacity>
 
           <TouchableOpacity

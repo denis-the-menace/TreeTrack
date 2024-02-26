@@ -14,6 +14,10 @@ import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/auth';
 import {getFromStorage} from './services/storage';
 import HomeNavigation from './navigations/HomeNavigation';
+import { LanguageProvider } from './services/LanguageContext'; // Çeviri için
+import Preferences from './pages/Preferences'; // Çeviri için
+import Profile from './pages/Profile';
+
 
 const App = () => {
   const [isSignedIn, setIsSigned] = useState(false);
@@ -65,7 +69,21 @@ const App = () => {
   // below code returns a blank page?
   // return <View>{handle()}</View>;
 
-  return handle();
+  //Çeviri için
+  return (
+    <LanguageProvider>
+      <View style={{ flex: 1 }}>
+        {handle()}
+        <Preferences />
+        <Profile />
+        {/* Diğer bileşenler */}
+      </View>
+    </LanguageProvider>
+  );
+
+
+  //return handle();
+
 };
 
 export default App;
