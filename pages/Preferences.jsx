@@ -4,6 +4,7 @@ import LinearGradient from "react-native-linear-gradient";
 import strings from '../strings/string'; // Varsayılan dil dosyası
 import turkishStrings from '../strings/turkish'; // Türkçe dil dosyası
 
+/*sadece bu sayfada çeviri var bütün uygulamaya eklenmeli*/
 const Preferences = ({ navigation }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
