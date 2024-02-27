@@ -69,20 +69,7 @@ const App = () => {
   // below code returns a blank page?
   // return <View>{handle()}</View>;
 
-  //Çeviri için
-  return (
-    <LanguageProvider>
-      <View style={{ flex: 1 }}>
-        {handle()}
-        <Preferences />
-        <Profile />
-        {/* Diğer bileşenler */}
-      </View>
-    </LanguageProvider>
-  );
-
-
-  //return handle();
+  return handle();
 
 };
 
