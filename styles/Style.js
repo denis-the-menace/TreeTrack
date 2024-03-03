@@ -30,6 +30,12 @@ const styles = StyleSheet.create({
     color: '#EFEFEF',
     marginBottom: 10,
   },
+  text2: {
+    fontSize: 30,
+    fontWeight: "bold", 
+    color: "#09A555",
+    marginBottom: 10,
+  },
   subtext: {
     fontSize: 18,
     fontWeight: 'bold',

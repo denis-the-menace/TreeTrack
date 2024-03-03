@@ -22,7 +22,7 @@ const Galleries = ({route}) => {
     <LinearGradient colors={['#FFFFFF', '#FFFFFF']} className="h-full">
       <View className="flex">
         <View className="flex h-1/6 p-5">
-          <Text className="mb-2 text-lg text-center font-bold text-[#09A555]">
+          <Text style={styles.text2}>
           {strings.gallery_title}
           </Text>
 
