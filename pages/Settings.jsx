@@ -3,9 +3,11 @@ import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/Style";
 import auth from '@react-native-firebase/auth';
 import strings from '../strings/string';
-import {deleteAccount} from '../services/helper'
+import { deleteAccount } from '../services/helper'
+import { useTranslation } from 'react-i18next';
 
 const Settings = ({ navigation, route }) => {
+  const { t } = useTranslation();
 
   const { setIsSigned } = route.params;
 
@@ -22,20 +24,20 @@ const Settings = ({ navigation, route }) => {
     try {
       const user = auth().currentUser;
       const userId = user ? user.uid : null;
-  
+
       if (userId) {
         // Delete account from Firebase
         await user.delete();
-  
+
         // Clear user-related information from AsyncStorage
         await deleteAccount(userId);
-  
+
         // Sign out the user
         await auth().signOut();
-  
+
         // Update the authentication state
         setIsSigned(false);
-  
+
         // Alert and navigate to SignUp screen
         Alert.alert('Success', 'Account deleted successfully!');
         navigation.navigate('SignUp');
@@ -60,7 +62,7 @@ const Settings = ({ navigation, route }) => {
           flex: 1,
         }}>
           <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#09A555" }}>
-          {strings.settings}
+            {strings.settings}
           </Text>
 
         </View>
@@ -90,6 +92,7 @@ const Settings = ({ navigation, route }) => {
               }}
             >
               <Text style={{ color: "#25596E" }}> {strings.profile1} </Text>
+              <Text style={{ color: "#25596E" }}> {t('first')} </Text>
 
               <Image
                 style={{
@@ -103,7 +106,7 @@ const Settings = ({ navigation, route }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            
+
             onPress={() => {
               navigation.navigate("Preferences");
             }}
@@ -228,38 +231,38 @@ const Settings = ({ navigation, route }) => {
           </TouchableOpacity>
 
           {/* Delete Account butonu */}
-        <TouchableOpacity
-          onPress={() => {
-            // Kullanıcıya silme işlemini onaylama mesajı göster
-            Alert.alert(
-              'Delete Account',
-              'Are you sure you want to delete your account?',
-              [
-                {
-                  text: 'Cancel',
-                  style: 'cancel',
-                },
-                {
-                  text: 'Delete',
-                  onPress: handleDeleteAccount,
-                  style: 'destructive',
-                },
-              ],
-            );
-          }}
-          style={{
-            height: 50,
-            backgroundColor: 'white',
-            borderRadius: 50,
-            marginTop: 15,
-            width: '100%',
-            elevation: 5,
-            justifyContent: 'center',
-          }}>
-          <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>
-            DELETE ACCOUNT
-          </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              // Kullanıcıya silme işlemini onaylama mesajı göster
+              Alert.alert(
+                'Delete Account',
+                'Are you sure you want to delete your account?',
+                [
+                  {
+                    text: 'Cancel',
+                    style: 'cancel',
+                  },
+                  {
+                    text: 'Delete',
+                    onPress: handleDeleteAccount,
+                    style: 'destructive',
+                  },
+                ],
+              );
+            }}
+            style={{
+              height: 50,
+              backgroundColor: 'white',
+              borderRadius: 50,
+              marginTop: 15,
+              width: '100%',
+              elevation: 5,
+              justifyContent: 'center',
+            }}>
+            <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>
+              DELETE ACCOUNT
+            </Text>
+          </TouchableOpacity>
 
 
         </View>

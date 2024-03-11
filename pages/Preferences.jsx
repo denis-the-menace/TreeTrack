@@ -3,17 +3,22 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import strings from '../strings/string'; // Varsayılan dil dosyası
 import turkishStrings from '../strings/turkish'; // Türkçe dil dosyası
+import i18next from '../services/i18next';
+import { useTranslation } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /*sadece bu sayfada çeviri var bütün uygulamaya eklenmeli*/
 const Preferences = ({ navigation }) => {
+  const { t } = useTranslation();
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleBack = () => {
-    navigation.goBack(); 
+    navigation.goBack();
   };
 
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
+  const handleOptionSelect = (lng) => {
+    i18next.changeLanguage(lng);
+    AsyncStorage.setItem('language', lng)
   };
 
   // Seçilen dilin metin dosyasını belirleme
@@ -40,7 +45,7 @@ const Preferences = ({ navigation }) => {
             borderTopLeftRadius: 50,
             borderTopRightRadius: 50
           }}>
-            <Text style={{ fontSize: 20, fontWeight: "bold"}}>{selectedStrings.language}</Text>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>{selectedStrings.language}</Text>
             <TouchableOpacity
               onPress={() => handleOptionSelect("tr")}
               style={{ flexDirection: "row", alignItems: "center", marginBottom: 15, marginTop: 15 }}>

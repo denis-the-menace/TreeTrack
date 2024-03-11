@@ -1,12 +1,12 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../styles/Style';
 import GardenGallery from '../layouts/gallery/GardenGallery';
 import PlantGallery from '../layouts/gallery/PlantGallery';
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import strings from '../strings/string';
 
-const Galleries = ({route}) => {
+const Galleries = ({ route }) => {
   // TODO: view in gallery
   const garden =
     route.params && route.params.garden ? route.params.garden : null;
@@ -23,7 +23,7 @@ const Galleries = ({route}) => {
       <View className="flex">
         <View className="flex h-1/6 p-5">
           <Text style={styles.text2}>
-          {strings.gallery_title}
+            {strings.gallery_title}
           </Text>
 
           <View className="flex flex-row justify-center">
