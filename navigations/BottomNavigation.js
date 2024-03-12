@@ -88,21 +88,15 @@ const BottomNavigation = ({setIsSigned}) => {
         <Tab.Screen
           name="Map"
           component={Map}
+          listeners={({navigation}) => ({
+            tabPress: (e) => {
+              e.preventDefault(); 
+            },
+          })}
           options={{
-            unmountOnBlur: true,
-            tabBarIcon: ({focused}) => (
-              <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                <Image
-                  source={
-                    focused
-                      ? require('../images/icons/focused_location.png')
-                      : require('../images/icons/location.png')
-                  }
-                  resizeMode="contain"
-                  style={styles.bottomNavigationİcons}></Image>
-              </View>
-            ),
-          }}></Tab.Screen>
+            tabBarButton: () => null, // Navigasyon çubuğunda görünmez
+          }}
+        />
 
         <Tab.Screen
           name="GardensStack"

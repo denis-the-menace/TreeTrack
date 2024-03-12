@@ -4,7 +4,6 @@ import styles from '../styles/Style';
 import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import strings from '../strings/string';
-// import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import MapView, {
   PROVIDER_GOOGLE,
   Polygon,
@@ -60,6 +59,8 @@ const Map = () => {
       console.log('error in handle search: ', error);
     }
   };
+
+
   useEffect(() => {
     Geolocation.getCurrentPosition(pos => {
       const crd = pos.coords;
@@ -90,7 +91,7 @@ const Map = () => {
         <Text style={styles.text}>{strings.mapTitle}</Text>
 
         {/* TODO: search bar - google cloud gerekli*/}
-        <TextInput
+        {/*<TextInput
           style={{
             backgroundColor: '#ffffff95',
             borderRadius: 5,
@@ -102,10 +103,11 @@ const Map = () => {
           value={searchText}
           onChangeText={setSearchText}
           onSubmitEditing={handleSearch}
-        />
-        <View style={{width: '100%', height: '60%', marginBottom: 5}}>
+        />*/}
+
+        <View style={{width: '100%', height: '60%', marginBottom: 35}}>
           <MapView
-            style={{width: '100%', height: '100%'}}
+            style={{width: '100%', height: '100%', marginTop: 10}}
             provider={PROVIDER_GOOGLE}
             showsUserLocation={true}
             region={selectedGardenCenter ? selectedGardenCenter : currentPosition}
