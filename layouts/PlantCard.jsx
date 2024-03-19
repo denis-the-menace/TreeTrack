@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import {deletePlant} from '../services/plant_services';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 import CustomModal from '../components/CustomModal';
 import {useState} from 'react';
 
@@ -16,7 +16,7 @@ const {height} = Dimensions.get('window');
 const handleDelete = async (plantId, onUpdate) => {
   try {
     await deletePlant(plantId);
-    ToastAndroid.show(strings.toast1_plantCard, ToastAndroid.SHORT);
+    ToastAndroid.show(t("toast1_plantCard"), ToastAndroid.SHORT);
     onUpdate();
   } catch (error) {
     console.log('Delete plant error: ', error);
@@ -24,6 +24,7 @@ const handleDelete = async (plantId, onUpdate) => {
 };
 
 const PlantCard = ({navigation, plant, garden, onUpdate}) => {
+  const { t } = useTranslation();
   const plant_image = !plant.image_url
     ? 'https://cdn-icons-png.flaticon.com/512/1892/1892747.png'
     : plant.image_url;
@@ -64,21 +65,21 @@ const PlantCard = ({navigation, plant, garden, onUpdate}) => {
                   })
                 }>
                 <Text className="text-black font-bold">
-                  {strings.edit_pc}
+                  {t("edit_pc")}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 className="items-center py-4 px-5 bg-[#FFF1DD] border-b-2 border-x-2 border-black"
                 onPress={() => alert(`Share`)}>
                 <Text className="text-black font-bold">
-                  {strings.share_pc}
+                  {t("share_pc")}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 className="items-center py-4 px-5 bg-[#FFF1DD] border-b-2 border-x-2 border-black"
                 onPress={() => handleDelete(plant.id, onUpdate)}>
                 <Text className="text-black font-bold">
-                  {strings.delete_pc}
+                  {t("delete_pc")}
                 </Text>
               </TouchableOpacity>
             </CustomModal>

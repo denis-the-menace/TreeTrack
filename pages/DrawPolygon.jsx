@@ -9,9 +9,10 @@ import MapView, {
 } from 'react-native-maps';
 import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const DrawPolygon = ({navigation, route}) => {
+  const { t } = useTranslation();
   const onUpdate = route.params && route.params.onUpdate ? route.params.onUpdate : () => {};
   const [selectedMapType, setMapType] = useState('standard');
    const [currentPosition, setPosition] = useState({
@@ -41,8 +42,8 @@ const DrawPolygon = ({navigation, route}) => {
    // asks user to remove this point, when a marker is pressed
    const handleMarkerPress = (coordinate, index) => {
      Alert.alert(
-       strings.alert1_dp,
-       strings.alert2_dp,
+       t("alert1_dp"),
+       t("alert2_dp"),
        [
          {
            text: 'Cancel',
@@ -64,14 +65,14 @@ const DrawPolygon = ({navigation, route}) => {
       colors={['#D1A96DE5', '#DB966FE5']}
       style={{height: '100%'}}>
       <View style={{padding: 20, flex: 1, marginBottom: 110}}>
-        <Text style={styles.text}>{strings.add_location}</Text>
+        <Text style={styles.text}>{t("add_location")}</Text>
 
         <Text
           style={{
             fontSize: 15,
             color: '#FFF1DD',
           }}>
-          {strings.tab_to_select}
+          {t("tab_to_select")}
         </Text>
 
         <View
@@ -88,7 +89,7 @@ const DrawPolygon = ({navigation, route}) => {
           <TextInput
             multiline
             numberOfLines={4}
-            placeholder={strings.search_placeholder}
+            placeholder={t("search_placeholder")}
             style={{
               height: 40,
               color: '#C4C4C4',
@@ -143,7 +144,7 @@ const DrawPolygon = ({navigation, route}) => {
                 setCoordinates([...coordinates, currentPosition]);
               }}>
               <Text style={{color: '#212121', fontSize: 12, fontWeight: '500'}}>
-              {strings.use_current_location}
+              {t("use_current_location")}
               </Text>
             </TouchableOpacity>
           </View>
@@ -167,7 +168,7 @@ const DrawPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>{strings.standard}</Text>
+            <Text style={{color: "white"}}>{t("standard")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -178,7 +179,7 @@ const DrawPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>{strings.hybrid}</Text>
+            <Text style={{color: "white"}}>{t("hybrid")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -189,7 +190,7 @@ const DrawPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>{strings.satellite}</Text>
+            <Text style={{color: "white"}}>{t("satellite")}</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
@@ -197,7 +198,7 @@ const DrawPolygon = ({navigation, route}) => {
           onPress={() => {
             navigation.navigate('CreateGarden', {coordinates, onUpdate}); // go back to create page to save garden
           }}>
-          <Text style={styles.bt1}>  {strings.save_area} </Text>
+          <Text style={styles.bt1}>  {t("save_area")} </Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

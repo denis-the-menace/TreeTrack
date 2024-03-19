@@ -13,9 +13,10 @@ import React, { useState, useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { getPlantsOfGarden, isInsidePolygon } from '../services/garden_services';
 import { setMapPositionByGardenArea } from '../services/helper';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const EditPlantLocation = ({ navigation }) => {
+  const { t } = useTranslation();
   const [selectedMapType, setMapType] = useState('standard');
   const [selectedLocation, setSelectedLocation] = useState(null);
   // get current position
@@ -58,10 +59,10 @@ const EditPlantLocation = ({ navigation }) => {
     if (isInsideGarden) {
       setPlantList(plants.filter(p => p.id !== updatedPlant.id))
       setSelectedLocation(e.nativeEvent.coordinate);
-      ToastAndroid.show(strings.plant_location_changed, ToastAndroid.SHORT);
+      ToastAndroid.show(t("plant_location_changed"), ToastAndroid.SHORT);
     } else {
       ToastAndroid.show(
-        strings.toast1_editlocation,
+        t("toast1_editlocation"),
         ToastAndroid.LONG,
       );
     }
@@ -72,10 +73,10 @@ const EditPlantLocation = ({ navigation }) => {
     if (isInsideGarden) {
       setPlantList(plants.filter(p => p.id !== updatedPlant.id))
       setSelectedLocation(currentPosition);
-      ToastAndroid.show(strings.plant_location_changed, ToastAndroid.SHORT);
+      ToastAndroid.show(t("plant_location_changed"), ToastAndroid.SHORT);
     } else {
       ToastAndroid.show(
-        strings.toast2_editlocation,
+        t("toast2_editlocation"),
         ToastAndroid.LONG,
       );
     }
@@ -87,7 +88,7 @@ const EditPlantLocation = ({ navigation }) => {
     region = setMapPositionByGardenArea(polygon);
   } else {
     ToastAndroid.show(
-      strings.toast3_editlocation,
+      t("toast3_editlocation"),
       ToastAndroid.SHORT,
     );
   }
@@ -95,7 +96,7 @@ const EditPlantLocation = ({ navigation }) => {
   return (
     <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{ height: '100%' }}>
       <View style={styles.container}>
-        <Text style={styles.text}>{strings.edit_plant_location}</Text>
+        <Text style={styles.text}>{t("edit_plant_location")}</Text>
 
         <Text
           style={{
@@ -130,7 +131,7 @@ const EditPlantLocation = ({ navigation }) => {
                 }}
                 onPress={() => {
                   ToastAndroid.show(
-                    strings.toast2_egp,
+                    t("toast2_egp"),
                     ToastAndroid.LONG,
                   );
                 }}
@@ -190,7 +191,7 @@ const EditPlantLocation = ({ navigation }) => {
               }}
               onPress={handleCurrentLocationPress}>
               <Text style={{ color: '#212121', fontSize: 12, fontWeight: '500' }}>
-              {strings.use_current_location}
+              {t("use_current_location")}
               </Text>
             </TouchableOpacity>
           </View>
@@ -214,7 +215,7 @@ const EditPlantLocation = ({ navigation }) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{ color: 'white' }}>{strings.standard}</Text>
+            <Text style={{ color: 'white' }}>{t("standard")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -225,7 +226,7 @@ const EditPlantLocation = ({ navigation }) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{ color: 'white' }}>{strings.hybrid}</Text>
+            <Text style={{ color: 'white' }}>{t("hybrid")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -236,7 +237,7 @@ const EditPlantLocation = ({ navigation }) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{ color: 'white' }}>{strings.satellite}</Text>
+            <Text style={{ color: 'white' }}>{t("satellite")}</Text>
           </TouchableOpacity>
         </View>
 
@@ -250,7 +251,7 @@ const EditPlantLocation = ({ navigation }) => {
               onUpdate,
             }); // go back to edit page to save garden
           }}>
-          <Text style={styles.bt1}> {strings.save_location} </Text>
+          <Text style={styles.bt1}> {t("save_location")} </Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

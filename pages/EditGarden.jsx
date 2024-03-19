@@ -12,9 +12,10 @@ import React, { useState } from 'react';
 import styles from '../styles/Style';
 import { useRoute } from '@react-navigation/native';
 import { updateGarden } from '../services/garden_services';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const EditGarden = ({ navigation }) => {
+    const { t } = useTranslation();
     const route = useRoute();
     const garden = route.params.garden;
     const onUpdate = route.params.onUpdate;
@@ -33,7 +34,7 @@ const EditGarden = ({ navigation }) => {
         }
         try {
             await updateGarden(garden.id, updated_garden)
-            ToastAndroid.show(strings.toast1_eg, ToastAndroid.SHORT)
+            ToastAndroid.show(t("toast1_eg"), ToastAndroid.SHORT)
             navigation.navigate("Gardens")
             // TODO: Navigate?
         } catch (error) {
@@ -51,8 +52,8 @@ const EditGarden = ({ navigation }) => {
                 <ScrollView>
                     <View style={{ marginBottom: 90 }}>
                         <Text style={styles.subtext}> &gt; {garden.name}</Text>
-                        <Text style={styles.text}>{strings.edit_garden}</Text>
-                        <Text style={styles.t4}>{strings.edit_garden_name}</Text>
+                        <Text style={styles.text}>{t("edit_garden")}</Text>
+                        <Text style={styles.t4}>{t("edit_garden_name")}</Text>
                         <TextInput
                             value={gardenName}
                             onChangeText={text => setGardenName(text)}
@@ -60,7 +61,7 @@ const EditGarden = ({ navigation }) => {
                             placeholderTextColor={'#21212160'}
                             style={styles.text_area}
                         />
-                        <Text style={styles.t4}>{strings.edit_area_garden}</Text>
+                        <Text style={styles.t4}>{t("edit_area_garden")}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <TouchableOpacity
                                 style={{
@@ -80,13 +81,13 @@ const EditGarden = ({ navigation }) => {
                                         height: 25,
                                     }}></Image>
                                 <Text style={{ ...styles.bt1, color: '#212121', marginLeft: 5 }}>
-                                {strings.open_map}
+                                {t("open_map")}
                                 </Text>
                             </TouchableOpacity>
                             
                         </View>
                         <TouchableOpacity style={styles.button_right} onPress={handleUpdateGarden}>
-                            <Text style={styles.bt1}> {strings.update} </Text>
+                            <Text style={styles.bt1}> {t("update")} </Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>

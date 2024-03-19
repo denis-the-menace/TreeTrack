@@ -3,7 +3,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from '../styles/Style';
 import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 import MapView, {
   PROVIDER_GOOGLE,
   Polygon,
@@ -16,6 +16,7 @@ import { setMapPositionByGardenArea } from '../services/helper';
 
 
 const Map = () => {
+  const { t } = useTranslation();
   const route = useRoute();
   let selectedGarden = route.params && route.params.garden ? route.params.garden : null;
   
@@ -88,7 +89,7 @@ const Map = () => {
       colors={['#D1A96DE5', '#DB966FE5']}
       style={{height: '100%'}}>
       <View style={styles.container}>
-        <Text style={styles.text}>{strings.mapTitle}</Text>
+        <Text style={styles.text}>{t("mapTitle")}</Text>
 
         {/* TODO: search bar - google cloud gerekli*/}
         {/*<TextInput
@@ -98,7 +99,7 @@ const Map = () => {
             marginBottom: 5,
             color: "#212121"
           }}
-          placeholder={strings.searchAddressPlaceholder}
+          placeholder={t("searchAddressPlaceholder")}
           placeholderTextColor={"#21212190"}
           value={searchText}
           onChangeText={setSearchText}
@@ -157,7 +158,7 @@ const Map = () => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>{strings.standard}</Text>
+            <Text style={{color: 'white'}}>{t("standard")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -168,7 +169,7 @@ const Map = () => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>{strings.hybrid}</Text>
+            <Text style={{color: 'white'}}>{t("hybrid")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -179,7 +180,7 @@ const Map = () => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>{strings.satellite}</Text>
+            <Text style={{color: 'white'}}>{t("satellite")}</Text>
           </TouchableOpacity>
         </View>
 

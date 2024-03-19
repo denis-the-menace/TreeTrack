@@ -1,8 +1,9 @@
 import LinearGradient from 'react-native-linear-gradient';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const Home = ({navigation}) => {
+  const { t } = useTranslation();
   return (
     <LinearGradient colors={['#FFFFFF', '#FFFFFF']} className="h-full">
       <View className="flex">
@@ -27,12 +28,12 @@ const Home = ({navigation}) => {
               }
               className="justify-center bg-white rounded-full mt-12 mx-8 h-16 w-3/4 shadow-md">
               <Text className="text-lg text-center font-bold text-green-600">
-              {strings.signUp_B}
+              {t("signUp_B")}
               </Text>
             </TouchableOpacity>
 
             <Text className="text-white text-xl mt-4 ml-4">
-            {strings.alreadyAccount}
+            {t("alreadyAccount")}
             </Text>
 
             <Text
@@ -40,7 +41,7 @@ const Home = ({navigation}) => {
                 navigation.navigate('SignIn', {setIsSigned: false})
               }
               className="text-white text-xl underline ml-2">
-              {strings.signIn}
+              {t("signIn")}
             </Text>
           </LinearGradient>
         </View>

@@ -5,9 +5,10 @@ import PlantCard from './PlantCard';
 import {useState, useCallback} from 'react';
 import {MenuProvider} from 'react-native-popup-menu';
 import {getPlantsOfGarden} from '../services/garden_services';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const FilledPlants = ({navigation, garden, plants, onUpdate}) => {
+  const { t } = useTranslation();
   const [refreshing, setRefreshing] = useState(false);
   const [plantList, setPlantList] = useState(plants);
   const onRefresh = useCallback(async () => {
@@ -25,7 +26,7 @@ const FilledPlants = ({navigation, garden, plants, onUpdate}) => {
             {gardenName}
           </Text>
           <Text className="font-bold text-3xl text-[#09A555]">
-            {strings.my_plants_B}
+            {t("my_plants_B")}
           </Text>
         </View>
         <View className="h-[90%]">

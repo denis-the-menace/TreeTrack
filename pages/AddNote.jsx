@@ -5,9 +5,10 @@ import React, {useEffect, useState} from 'react';
 import PlantNote from '../layouts/add_note/PlantNote';
 import GardenNote from '../layouts/add_note/GardenNote';
 import {isEmptyGarden} from '../services/garden_services';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const AddPlantNote = ({navigation}) => {
+  const { t } = useTranslation();
   const [showGarden, setShowGarden] = useState(false); // display plant note page by default
   const [isEmpty, setIsEmptyGarden] = useState(-1);
   useEffect(() => {
@@ -25,11 +26,11 @@ const AddPlantNote = ({navigation}) => {
           flex: 1,
           marginBottom: 150,
         }}>
-        <Text style={styles.text}>{strings.add_note_B}</Text>
+        <Text style={styles.text}>{t("add_note_B")}</Text>
         {isEmpty === true && (
           <View>
             <Text style={styles.t4}>
-            {strings.no_garden_message}
+            {t("no_garden_message")}
             </Text>
             <TouchableOpacity
               style={{
@@ -52,7 +53,7 @@ const AddPlantNote = ({navigation}) => {
                 source={require('../images/icons/plant_white.png')}
                 style={{width: 25, height: 25, marginRight: 10}}></Image>
               <Text style={{...styles.t4, alignSelf: 'center'}}>
-                {strings.add_garden_button}
+                {t("add_garden_button")}
               </Text>
             </TouchableOpacity>
           </View>
@@ -77,7 +78,7 @@ const AddPlantNote = ({navigation}) => {
                     borderRadius: 5,
                   }}
                   onPress={() => setShowGarden(false)}>
-                  <Text style={styles.bt1}>{strings.plant}</Text>
+                  <Text style={styles.bt1}>{t("plant")}</Text>
                 </TouchableOpacity>
 
                 <View
@@ -97,7 +98,7 @@ const AddPlantNote = ({navigation}) => {
                     borderRadius: 5,
                   }}
                   onPress={() => setShowGarden(true)}>
-                  <Text style={styles.bt1}> {strings.garden} </Text>
+                  <Text style={styles.bt1}> {t("garden")} </Text>
                 </TouchableOpacity>
               </View>
             </View>

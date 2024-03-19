@@ -15,9 +15,10 @@ import storage from '@react-native-firebase/storage';
 import {insertNewPlant} from '../services/plant_services';
 import AutocompleteInput from 'react-native-autocomplete-input';
 import {getPlantTypes, searchPlantType} from '../services/plant_type_services';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const CreatePlant = ({route, navigation}) => {
+  const { t } = useTranslation();
   const onUpdate =
     route.params && route.params.onUpdate ? route.params.onUpdate : () => {};
   const plantLocation =
@@ -53,7 +54,7 @@ const CreatePlant = ({route, navigation}) => {
       // if new type is inserted, update the list
       setPlantTypes(searchPlantTypeResult.plantTypes);
       await insertNewPlant(plantData);
-      ToastAndroid.show(strings.toast1_cp, ToastAndroid.SHORT);
+      ToastAndroid.show(t("toast1_cp"), ToastAndroid.SHORT);
       onUpdate();
       navigation.navigate('Plants', {garden});
     } catch (error) {
@@ -91,10 +92,10 @@ const CreatePlant = ({route, navigation}) => {
           {'\u003E'}
           {garden.name}{' '}
         </Text>
-        <Text style={styles.text}>{strings.add_new_plant}</Text>
+        <Text style={styles.text}>{t("add_new_plant")}</Text>
         {/* add plant section */}
         <View>
-          <Text style={styles.t4}>{strings.give_name_to_plant}</Text>
+          <Text style={styles.t4}>{t("give_name_to_plant")}</Text>
           <TextInput
             value={plantName}
             onChangeText={text => setPlantName(text)}
@@ -113,7 +114,7 @@ const CreatePlant = ({route, navigation}) => {
               elevation: 5,
               fontSize: 16,
             }}></TextInput>
-          <Text style={styles.t4}>{strings.select_plant_type}</Text>
+          <Text style={styles.t4}>{t("select_plant_type")}</Text>
           <View
             style={{
               width: '100%',
@@ -143,7 +144,7 @@ const CreatePlant = ({route, navigation}) => {
                 elevation: 5,
                 fontSize: 16,
               }}
-              placeholder={strings.enter_plant_type}
+              placeholder={t("enter_plant_type")}
               placeholderTextColor={'#21212160'}
               flatListProps={{
                 keyExtractor: (_, idx) => idx,
@@ -173,7 +174,7 @@ const CreatePlant = ({route, navigation}) => {
             padding: 10,
             width: '100%',
           }}>
-          <Text style={styles.t4}>{strings.add_location_plant}</Text>
+          <Text style={styles.t4}>{t("add_location_plant")}</Text>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <TouchableOpacity
               style={{
@@ -197,7 +198,7 @@ const CreatePlant = ({route, navigation}) => {
                   height: 25,
                 }}></Image>
               <Text style={{...styles.bt1, color: '#212121', marginLeft: 5}}>
-              {strings.open_map}              </Text>
+              {t("open_map")}              </Text>
             </TouchableOpacity>
             {plantLocation.length > 2 && (
               <Image
@@ -215,7 +216,7 @@ const CreatePlant = ({route, navigation}) => {
         <TouchableOpacity
               style={{...styles.button_right, width: 125}}
               onPress={addPlant}>
-              <Text style={{...styles.bt1}}>{strings.add_button}</Text>
+              <Text style={{...styles.bt1}}>{t("add_button")}</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

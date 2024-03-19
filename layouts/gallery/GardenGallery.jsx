@@ -11,9 +11,10 @@ import React, {useState, useEffect} from 'react';
 import styles from "../../styles/Style";
 import { getGardenNotes, getUserGardenNames } from '../../services/garden_services';
 import { formatDate, sortNoteList } from '../../services/helper';
-import strings from '../../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const GardenGallery = ({selectedGarden}) => {
+  const { t } = useTranslation();
   console.log('selected garden: ', selectedGarden); // TODO - view in gallery
   const [gardenNoteList, setNoteList] = useState([]);
   const [filteredNoteList, setFilteredNoteList] = useState([]);
@@ -133,8 +134,8 @@ const GardenGallery = ({selectedGarden}) => {
           </Picker>
         </View>
       </View>
-      {isLoading && <Text style={{color: '#efefef', padding: 10}}>{strings.loading_gg}</Text>}
-      {!isLoading && filteredNoteList.length == 0 && <Text style={{color: '#efefef', padding: 10}}> {strings.no_note_gg}</Text>}
+      {isLoading && <Text style={{color: '#efefef', padding: 10}}>{t("loading_gg")}</Text>}
+      {!isLoading && filteredNoteList.length == 0 && <Text style={{color: '#efefef', padding: 10}}> {t("no_note_gg")}</Text>}
     </View>
   );
 }

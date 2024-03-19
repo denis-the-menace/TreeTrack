@@ -1,6 +1,5 @@
 import LinearGradient from 'react-native-linear-gradient';
 import React, {useState} from 'react';
-import strings from '../strings/string';
 import {
   View,
   Text,
@@ -13,8 +12,10 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import CheckBox from '@react-native-community/checkbox';
 import {saveUserId} from '../services/storage';
+import { useTranslation } from 'react-i18next';
 
 const SignUp = ({setIsSigned, navigation}) => {
+  const { t } = useTranslation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +29,7 @@ const SignUp = ({setIsSigned, navigation}) => {
     const handleSignUp = () => {
       if (toggleCheckBox && email != '' && name != '' && password != '') {
         if (password !== confirmPassword) {
-          ToastAndroid.show(strings.toast1_signUp, ToastAndroid.SHORT);
+          ToastAndroid.show(t("toast1_signUp"), ToastAndroid.SHORT);
           return;
         }
         auth()
@@ -44,7 +45,7 @@ const SignUp = ({setIsSigned, navigation}) => {
             setIsSigned(true);
             await saveUserId(uid, toggleCheckBox);
             console.log('User signed up!');
-            ToastAndroid.show(strings.toast2_signUp, ToastAndroid.SHORT);
+            ToastAndroid.show(t("toast2_signUp"), ToastAndroid.SHORT);
   
             })
           .catch((error) => {
@@ -53,7 +54,7 @@ const SignUp = ({setIsSigned, navigation}) => {
           });
       }
       else if (email == '' || password == '' || name == '') {
-        ToastAndroid.show(strings.toast3_signUp, ToastAndroid.SHORT);
+        ToastAndroid.show(t("toast3_signUp"), ToastAndroid.SHORT);
       }
       else {
         ToastAndroid.show('Please, read and confirm the terms and conditions!', ToastAndroid.SHORT);
@@ -69,12 +70,12 @@ const SignUp = ({setIsSigned, navigation}) => {
       <LinearGradient
         className="w-full mt-2 p-8 rounded-[32px] rounded-bl-none flex items-center"
         colors={['#BAE9D1', '#36861C']}>
-        <Text className="text-white text-xl mb-2 text-center">{strings.welcome}</Text>
+        <Text className="text-white text-xl mb-2 text-center">{t("welcome")}</Text>
 
         <TextInput
           value={name}
           onChangeText={setName}
-          placeholder={strings.namePlaceholder}
+          placeholder={t("namePlaceholder")}
           placeholderTextColor={'#21212160'}
           className="bg-white rounded-full mt-2 pl-4 w-full text-black"
           style={{
@@ -85,7 +86,7 @@ const SignUp = ({setIsSigned, navigation}) => {
         <TextInput
           value={email}
           onChangeText={setEmail}
-          placeholder={strings.emailPlaceholder}
+          placeholder={t("emailPlaceholder")}
           placeholderTextColor={'#21212160'}
           className="bg-white rounded-full mt-2 pl-4 w-full text-black"
           style={{
@@ -97,7 +98,7 @@ const SignUp = ({setIsSigned, navigation}) => {
           <TextInput
             value={password}
             onChangeText={setPassword}
-            placeholder={strings.passwordPlaceholder}
+            placeholder={t("passwordPlaceholder")}
             placeholderTextColor={'#21212160'}
             secureTextEntry={!isPasswordVisible}
             className="bg-white rounded-full mt-2 pl-4 w-full text-black"
@@ -130,7 +131,7 @@ const SignUp = ({setIsSigned, navigation}) => {
           <TextInput
             value={confirmPassword}
             onChangeText={setConfirmPassword}
-            placeholder={strings.confirmPasswordPlaceholder}
+            placeholder={t("confirmPasswordPlaceholder")}
             placeholderTextColor={'#21212160'}
             secureTextEntry={!isConfirmPasswordVisible}
             className="bg-white rounded-full mt-2 pl-4 w-full text-black"
@@ -168,10 +169,10 @@ const SignUp = ({setIsSigned, navigation}) => {
             onValueChange={newValue => setToggleCheckBox(newValue)}
             tintColors={{true: 'white'}}
           />
-          <Text className="text-white text-sm">{strings.termsAndConditions}</Text>
+          <Text className="text-white text-sm">{t("termsAndConditions")}</Text>
 
           <Text className="text-white text-sm underline">
-            {'\t'}{strings.termsAndConditions1}
+            {'\t'}{t("termsAndConditions1")}
           </Text>
         </View>
         <View className="self-start flex flex-row mt-2 ml-2 justify-center items-center">
@@ -181,7 +182,7 @@ const SignUp = ({setIsSigned, navigation}) => {
             onValueChange={newValue => setRememberToggleCheckBox(newValue)}
             tintColors={{true: 'white'}}
           />
-          <Text className="text-white text-sm">{strings.rememberMe}</Text>
+          <Text className="text-white text-sm">{t("rememberMe")}</Text>
         </View>
       </LinearGradient>
       <TouchableOpacity
@@ -191,15 +192,15 @@ const SignUp = ({setIsSigned, navigation}) => {
           elevation: 5,
         }}>
         <Text className="text-lg text-center font-bold text-white">
-        {strings.signUp_B}
+        {t("signUp_B")}
         </Text>
       </TouchableOpacity>
-      <Text className="text-black text-lg mt-4">{strings.alreadyAccount}</Text>
+      <Text className="text-black text-lg mt-4">{t("alreadyAccount")}</Text>
 
       <Text
         onPress={() => navigation.navigate('SignIn', {setIsSigned: false})}
         className="text-lg underline font-bold text-[#36861C]">
-        {'\t'}{strings.signIn}
+        {'\t'}{t("signIn")}
       </Text>
     </View>
   );

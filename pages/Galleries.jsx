@@ -4,9 +4,10 @@ import styles from '../styles/Style';
 import GardenGallery from '../layouts/gallery/GardenGallery';
 import PlantGallery from '../layouts/gallery/PlantGallery';
 import React, { useState, useEffect } from 'react';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const Galleries = ({ route }) => {
+  const { t } = useTranslation();
   // TODO: view in gallery
   const garden =
     route.params && route.params.garden ? route.params.garden : null;
@@ -23,7 +24,7 @@ const Galleries = ({ route }) => {
       <View className="flex">
         <View className="flex h-1/6 p-5">
           <Text style={styles.text2}>
-            {strings.gallery_title}
+            {t("gallery_title")}
           </Text>
 
           <View className="flex flex-row justify-center">
@@ -34,7 +35,7 @@ const Galleries = ({ route }) => {
                   backgroundColor: showGarden ? '#25596E' : '#09A555',
                 }}
                 onPress={() => setShowGarden(true)}>
-                <Text className="text-white text-center"> {strings.garden_button} </Text>
+                <Text className="text-white text-center"> {t("garden_button")} </Text>
               </TouchableOpacity>
 
               <View className="bg-[#FFFFFF50] w-1 h-8 mx-2"></View>
@@ -45,7 +46,7 @@ const Galleries = ({ route }) => {
                   backgroundColor: !showGarden ? '#25596E' : '#09A555',
                 }}
                 onPress={() => setShowGarden(false)}>
-                <Text className="text-white text-center"> {strings.plant_button} </Text>
+                <Text className="text-white text-center"> {t("plant_button")} </Text>
               </TouchableOpacity>
             </View>
           </View>

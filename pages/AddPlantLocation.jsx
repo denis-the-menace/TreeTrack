@@ -7,9 +7,10 @@ import React, { useState, useEffect } from 'react';
 import {useRoute} from '@react-navigation/native';
 import { getPlantsOfGarden, isInsidePolygon } from '../services/garden_services';
 import { setMapPositionByGardenArea } from '../services/helper';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const AddPlantLocation = ({navigation}) => {
+  const { t } = useTranslation();
   const [selectedMapType, setMapType] = useState("standard");
   const [selectedLocation, setSelectedLocation] = useState(null);
     // get current position
@@ -51,9 +52,9 @@ const AddPlantLocation = ({navigation}) => {
     const isInsideGarden = isInsidePolygon(e.nativeEvent.coordinate, polygon);
     if(isInsideGarden){
       setSelectedLocation(e.nativeEvent.coordinate)
-      ToastAndroid.show(strings.toast1_apl, ToastAndroid.SHORT)
+      ToastAndroid.show(t("toast1_apl"), ToastAndroid.SHORT)
     }else{
-      ToastAndroid.show(strings.toast2_apl, ToastAndroid.LONG)
+      ToastAndroid.show(t("toast2_apl"), ToastAndroid.LONG)
     }
    
   };
@@ -62,9 +63,9 @@ const AddPlantLocation = ({navigation}) => {
     const isInsideGarden = isInsidePolygon(currentPosition, polygon)
     if(isInsideGarden){
       setSelectedLocation(currentPosition)
-        ToastAndroid.show(strings.toast1_apl, ToastAndroid.SHORT)
+        ToastAndroid.show(t("toast1_apl"), ToastAndroid.SHORT)
     }else{
-        ToastAndroid.show(strings.toast3_apl, ToastAndroid.LONG)
+        ToastAndroid.show(t("toast3_apl"), ToastAndroid.LONG)
     }
   }
 
@@ -74,13 +75,13 @@ const AddPlantLocation = ({navigation}) => {
     region = setMapPositionByGardenArea(polygon);
   }
   else{
-    ToastAndroid.show(strings.toast4_apl, ToastAndroid.SHORT)
+    ToastAndroid.show(t("toast4_apl"), ToastAndroid.SHORT)
   }
 
   return (
     <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{height: '100%'}}>
       <View style={styles.container}>
-        <Text style={styles.text}>{strings.select_plant_location}</Text>
+        <Text style={styles.text}>{t("select_plant_location")}</Text>
 
         <Text
           style={{
@@ -88,7 +89,7 @@ const AddPlantLocation = ({navigation}) => {
             color: '#efefef',
             marginBottom: 10,
           }}>
-          {strings.select_location_instructions}
+          {t("select_location_instructions")}
         </Text>
 
         <View style={{width: '100%', height: '50%'}}>
@@ -114,7 +115,7 @@ const AddPlantLocation = ({navigation}) => {
                   longitude: plant.location.longitude,
                 }}
                 onPress={() => {
-                  ToastAndroid.show(strings.toast5_apl, ToastAndroid.LONG)
+                  ToastAndroid.show(t("toast5_apl"), ToastAndroid.LONG)
                 }}
                 style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Text 
@@ -177,7 +178,7 @@ const AddPlantLocation = ({navigation}) => {
               }}
               onPress={handleCurrentLocationPress}>
               <Text style={{color: '#212121', fontSize: 12, fontWeight: '500'}}>
-               {strings.current_location_selected}
+               {t("current_location_selected")}
               </Text>
             </TouchableOpacity>
           </View>
@@ -201,7 +202,7 @@ const AddPlantLocation = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>{strings.standard}</Text>
+            <Text style={{color: "white"}}>{t("standard")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -212,7 +213,7 @@ const AddPlantLocation = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>{strings.hybrid}</Text>
+            <Text style={{color: "white"}}>{t("hybrid")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -223,7 +224,7 @@ const AddPlantLocation = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: "white"}}>{strings.satellite}</Text>
+            <Text style={{color: "white"}}>{t("satellite")}</Text>
           </TouchableOpacity>
         </View>
         
@@ -231,7 +232,7 @@ const AddPlantLocation = ({navigation}) => {
         onPress={() => {
           navigation.navigate('CreatePlant', {"coordinates": selectedLocation, garden, onUpdate}); // go back to create page to save garden
         }}>
-          <Text style={styles.bt1}> {strings.save_location} </Text>
+          <Text style={styles.bt1}> {t("save_location")} </Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

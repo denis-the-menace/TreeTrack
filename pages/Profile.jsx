@@ -6,14 +6,14 @@ import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import styles from '../styles/Style';
-import strings from '../strings/string';
 const defaultProfileImage = require('../images/defaultUser.png');
 const editIcon = require('../images/icons/plus3.png');
 const editIconGreen = require('../images/icons/edit.png');
 const checkIcon = require('../images/icons/update.png');
+import { useTranslation } from 'react-i18next';
 
 const Profile = ({ navigation, route }) => {
-  
+  const { t } = useTranslation();
   const currentUser = auth().currentUser;
   const [firstName, setFirstName] = useState('Name');
   const [lastName, setLastName] = useState('');
@@ -112,7 +112,7 @@ const Profile = ({ navigation, route }) => {
     if (profileImage) {
       Alert.alert(
         '',
-        strings.alert1_profile,
+        t("alert1_profile"),
         [
           {
             text: 'Cancel',
@@ -135,7 +135,7 @@ const Profile = ({ navigation, route }) => {
     }
     else {
       ToastAndroid.show(
-        strings.toast1_profile, ToastAndroid.SHORT
+        t("toast1_profile"), ToastAndroid.SHORT
       );
     }
   };
@@ -165,7 +165,7 @@ const Profile = ({ navigation, route }) => {
           backgroundColor: isModalVisible ? '#FFFFFF130' : '#FFFFFF',
         }}>
           <Text style={{ fontSize: 30, color: 'white', fontWeight: 'bold', color: isModalVisible ? '#09A55580' : '#09A555' }}>
-            {strings.profile}
+            {t("profile")}
           </Text>
         </View>
         <View
@@ -217,7 +217,7 @@ const Profile = ({ navigation, route }) => {
           borderTopRightRadius: 50
         }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 75 }}>
-            <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20 }}>{strings.gardenerInformation}</Text>
+            <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20 }}>{t("gardenerInformation")}</Text>
             <TouchableOpacity onPress={() => handleUpdate()}>
               <Image
                 source={isEditingSurname || isEditingName ? checkIcon : editIconGreen}
@@ -239,7 +239,7 @@ const Profile = ({ navigation, route }) => {
               borderRadius: 10
             }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ color: 'black' }}>{strings.name} </Text>
+            {/*<Text style={{ color: 'black' }}>{t("name")} </Text>*/}
               {isEditingName ? (
                 <TextInput
                   style={{ flex: 1, color: 'black' }}
@@ -247,13 +247,13 @@ const Profile = ({ navigation, route }) => {
                   onChangeText={setFirstName}
                 />
               ) : (
-                <Text style={{ flex: 1, color: 'black' }}>{firstName}</Text>
+              <Text style={{ flex: 1, color: 'black' }}>{firstName}</Text>
               )}
             </View>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
 
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ color: 'black' }}>{strings.surname} </Text>
+              {/*<Text style={{ color: 'black' }}>{t("surname")} </Text>*/}
               {isEditingSurname ? (
                 <TextInput
                   style={{ flex: 1, color: 'black' }}
@@ -265,11 +265,11 @@ const Profile = ({ navigation, route }) => {
               )}
             </View>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>{strings.email} {email}</Text>
+            <Text style={{ color: 'black' }}>{email}</Text>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>{strings.homeGarden}</Text>
+            <Text style={{ color: 'black' }}>{t("homeGarden")}</Text>
           </View>
-          <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20, marginTop: 20 }}>{strings.social}</Text>
+          <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20, marginTop: 20 }}>{t("social")}</Text>
           <View
             style={{
               backgroundColor: isModalVisible ? '#FFFFFF80' : '#FFFFFF',
@@ -278,13 +278,13 @@ const Profile = ({ navigation, route }) => {
               paddingBottom: 10,
               borderRadius: 10
             }}>
-            <Text style={{ color: 'black' }}>{strings.shareProfile}</Text>
+            <Text style={{ color: 'black' }}>{t("shareProfile")}</Text>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>{strings.connectInstagram}</Text>
+            <Text style={{ color: 'black' }}>{t("connectInstagram")}</Text>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>{strings.connectTwitter}</Text>
+            <Text style={{ color: 'black' }}>{t("connectTwitter")}</Text>
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>{strings.connectPinterest}</Text>
+            <Text style={{ color: 'black' }}>{t("connectPinterest")}</Text>
           </View>
           <TouchableOpacity
           onPress={() => navigation.navigate('ChangePassword')}
@@ -298,7 +298,7 @@ const Profile = ({ navigation, route }) => {
             justifyContent: 'center'
           }}
         >
-          <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>{strings.changePassword}</Text>
+          <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>{t("changePassword")}</Text>
         </TouchableOpacity>
         </View>
 
@@ -330,21 +330,21 @@ const Profile = ({ navigation, route }) => {
                   onPress={handleTakePhoto}
                   style={[styles.button, { marginTop: 15 }]}
                 >
-                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>{strings.takePhoto}</Text>
+                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>{t("takePhoto")}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={handleChoosePhoto}
                   style={styles.button}
                 >
-                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>{strings.selectFromGallery}</Text>
+                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>{t("selectFromGallery")}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={handleRemovePhoto}
                   style={styles.button}
                 >
-                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>{strings.removePhoto}</Text>
+                  <Text style={[styles.bt1, { fontWeight: 'bold' }]}>{t("removePhoto")}</Text>
                 </TouchableOpacity>
               </View>
             </TouchableWithoutFeedback>

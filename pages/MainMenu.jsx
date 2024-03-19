@@ -4,8 +4,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const MainMenu = ({ navigation }) => {
+    const { t } = useTranslation();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const currentUser = auth().currentUser;
     const [firstName, setFirstName] = useState('Name');
@@ -80,11 +82,11 @@ const MainMenu = ({ navigation }) => {
                         paddingTop: 10,
 
                     }}>
-                    <Text style={{ color: 'black', textAlign: "center" }}> {strings.appName}</Text>
+                    <Text style={{ color: 'black', textAlign: "center" }}> {t("appName")}</Text>
                     <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-                    <Text style={{ color: 'black' }}>{strings.helloMessage} {firstName} {lastName}</Text>
+                    <Text style={{ color: 'black' }}>{t("helloMessage")} {firstName} {lastName}</Text>
                     <Text style={{ color: 'black' }}>
-                    {strings.discoverNatureDescription}</Text>
+                    {t("discoverNatureDescription")}</Text>
                 </View>
                 {/* MainMenu içeriğini buraya ekle */}
                 <View style={{
@@ -115,7 +117,7 @@ const MainMenu = ({ navigation }) => {
                                 justifyContent: "space-between"
                             }}
                         >
-                            <Text style={{ color: "#25596E" }}> {strings.addNote_mm} </Text>
+                            <Text style={{ color: "#25596E" }}> {t("addNote_mm")} </Text>
 
                             <Image
                                 style={{
@@ -145,7 +147,7 @@ const MainMenu = ({ navigation }) => {
                                 justifyContent: "space-between"
                             }}
                         >
-                            <Text style={{ color: "#25596E" }}> {strings.openMap_mm} </Text>
+                            <Text style={{ color: "#25596E" }}> {t("openMap_mm")} </Text>
 
                             <Image
                                 style={{
@@ -175,7 +177,7 @@ const MainMenu = ({ navigation }) => {
                                 justifyContent: "space-between"
                             }}
                         >
-                            <Text style={{ color: "#25596E" }}> {strings.myGardens_mm} </Text>
+                            <Text style={{ color: "#25596E" }}> {t("myGardens_mm")} </Text>
 
                             <Image
                                 style={{
@@ -203,7 +205,7 @@ const MainMenu = ({ navigation }) => {
                                 justifyContent: "space-between"
                             }}
                         >
-                            <Text style={{ color: "#25596E" }}> {strings.gallery_mm} </Text>
+                            <Text style={{ color: "#25596E" }}> {t("gallery_mm")} </Text>
 
                             <Image
                                 style={{
@@ -233,7 +235,7 @@ const MainMenu = ({ navigation }) => {
 
                             }}
                         >
-                            <Text style={{ color: "#25596E" }}> {strings.settings_mm} </Text>
+                            <Text style={{ color: "#25596E" }}> {t("settings_mm")} </Text>
 
                             <Image
                                 style={{

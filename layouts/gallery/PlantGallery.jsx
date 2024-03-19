@@ -5,9 +5,10 @@ import styles from '../../styles/Style';
 import { getPlantNotes } from '../../services/plant_services';
 import { formatDate, sortNoteList } from '../../services/helper';
 import { getUserGardenNames } from '../../services/garden_services';
-import strings from '../../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const PlantGallery = () => {
+  const { t } = useTranslation();
   const [plantNoteList, setNoteList] = useState([]);
   const [filteredNoteList, setFilteredNoteList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -120,8 +121,8 @@ const PlantGallery = () => {
             </Picker>
           </View>
         </View>       
-      {isLoading && <Text style={{color: '#efefef', padding: 10}}>{strings.loading_gg}</Text>}
-      {!isLoading && filteredNoteList.length == 0 && <Text style={{color: '#efefef', padding: 10}}>{strings.no_plant_pg}</Text>}
+      {isLoading && <Text style={{color: '#efefef', padding: 10}}>{t("loading_gg")}</Text>}
+      {!isLoading && filteredNoteList.length == 0 && <Text style={{color: '#efefef', padding: 10}}>{t("no_plant_pg")}</Text>}
       </View>
     );
   }

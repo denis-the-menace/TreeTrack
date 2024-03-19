@@ -2,9 +2,10 @@ import LinearGradient from "react-native-linear-gradient";
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, ToastAndroid } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import strings from "../strings/string";
+import { useTranslation } from 'react-i18next';
 
 const ForgotPassword = ({ navigation }) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
 
   const handleForgotPassword = () => {
@@ -12,14 +13,14 @@ const ForgotPassword = ({ navigation }) => {
       auth()
         .sendPasswordResetEmail(email)
         .then(() => {
-          ToastAndroid.show(strings.password_email_message, ToastAndroid.SHORT);
+          ToastAndroid.show(t("password_email_message"), ToastAndroid.SHORT);
                 })
         .catch((error) => {
           console.error(error);
           ToastAndroid.show(error.message, ToastAndroid.SHORT);
         });
     } else {
-      ToastAndroid.show(strings.enter_email_message, ToastAndroid.SHORT);
+      ToastAndroid.show(t("enter_email_message"), ToastAndroid.SHORT);
     }
   };
   
@@ -43,7 +44,7 @@ const ForgotPassword = ({ navigation }) => {
         color: "#09A555",
         alignSelf: 'flex-start',
         }}>
-          {strings.forgot_password}
+          {t("forgot_password")}
       </Text>
 
       <LinearGradient
@@ -67,7 +68,7 @@ const ForgotPassword = ({ navigation }) => {
               fontSize: 20,
               marginBottom: 10,
             }}>
-            {strings.enter_email_message}
+            {t("enter_email_message")}
           </Text>
 
           <TextInput
@@ -102,7 +103,7 @@ const ForgotPassword = ({ navigation }) => {
           elevation: 5,
         }}>
         <Text style={{color: '#fff', fontSize: 16, textAlign: 'center'}}>
-            {strings.send_reset_email}
+            {t("send_reset_email")}
         </Text>
       </TouchableOpacity>
 
@@ -115,7 +116,7 @@ const ForgotPassword = ({ navigation }) => {
           fontWeight: 'bold',
           color: '#36861C',
         }}>
-          {strings.back_to_sign_in}
+          {t("back_to_sign_in")}
       </Text>
     </View>
   );

@@ -146,6 +146,12 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 1,
   },
+  radioButtonChecked: {
+    width: 10, // İşaret genişliği
+    height: 10, // İşaret yüksekliği
+    borderRadius: 5, // İşaretin yuvarlatılmış kenarları
+    backgroundColor: '#FFF', // İşaret rengi
+  },
 });
 
 export default styles;

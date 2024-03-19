@@ -16,13 +16,15 @@ import Geolocation from '@react-native-community/geolocation';
 import storage from '@react-native-firebase/storage';
 import styles from '../../styles/Style';
 import PhotoPick from '../photo_picker/ImagePicker';
+import { useTranslation } from 'react-i18next';
 import {
   getSortedGardensByDistance,
   insertGardenNote,
 } from '../../services/garden_services';
-import strings from '../../strings/string';
+
 
 const GardenNote = ({ navigation }) => {
+  const { t } = useTranslation();
   const [gardenList, setGardenList] = useState([]);
   const [currentPosition, setPosition] = useState(null);
   useEffect(() => {
@@ -119,7 +121,7 @@ const GardenNote = ({ navigation }) => {
       >
         <View style={{ marginBottom: 90, paddingHorizontal: 10 }}>
           <Text style={styles.t4}>
-          {strings.gardenPhoto_gn}
+          {t("gardenPhoto_gn")}
           </Text>
           <PhotoPick
             onSelect={onSelectImage}
@@ -128,7 +130,7 @@ const GardenNote = ({ navigation }) => {
             
           />
 
-          <Text style={styles.t4}>{strings.selectGarden_gn}</Text>
+          <Text style={styles.t4}>{t("selectGarden_gn")}</Text>
           <View style={styles.picker_view}>
             <Picker
               dropdownIconRippleColor={'rgba(202, 255, 222, 0.56)'}
@@ -152,7 +154,7 @@ const GardenNote = ({ navigation }) => {
             </Picker>
           </View>
 
-          <Text style={styles.t4}>{strings.enterNotes_gn}</Text>
+          <Text style={styles.t4}>{t("enterNotes_gn")}</Text>
           <KeyboardAvoidingView
             behavior="padding"
             keyboardVerticalOffset={10}
@@ -169,7 +171,7 @@ const GardenNote = ({ navigation }) => {
                 onChangeText={(text) => setGardenNote(text)}
                 multiline
                 numberOfLines={5}
-                placeholder="Garden notes..."
+                placeholder={t("garden_notes_n")}
                 placeholderTextColor={'#21212160'}
                 style={styles.text_area}
                 scrollEnabled={false}
@@ -180,7 +182,7 @@ const GardenNote = ({ navigation }) => {
               style={styles.button_right}
               onPress={saveNote}
             >
-              <Text style={styles.bt1}> {strings.save_button} </Text>
+              <Text style={styles.bt1}> {t("save_button")} </Text>
             </TouchableOpacity>
           </KeyboardAvoidingView>
         </View>

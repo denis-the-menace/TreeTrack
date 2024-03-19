@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import {deleteGarden} from '../services/garden_services';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 import CustomModal from '../components/CustomModal';
 import {useState} from 'react';
 
@@ -16,7 +16,7 @@ const {height} = Dimensions.get('window');
 const handleDelete = async (gardenId, onUpdate) => {
   try {
     await deleteGarden(gardenId);
-    ToastAndroid.show(strings.toast1_gardenCard, ToastAndroid.SHORT);
+    ToastAndroid.show(t("toast1_gardenCard"), ToastAndroid.SHORT);
     onUpdate();
   } catch (error) {
     console.log('Delete garden error: ', error);
@@ -24,6 +24,7 @@ const handleDelete = async (gardenId, onUpdate) => {
 };
 
 const GardenCard = ({navigation, garden, onUpdate}) => {
+  const { t } = useTranslation();
   const garden_image = !garden.image_url
     ? 'https://cdn-icons-png.flaticon.com/512/3039/3039008.png'
     : garden.image_url;
@@ -59,18 +60,18 @@ const GardenCard = ({navigation, garden, onUpdate}) => {
                 onPress={() =>
                   navigation.navigate('EditGarden', {garden, onUpdate})
                 }>
-                <Text className="text-black font-bold">{strings.edit_gc}</Text>
+                <Text className="text-black font-bold">{t("edit_gc")}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 className="items-center py-4 px-5 bg-[#FFF1DD] border-b-2 border-x-2 border-black"
                 onPress={() => alert(`Share`)}>
-                <Text className="text-black font-bold">{strings.share_gc}</Text>
+                <Text className="text-black font-bold">{t("share_gc")}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 className="items-center py-4 px-5 bg-[#FFF1DD] border-b-2 border-x-2 border-black"
                 onPress={() => handleDelete(garden.id, onUpdate)}>
                 <Text className="text-black font-bold">
-                  {strings.delete_gc}
+                  {t("delete_gc")}
                 </Text>
               </TouchableOpacity>
             </CustomModal>

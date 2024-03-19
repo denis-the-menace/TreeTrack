@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import strings from '../strings/string'; // Varsayılan dil dosyası
-import turkishStrings from '../strings/turkish'; // Türkçe dil dosyası
 import i18next from '../services/i18next';
 import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,8 +19,6 @@ const Preferences = ({ navigation }) => {
     AsyncStorage.setItem('language', lng)
   };
 
-  // Seçilen dilin metin dosyasını belirleme
-  const selectedStrings = selectedOption === "en" ? strings : turkishStrings;
 
   return (
     <LinearGradient
@@ -35,7 +31,7 @@ const Preferences = ({ navigation }) => {
             flex: 1,
           }}>
             <Text style={{ fontSize: 30, fontWeight: "bold", color: "#09A555" }}>
-              {selectedStrings.preferences1}
+              {t("preferences1")}
             </Text>
           </View>
           <View style={{
@@ -45,7 +41,7 @@ const Preferences = ({ navigation }) => {
             borderTopLeftRadius: 50,
             borderTopRightRadius: 50
           }}>
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>{selectedStrings.language}</Text>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>{t("language")}</Text>
             <TouchableOpacity
               onPress={() => handleOptionSelect("tr")}
               style={{ flexDirection: "row", alignItems: "center", marginBottom: 15, marginTop: 15 }}>
@@ -66,7 +62,7 @@ const Preferences = ({ navigation }) => {
                   backgroundColor: "#09A555",
                 }} />}
               </View>
-              <Text>{selectedStrings.turkish}</Text>
+              <Text>{t("turkish")}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => handleOptionSelect("en")}
@@ -88,7 +84,7 @@ const Preferences = ({ navigation }) => {
                   backgroundColor: "#09A555",
                 }} />}
               </View>
-              <Text>{selectedStrings.english}</Text>
+              <Text>{t("english")}</Text>
             </TouchableOpacity>
             {/* Add more options as needed */}
           </View>

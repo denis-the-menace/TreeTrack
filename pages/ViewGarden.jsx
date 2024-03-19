@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react';
 import styles from '../styles/Style';
 import { getGardensNoteById } from '../services/garden_services';
 import { formatDate } from '../services/helper';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const ViewGarden = ({ navigation, route }) => {
+  const { t } = useTranslation();
   const { height } = Dimensions.get("window")
   const garden = route.params.garden;
   const onUpdate = route.params.onUpdate;
@@ -64,7 +65,7 @@ const ViewGarden = ({ navigation, route }) => {
         </View>
 
         <Text style={{ fontSize: 16, marginBottom: 15, color: '#efefef', paddingHorizontal: 20 }}>
-          <Text style={{ fontWeight: 'bold' }}>{strings.gardenType_vg} </Text>
+          <Text style={{ fontWeight: 'bold' }}>{t("gardenType_vg")} </Text>
           {!garden.garden_type || garden.garden_type === ''
             ? 'Undefined'
             : garden.garden_type}
@@ -72,7 +73,7 @@ const ViewGarden = ({ navigation, route }) => {
 
         {gardenNotes.length == 0 && (
           <Text style={{ color: '#efefef', fontSize: 16, textAlign: 'center' }}>
-            {strings.noGardenNote_vg}
+            {t("noGardenNote_vg")}
           </Text>
         )}
         <ScrollView style={{ paddingHorizontal: 20 }} nestedScrollEnabled={true} >
@@ -181,7 +182,7 @@ const ViewGarden = ({ navigation, route }) => {
                   marginVertical: 8,
                   alignSelf: 'center',
                 }}>
-                {gardenImages.length > 0 ? "Other " : ""}{strings.gardenNotes_vg}
+                {gardenImages.length > 0 ? "Other " : ""}{t("gardenNotes_vg")}
               </Text>
 
               <ScrollView nestedScrollEnabled={true}>
@@ -220,26 +221,26 @@ const ViewGarden = ({ navigation, route }) => {
           <TouchableOpacity
             onPress={() => {navigation.navigate('Plants', { garden: garden });}}
             style={{ ...styles.button_right, marginTop: 5, marginBottom: 25, marginHorizontal: 10 }}>
-            <Text style={styles.bt1}> {strings.displayPlants_vg} </Text>
+            <Text style={styles.bt1}> {t("displayPlants_vg")} </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {navigation.navigate('Map', { garden }); }}
             style={{ ...styles.button_right, marginTop: 5, marginBottom: 25, marginHorizontal: 10 }}>
-            <Text style={styles.bt1}> {strings.displayInMap_vg} </Text>
+            <Text style={styles.bt1}> {t("displayInMap_vg")} </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {navigation.navigate('Galleries', { garden, showGarden: true }); }}
             style={{ ...styles.button_right, marginTop: 5, marginBottom: 80, marginHorizontal: 10 }}>
-            <Text style={styles.bt1}> {strings.viewInGallery_vg} </Text>
+            <Text style={styles.bt1}> {t("viewInGallery_vg")} </Text>
           </TouchableOpacity>
 
           {/* newly added Add Plant button */}
           <TouchableOpacity 
             onPress={() => {navigation.navigate("CreatePlant", {garden: garden}, {onUpdate: onUpdate})}}
             style={{ ...styles.button_right, marginTop: 10, marginBottom: 80, marginHorizontal: 10 }}>
-            <Text style={styles.bt1}> {strings.addPlant_vg} </Text>
+            <Text style={styles.bt1}> {t("addPlant_vg")} </Text>
           </TouchableOpacity>
 
         </View>

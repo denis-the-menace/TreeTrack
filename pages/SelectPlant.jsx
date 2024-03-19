@@ -19,9 +19,10 @@ import {insertNewPlant} from '../services/plant_services';
 import {setMapPositionByGardenArea} from '../services/helper';
 import AutocompleteInput from 'react-native-autocomplete-input';
 import { getPlantTypes, insertNewPlantType, searchPlantType } from '../services/plant_type_services';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const SelectPlant = ({navigation}) => {
+  const { t } = useTranslation();
   const [selectedMapType, setMapType] = useState('standard');
   const [modalVisible, setModalVisible] = useState(false);
   const [newPlantName, setNewPlantName] = useState(null);
@@ -43,7 +44,7 @@ const SelectPlant = ({navigation}) => {
       setPlantTypes(searchPlantTypeResult.plantTypes)
       const ref_id = await insertNewPlant(newPlant);
       setModalVisible(!modalVisible);
-      ToastAndroid.show(strings.toast1_selectPlant, ToastAndroid.SHORT);
+      ToastAndroid.show(t("toast1_selectPlant"), ToastAndroid.SHORT);
       newPlant = {...newPlant, id: ref_id};
       // console.log('Inserted newPlant: ', newPlant);
       plants.push(newPlant);
@@ -99,8 +100,8 @@ const SelectPlant = ({navigation}) => {
     const isInsideGarden = isInsidePolygon(e.nativeEvent.coordinate, polygon);
     if (isInsideGarden) {
       Alert.alert(
-        strings.alert1_selectPlant,
-        strings.alert2_selectPlant,
+        t("alert1_selectPlant"),
+        t("alert2_selectPlant"),
         [
           {
             text: 'Cancel',
@@ -124,8 +125,8 @@ const SelectPlant = ({navigation}) => {
     const isInsideGarden = isInsidePolygon(currentPosition, polygon);
     if (isInsideGarden) {
       Alert.alert(
-        strings.alert1_selectPlant,
-        strings.alert2_selectPlant,
+        t("alert1_selectPlant"),
+        t("alert2_selectPlant"),
         [
           {
             text: 'Cancel',
@@ -144,7 +145,7 @@ const SelectPlant = ({navigation}) => {
       );
     } else {
       ToastAndroid.show(
-        strings.toast2_selectPlant,
+        t("toast2_selectPlant"),
         ToastAndroid.LONG,
       );
     }
@@ -159,13 +160,13 @@ const SelectPlant = ({navigation}) => {
     region = setMapPositionByGardenArea(polygon);
   } else {
     ToastAndroid.show(
-      strings.toast4_apl,
+      t("toast4_apl"),
       ToastAndroid.SHORT,
     );
   }
-  let initialMessage = strings.initialMessage1;
+  let initialMessage = t("initialMessage1");
   if (plants.length == 0) {
-    initialMessage = strings.initialMessage2;
+    initialMessage = t("initialMessage2");
   }
   const [selectedPlant, setSelectedPlant] = useState(null);
   
@@ -188,8 +189,8 @@ const SelectPlant = ({navigation}) => {
   return (
     <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{height: '100%'}}>
       <View style={styles.container}>
-        <Text style={styles.subtext}> &gt; {strings.addPhoto}</Text>
-        <Text style={styles.text}>{strings.selectPlant}</Text>
+        <Text style={styles.subtext}> &gt; {t("addPhoto")}</Text>
+        <Text style={styles.text}>{t("selectPlant")}</Text>
 
         <Text
           style={{
@@ -197,7 +198,7 @@ const SelectPlant = ({navigation}) => {
             color: '#efefef',
             marginBottom: 10,
           }}>
-          {strings.selectPlantOrMap}
+          {t("selectPlantOrMap")}
         </Text>
 
         <View style={{width: '100%', height: '50%'}}>
@@ -268,7 +269,7 @@ const SelectPlant = ({navigation}) => {
               }}
               onPress={handleCurrentLocationPress}>
               <Text style={{color: '#212121', fontSize: 12, fontWeight: '500'}}>
-              {strings.current_location_selected}
+              {t("current_location_selected")}
               </Text>
             </TouchableOpacity>
           </View>
@@ -292,7 +293,7 @@ const SelectPlant = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>{strings.standard}</Text>
+            <Text style={{color: 'white'}}>{t("standard")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -303,7 +304,7 @@ const SelectPlant = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>{strings.hybrid}</Text>
+            <Text style={{color: 'white'}}>{t("hybrid")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -314,7 +315,7 @@ const SelectPlant = ({navigation}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>{strings.satellite}</Text>
+            <Text style={{color: 'white'}}>{t("satellite")}</Text>
           </TouchableOpacity>
         </View>
         {/* modal for adding new plant */}
@@ -338,13 +339,13 @@ const SelectPlant = ({navigation}) => {
                       marginVertical: 10,
                     }}>
                     {' '}
-                    {strings.enterNewPlantDetail}
+                    {t("enterNewPlantDetail")}
                   </Text>
                   <TextInput
                     value={newPlantName}
                     onChangeText={text => setNewPlantName(text)}
                     placeholderTextColor={'#21212160'}
-                    placeholder={strings.enterPlantName}
+                    placeholder={t("enterPlantName")}
                     style={{
                       borderWidth: 1,
                       borderColor: '#21212150',
@@ -387,7 +388,7 @@ const SelectPlant = ({navigation}) => {
                         borderWidth: 0,
                         backgroundColor: "#fff"
                       }}
-                      placeholder={strings.enterPlantType}
+                      placeholder={t("enterPlantType")}
                       placeholderTextColor={'#21212160'}
                       flatListProps={{
                         keyExtractor: (_, idx) => idx,
@@ -425,7 +426,7 @@ const SelectPlant = ({navigation}) => {
                       }}
                       onPress={() => setModalVisible(!modalVisible)}>
                       <Text style={{color: '#212121', fontSize: 16}}>
-                      {strings.cancel}
+                      {t("cancel")}
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -437,7 +438,7 @@ const SelectPlant = ({navigation}) => {
                         marginTop: 15,
                       }}
                       onPress={addNewPlant}>
-                      <Text style={{color: '#fff', fontSize: 16}}>{strings.add}</Text>
+                      <Text style={{color: '#fff', fontSize: 16}}>{t("add")}</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -484,7 +485,7 @@ const SelectPlant = ({navigation}) => {
           onPress={() => {
             navigation.navigate('AddNote', {selectedPlant});
           }}>
-          <Text style={styles.bt1}> {strings.select} </Text>
+          <Text style={styles.bt1}> {t("select")} </Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

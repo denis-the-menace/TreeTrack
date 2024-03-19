@@ -2,9 +2,10 @@ import LinearGradient from "react-native-linear-gradient";
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, ToastAndroid } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import strings from "../strings/string";
+import { useTranslation } from 'react-i18next';
 
 const ChangePassword = ({ navigation }) => {
+  const { t } = useTranslation();
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -19,24 +20,24 @@ const ChangePassword = ({ navigation }) => {
       const user = auth().currentUser;
 
       if (!currentPassword) {
-        ToastAndroid.show(strings.enter_current_password, ToastAndroid.SHORT);
+        ToastAndroid.show(t("enter_current_password"), ToastAndroid.SHORT);
         return;
       }
       const credential = auth.EmailAuthProvider.credential(user.email, currentPassword);
 
       await user.reauthenticateWithCredential(credential);
       if (newPassword.length < 6 || confirmNewPassword.length < 6) {
-        ToastAndroid.show(strings.password_min_length, ToastAndroid.SHORT);
+        ToastAndroid.show(t("password_min_length"), ToastAndroid.SHORT);
         return;
       }
       if (newPassword === confirmNewPassword) {
         await user.updatePassword(newPassword);
-        ToastAndroid.show(strings.change_successfully, ToastAndroid.SHORT);
+        ToastAndroid.show(t("change_successfully"), ToastAndroid.SHORT);
       } else {
-        ToastAndroid.show(strings.password_not_match, ToastAndroid.SHORT);
+        ToastAndroid.show(t("password_not_match"), ToastAndroid.SHORT);
       }
     } catch (error) {
-      ToastAndroid.show(strings.password_error_message, ToastAndroid.SHORT);
+      ToastAndroid.show(t("password_error_message"), ToastAndroid.SHORT);
     }
   };
 
@@ -94,7 +95,7 @@ const ChangePassword = ({ navigation }) => {
         borderTopRightRadius: 50
       }}>
         <View>
-          <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, marginBottom: 10, marginTop: 40 }}>{strings.enter_password_information}</Text>
+          <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, marginBottom: 10, marginTop: 40 }}>{t("enter_password_information")}</Text>
 
           {renderPasswordInput('currentPassword', 'Current Password', currentPassword, setCurrentPassword, isVisible, setIsVisible)}
           {renderPasswordInput('newPassword', 'New Password', newPassword, setNewPassword, isVisible, setIsVisible)}
@@ -115,7 +116,7 @@ const ChangePassword = ({ navigation }) => {
             elevation: 20,
           }}>
           <Text style={{ color: 'black', fontSize: 16, textAlign: 'center', fontWeight: 'bold' }}>
-            {strings.update_button}
+            {t("update_button")}
           </Text>
         </TouchableOpacity>
       </View>

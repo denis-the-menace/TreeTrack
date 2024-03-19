@@ -17,9 +17,10 @@ import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import { setMapPositionByGardenArea } from '../services/helper';
 import { getPlantsOfGarden } from '../services/garden_services';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const EditGardenPolygon = ({navigation, route}) => {
+  const { t } = useTranslation();
   const onUpdate =
     route.params && route.params.onUpdate ? route.params.onUpdate : () => {};
   const garden =
@@ -60,8 +61,8 @@ const EditGardenPolygon = ({navigation, route}) => {
   // asks user to remove this point, when a marker is pressed
   const handleMarkerPress = (coordinate, index) => {
     Alert.alert(
-      strings.alert1_dp,
-      strings.alert2_dp,
+      t("alert1_dp"),
+      t("alert2_dp"),
       [
         {
           text: 'Cancel',
@@ -86,7 +87,7 @@ const EditGardenPolygon = ({navigation, route}) => {
     region = setMapPositionByGardenArea(polygon);
   }
   else{
-    ToastAndroid.show(strings.toast1_egp, ToastAndroid.SHORT)
+    ToastAndroid.show(t("toast1_egp"), ToastAndroid.SHORT)
   }
   
   return (
@@ -94,14 +95,14 @@ const EditGardenPolygon = ({navigation, route}) => {
       colors={['#D1A96DE5', '#DB966FE5']}
       style={{height: '100%'}}>
       <View style={{padding: 20, flex: 1, marginBottom: 110}}>
-        <Text style={styles.text}>{strings.edit_garden_area}</Text>
+        <Text style={styles.text}>{t("edit_garden_area")}</Text>
 
         <Text
           style={{
             fontSize: 15,
             color: '#FFF1DD',
           }}>
-          {strings.tab_corners_remove}
+          {t("tab_corners_remove")}
         </Text>
 
         <View style={{width: '100%', height: '60%', marginVertical: 5}}>
@@ -128,7 +129,7 @@ const EditGardenPolygon = ({navigation, route}) => {
                 }}
                 onPress={() => {
                   ToastAndroid.show(
-                    strings.toast2_egp,
+                    t("toast2_egp"),
                     ToastAndroid.LONG,
                   );
                 }}
@@ -171,7 +172,7 @@ const EditGardenPolygon = ({navigation, route}) => {
                 setCoordinates([...coordinates, currentPosition]);
               }}>
               <Text style={{color: '#212121', fontSize: 12, fontWeight: '500'}}>
-              {strings.use_current_location}
+              {t("use_current_location")}
               </Text>
             </TouchableOpacity>
           </View>
@@ -195,7 +196,7 @@ const EditGardenPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>{strings.standard}</Text>
+            <Text style={{color: 'white'}}>{t("standard")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('hybrid')}
@@ -206,7 +207,7 @@ const EditGardenPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>{strings.hybrid}</Text>
+            <Text style={{color: 'white'}}>{t("hybrid")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setMapType('satellite')}
@@ -217,7 +218,7 @@ const EditGardenPolygon = ({navigation, route}) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}>
-            <Text style={{color: 'white'}}>{strings.satellite}</Text>
+            <Text style={{color: 'white'}}>{t("satellite")}</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
@@ -225,7 +226,7 @@ const EditGardenPolygon = ({navigation, route}) => {
           onPress={() => {
             navigation.navigate('EditGarden', {polygon: coordinates, garden, onUpdate}); // go back to edit garden page
           }}>
-          <Text style={styles.bt1}> {strings.save_area} </Text>
+          <Text style={styles.bt1}> {t("save_area")} </Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

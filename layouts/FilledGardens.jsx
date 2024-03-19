@@ -4,9 +4,10 @@ import {TouchableOpacity} from 'react-native';
 import GardenCard from './GardenCard';
 import {useState, useCallback} from 'react';
 import {getUserGardens} from '../services/garden_services';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const FilledGardens = ({navigation, gardens, onUpdate}) => {
+  const { t } = useTranslation();
   const [refreshing, setRefreshing] = useState(false);
   const [gardenList, setGardenList] = useState(gardens);
   const onRefresh = useCallback(async () => {
@@ -20,7 +21,7 @@ const FilledGardens = ({navigation, gardens, onUpdate}) => {
       <View className="flex">
         <View className="flex p-5 h-[10%]">
           <Text className="font-bold text-3xl text-[#9E673D]">
-            {strings.my_gardens_B}
+            {t("my_gardens_B")}
           </Text>
         </View>
         <View className="h-[90%]">

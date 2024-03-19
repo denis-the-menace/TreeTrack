@@ -4,9 +4,10 @@ import React, {useEffect, useState} from 'react';
 import styles from '../styles/Style';
 import {getPlantNotesById} from '../services/plant_services';
 import {formatDate} from '../services/helper';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 
 const ViewGarden = ({navigation, route}) => {
+  const { t } = useTranslation();
     const {height} = Dimensions.get("window")
   const plant = route.params.plant;
   const garden = route.params.garden;
@@ -81,14 +82,14 @@ const ViewGarden = ({navigation, route}) => {
             color: '#efefef',
             paddingHorizontal: 20,
           }}>
-          <Text style={{fontWeight: 'bold'}}>{strings.plant_type_vp} </Text>
+          <Text style={{fontWeight: 'bold'}}>{t("plant_type_vp")} </Text>
           {!plant.plant_type || plant.plant_type === ''
             ? 'Undefined'
             : plant.plant_type}
         </Text>
         {plantNotes.length == 0 && (
           <Text style={{color: '#efefef', fontSize: 16, textAlign: 'center'}}>
-            {strings.any_note_vp}
+            {t("any_note_vp")}
           </Text>
         )}
         {plantNotes.length > 0 && (
@@ -207,7 +208,7 @@ const ViewGarden = ({navigation, route}) => {
                     marginVertical: 8,
                     alignSelf: 'center',
                   }}>
-                  {plantImages.length > 0 ? "Other ": ""}{strings.plantNotes_vp}
+                  {plantImages.length > 0 ? "Other ": ""}{t("plantNotes_vp")}
                 </Text>
 
                 <ScrollView nestedScrollEnabled={true}>
@@ -246,7 +247,7 @@ const ViewGarden = ({navigation, route}) => {
               navigation.navigate('Galleries', {plant, showGarden: false});
             }}
             style={{...styles.button_right, marginLeftt: 10}}>
-            <Text style={styles.bt1}>{strings.viewInGallery_vg} </Text>
+            <Text style={styles.bt1}>{t("viewInGallery_vg")} </Text>
           </TouchableOpacity>
         </View>
       </View>

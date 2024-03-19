@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity, Image, Alert } from "react-native"
 import LinearGradient from "react-native-linear-gradient";
 import styles from "../styles/Style";
 import auth from '@react-native-firebase/auth';
-import strings from '../strings/string';
 import { deleteAccount } from '../services/helper'
 import { useTranslation } from 'react-i18next';
 
@@ -62,7 +61,8 @@ const Settings = ({ navigation, route }) => {
           flex: 1,
         }}>
           <Text style={{ fontSize: 30, color: "white", fontWeight: "bold", color: "#09A555" }}>
-            {strings.settings}
+            
+            {t("settings")}
           </Text>
 
         </View>
@@ -91,7 +91,7 @@ const Settings = ({ navigation, route }) => {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ color: "#25596E" }}> {strings.profile1} </Text>
+              <Text style={{ color: "#25596E" }}> {t("profile1")} </Text>
 
               <Image
                 style={{
@@ -122,7 +122,7 @@ const Settings = ({ navigation, route }) => {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ color: "#25596E" }}> {strings.preferences1} </Text>
+              <Text style={{ color: "#25596E" }}> {t("preferences1")} </Text>
 
               <Image
                 style={{
@@ -152,7 +152,7 @@ const Settings = ({ navigation, route }) => {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ color: "#25596E" }}> {strings.privacyAndSafety1} </Text>
+              <Text style={{ color: "#25596E" }}> {t("privacyAndSafety1")} </Text>
 
               <Image
                 style={{
@@ -177,7 +177,7 @@ const Settings = ({ navigation, route }) => {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ color: "#25596E" }}> {strings.notifications1} </Text>
+              <Text style={{ color: "#25596E" }}> {t("notifications1")} </Text>
 
               <Image
                 style={{
@@ -207,7 +207,7 @@ const Settings = ({ navigation, route }) => {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ color: "#25596E" }}> {strings.support1} </Text>
+              <Text style={{ color: "#25596E" }}> {t("support1")} </Text>
               <Image
                 style={{ marginEnd: 5 }}
                 source={require('../images/icons/ic_right_arrow.png')}
@@ -226,7 +226,7 @@ const Settings = ({ navigation, route }) => {
               elevation: 5,
               justifyContent: 'center'
             }}>
-            <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>{strings.logOut}</Text>
+            <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>{t("logOut")}</Text>
           </TouchableOpacity>
 
           {/* Delete Account butonu */}
@@ -259,7 +259,7 @@ const Settings = ({ navigation, route }) => {
               justifyContent: 'center',
             }}>
             <Text style={{ fontSize: 16, textAlign: 'center', color: 'black', fontWeight: 'bold' }}>
-              DELETE ACCOUNT
+              {t("delete_account")}
             </Text>
           </TouchableOpacity>
 

@@ -1,6 +1,6 @@
 import LinearGradient from 'react-native-linear-gradient';
 import React, {useState} from 'react';
-import strings from '../strings/string';
+import { useTranslation } from 'react-i18next';
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ import CheckBox from '@react-native-community/checkbox';
 import {saveUserId} from '../services/storage';
 
 const SignIn = ({setIsSigned, navigation}) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -32,13 +33,13 @@ const SignIn = ({setIsSigned, navigation}) => {
         const firestoreDocument = await usersRef.get();
 
         if (!firestoreDocument.exists) {
-          ToastAndroid.show(strings.toast1_signIn, ToastAndroid.SHORT);
+          ToastAndroid.show(t("toast1_signIn"), ToastAndroid.SHORT);
         }
 
         setIsSigned(true);
         await saveUserId(uid, toggleCheckBox);
         console.log('inside handleLogin ', uid, toggleCheckBox);
-        ToastAndroid.show(strings.toast2_signIn, ToastAndroid.SHORT);
+        ToastAndroid.show(t("toast2_signIn"), ToastAndroid.SHORT);
       } catch (error) {
         console.error(error);
         if (error.message) {
@@ -47,12 +48,12 @@ const SignIn = ({setIsSigned, navigation}) => {
       }
     } else if (email === '' || password === '') {
       ToastAndroid.show(
-        strings.toast3_signIn,
+        t("toast3_signIn"),
         ToastAndroid.SHORT,
       );
     } else {
       ToastAndroid.show(
-        strings.toast4_signIn,
+        t("toast4_signIn"),
         ToastAndroid.SHORT,
       );
     }
@@ -69,12 +70,12 @@ const SignIn = ({setIsSigned, navigation}) => {
       <LinearGradient
         colors={['#BAE9D1', '#36861C']}
         className="w-full mt-10 p-8 rounded-[32px] rounded-bl-none flex items-center">
-        <Text className="text-white text-xl mb-2 text-center">{strings.welcome}!</Text>
+        <Text className="text-white text-xl mb-2 text-center">{t("welcome")}!</Text>
 
         <TextInput
           value={email}
           onChangeText={setEmail}
-          placeholder={strings.emailPlaceholder}
+          placeholder={t("emailPlaceholder")}
           placeholderTextColor={'#21212160'}
           className="bg-white rounded-full mt-2 pl-4 w-full text-black"
           style={{
@@ -85,7 +86,7 @@ const SignIn = ({setIsSigned, navigation}) => {
           <TextInput
             value={password}
             onChangeText={setPassword}
-            placeholder={strings.passwordPlaceholder}
+            placeholder={t("passwordPlaceholder")}
             placeholderTextColor={'#21212160'}
             secureTextEntry={!isPasswordVisible}
             className="bg-white rounded-full mt-2 pl-4 w-full text-black"
@@ -116,7 +117,7 @@ const SignIn = ({setIsSigned, navigation}) => {
         <Text 
         onPress={() => navigation.navigate('ForgotPassword')}
         className="text-white text-sm underline mt-2 ml-2">
-        {strings.forgotPassword}
+        {t("forgotPassword")}
         </Text>
 
         <View className="flex flex-row mt-2 justify-center items-center">
@@ -126,7 +127,7 @@ const SignIn = ({setIsSigned, navigation}) => {
             onValueChange={newValue => setToggleCheckBox(newValue)}
             tintColors={{true: 'white'}}
           />
-          <Text className="text-white text-sm">{strings.rememberMe}</Text>
+          <Text className="text-white text-sm">{t("rememberMe")}</Text>
         </View>
       </LinearGradient>
 
@@ -137,18 +138,18 @@ const SignIn = ({setIsSigned, navigation}) => {
           elevation: 5,
         }}>
         <Text className="text-lg text-center font-bold text-white">
-        {strings.signIn_B}
+        {t("signIn_B")}
         </Text>
       </TouchableOpacity>
 
       <Text className="text-black text-lg mt-4">
-      {strings.dontHaveAccount}
+      {t("dontHaveAccount")}
       </Text>
 
       <Text
         onPress={() => navigation.navigate('SignUp', {setIsSigned: false})}
         className="text-lg underline font-bold text-[#36861C]">
-        {'\t'}{strings.signUp}
+        {'\t'}{t("signUp")}
       </Text>
     </View>
   );
