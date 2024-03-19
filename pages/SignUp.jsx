@@ -23,43 +23,55 @@ const SignUp = ({setIsSigned, navigation}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [rememberToggleCheckBox, setRememberToggleCheckBox] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
-    useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 
-    const handleSignUp = () => {
-      if (toggleCheckBox && email != '' && name != '' && password != '') {
-        if (password !== confirmPassword) {
-          ToastAndroid.show(t("toast1_signUp"), ToastAndroid.SHORT);
-          return;
-        }
-        auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then(async (response) => {
-            const { uid, email } = response.user;
-            const ref = firestore().collection('users').doc(uid)
-            ref.set({
-              "user_uid": uid,
-              "name": name,
-              "email": email,
-            })
-            setIsSigned(true);
-            await saveUserId(uid, toggleCheckBox);
-            console.log('User signed up!');
-            ToastAndroid.show(t("toast2_signUp"), ToastAndroid.SHORT);
+  // e-mail verification
+  const handleSignUp = () => {
+    if (toggleCheckBox && email !== '' && name !== '' && password !== '') {
+      if (password !== confirmPassword) {
+        ToastAndroid.show(t("toast1_signUp"), ToastAndroid.SHORT);
+        return;
+      }
+      auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(async (response) => {
+          const { uid, email: userEmail } = response.user;
+          // Doğrulama e-postası gönder
+          await response.user.sendEmailVerification();
+          ToastAndroid.show(t("verification"), ToastAndroid.SHORT);
   
-            })
-          .catch((error) => {
-            console.log(error);
-            ToastAndroid.show(error.message.split('] ')[1], ToastAndroid.SHORT);
+          // Kullanıcıyı Firestore'a kaydetme
+          const ref = firestore().collection('users').doc(uid);
+          await ref.set({
+            "user_uid": uid,
+            "name": name,
+            "email": userEmail,
           });
-      }
-      else if (email == '' || password == '' || name == '') {
-        ToastAndroid.show(t("toast3_signUp"), ToastAndroid.SHORT);
-      }
-      else {
-        ToastAndroid.show('Please, read and confirm the terms and conditions!', ToastAndroid.SHORT);
-      }
-    };
+  
+          await saveUserId(uid, toggleCheckBox);
+          ToastAndroid.show(t("toast2_signUp"), ToastAndroid.SHORT);
+
+          // Bütün alanları temizle ve toogle'ları uncheck yap
+          setName('');
+          setEmail('');
+          setPassword('');
+          setConfirmPassword('');
+          setToggleCheckBox(false);
+          setRememberToggleCheckBox(false);
+
+        })
+        .catch((error) => {
+          console.log(error);
+          ToastAndroid.show(error.message.split('] ')[1], ToastAndroid.SHORT);
+        });
+    } else if (email === '' || password === '' || name === '') {
+      ToastAndroid.show(t("toast3_signUp"), ToastAndroid.SHORT);
+    } else if (!toggleCheckBox) {
+      ToastAndroid.show(t("confirmConditions"), ToastAndroid.SHORT);
+    } 
+    
+  };
+
 
   return (
     <View className="flex p-8 justify-center items-center bg-white h-full">

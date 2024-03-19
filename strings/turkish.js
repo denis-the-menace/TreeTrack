@@ -212,6 +212,8 @@ const turkish = {
     toast1_signUp:'Şifreler eşleşmiyor!',
     toast2_signUp:'Kullanıcı kaydedildi!',
     toast3_signUp:'Lütfen formu doğru şekilde doldurun!',
+    verification: 'Doğrulama e-postası gönderildi. Lütfen oturum açmadan önce e-posta adresinizi doğrulayın.',
+    confirmConditions: 'Lütfen şartlar ve koşulları okuyup onaylayın!',
 
     //Support
     supportTitle_B: 'DESTEK',

@@ -1,5 +1,5 @@
 import LinearGradient from 'react-native-linear-gradient';
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   View,
@@ -12,14 +12,25 @@ import {
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import CheckBox from '@react-native-community/checkbox';
-import {saveUserId} from '../services/storage';
+import { saveUserId } from '../services/storage';
 
-const SignIn = ({setIsSigned, navigation}) => {
+const SignIn = ({ setIsSigned, navigation }) => {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      // Sayfadan çıkıldığında text alanlarını temizle ve toggle'ları unchecked yap
+      setEmail('');
+      setPassword('');
+      setToggleCheckBox(false);
+    });
+  
+    return unsubscribe;
+  }, [navigation]);
 
   const handleLogin = async () => {
     if (email !== '' && password !== '') {
@@ -36,10 +47,18 @@ const SignIn = ({setIsSigned, navigation}) => {
           ToastAndroid.show(t("toast1_signIn"), ToastAndroid.SHORT);
         }
 
-        setIsSigned(true);
-        await saveUserId(uid, toggleCheckBox);
-        console.log('inside handleLogin ', uid, toggleCheckBox);
-        ToastAndroid.show(t("toast2_signIn"), ToastAndroid.SHORT);
+        // Kullanıcı doğrulanmış mı kontrol et
+        if (response.user.emailVerified) {
+          setIsSigned(true);
+          await saveUserId(uid, toggleCheckBox);
+          console.log('inside handleLogin ', uid, toggleCheckBox);
+          ToastAndroid.show(t("toast2_signIn"), ToastAndroid.SHORT);
+
+        } else {
+          // Kullanıcı e-postasını doğrulamamışsa hata göster
+          ToastAndroid.show(t("emailNotVerified"), ToastAndroid.SHORT);
+          // Kullanıcıyı tekrar gönderme veya başka bir şey yapma seçeneği burada eklenebilir
+        }
       } catch (error) {
         console.error(error);
         if (error.message) {
@@ -101,7 +120,7 @@ const SignIn = ({setIsSigned, navigation}) => {
               position: 'absolute',
               right: 20,
               top: '50%',
-              transform: [{translateY: -9}],
+              transform: [{ translateY: -9 }],
               opacity: password ? 1 : 0.5,
             }}>
             <Image
@@ -114,10 +133,10 @@ const SignIn = ({setIsSigned, navigation}) => {
           </TouchableOpacity>
         </View>
 
-        <Text 
-        onPress={() => navigation.navigate('ForgotPassword')}
-        className="text-white text-sm underline mt-2 ml-2">
-        {t("forgotPassword")}
+        <Text
+          onPress={() => navigation.navigate('ForgotPassword')}
+          className="text-white text-sm underline mt-2 ml-2">
+          {t("forgotPassword")}
         </Text>
 
         <View className="flex flex-row mt-2 justify-center items-center">
@@ -125,7 +144,7 @@ const SignIn = ({setIsSigned, navigation}) => {
             disabled={false}
             value={toggleCheckBox}
             onValueChange={newValue => setToggleCheckBox(newValue)}
-            tintColors={{true: 'white'}}
+            tintColors={{ true: 'white' }}
           />
           <Text className="text-white text-sm">{t("rememberMe")}</Text>
         </View>
@@ -138,16 +157,16 @@ const SignIn = ({setIsSigned, navigation}) => {
           elevation: 5,
         }}>
         <Text className="text-lg text-center font-bold text-white">
-        {t("signIn_B")}
+          {t("signIn_B")}
         </Text>
       </TouchableOpacity>
 
       <Text className="text-black text-lg mt-4">
-      {t("dontHaveAccount")}
+        {t("dontHaveAccount")}
       </Text>
 
       <Text
-        onPress={() => navigation.navigate('SignUp', {setIsSigned: false})}
+        onPress={() => navigation.navigate('SignUp', { setIsSigned: false })}
         className="text-lg underline font-bold text-[#36861C]">
         {'\t'}{t("signUp")}
       </Text>

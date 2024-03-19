@@ -16,9 +16,9 @@ const Preferences = ({ navigation }) => {
 
   const handleOptionSelect = (lng) => {
     i18next.changeLanguage(lng);
-    AsyncStorage.setItem('language', lng)
+    AsyncStorage.setItem('language', lng);
+    setSelectedOption(lng); // Seçilen dili güncelle
   };
-
 
   return (
     <LinearGradient

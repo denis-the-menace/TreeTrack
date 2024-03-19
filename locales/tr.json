@@ -204,5 +204,8 @@
   "english": "İngilizce",
   "delete_account": "HESABI SİL",
   "plant_notes_n":"Bitki notları...",
-  "garden_notes_n":"Bahçe notları..."
+  "garden_notes_n":"Bahçe notları...",
+  "verification": "Doğrulama e-postası gönderildi. Lütfen oturum açmadan önce e-posta adresinizi doğrulayın.",
+  "confirmConditions": "Lütfen şartlar ve koşulları okuyup onaylayın!",
+  "emailNotVerified": "E-mail doğrulanmadı!"
 }

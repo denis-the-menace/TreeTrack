@@ -214,6 +214,8 @@ const strings = {
   toast1_signUp:'Passwords do not match!',
   toast2_signUp:'User signed up!',
   toast3_signUp:'Please fill the form correctly!',
+  verification: 'Verification email sent. Please verify your email before signing in.',
+  confirmConditions: 'Please, read and confirm the terms and conditions!',
 
   //Support
   supportTitle_B: 'SUPPORT',
