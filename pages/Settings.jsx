@@ -92,7 +92,6 @@ const Settings = ({ navigation, route }) => {
               }}
             >
               <Text style={{ color: "#25596E" }}> {strings.profile1} </Text>
-              <Text style={{ color: "#25596E" }}> {t('first')} </Text>
 
               <Image
                 style={{
