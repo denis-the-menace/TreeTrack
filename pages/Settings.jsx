@@ -1,6 +1,5 @@
 import { View, Text, TouchableOpacity, Image, Alert } from "react-native"
 import LinearGradient from "react-native-linear-gradient";
-import styles from "../styles/Style";
 import auth from '@react-native-firebase/auth';
 import { deleteAccount } from '../services/helper'
 import { useTranslation } from 'react-i18next';
