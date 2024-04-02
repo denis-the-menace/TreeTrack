@@ -45,11 +45,12 @@ const MainMenu = ({ navigation }) => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{ flex: 1 }}>
                 {/* Logo */}
-                <View style={{ padding: 15 }}>
+                {/* Logo */}
+                <View style={{ padding: 15, justifyContent: 'center', alignItems: 'center' }}>
                     <View style={{ backgroundColor: 'white', borderRadius: 10 }}>
                         <Image
                             source={require('../images/tree_track.png')}
-                            style={{ height: 60 }}
+                            style={{ height: 60, alignSelf: 'center' }}
                             resizeMode="contain"
                         />
                     </View>
@@ -66,7 +67,7 @@ const MainMenu = ({ navigation }) => {
                             <Image
                                 key={index}
                                 source={image}
-                                style={{ height: 200, width: Dimensions.get('window').width }}
+                                style={{ height: Dimensions.get('window').height * 0.29, width: Dimensions.get('window').width }}
                                 resizeMode="contain"
                             />
                         ))}
@@ -86,7 +87,7 @@ const MainMenu = ({ navigation }) => {
                     <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
                     <Text style={{ color: 'black' }}>{t("helloMessage")} {firstName} {lastName}</Text>
                     <Text style={{ color: 'black' }}>
-                    {t("discoverNatureDescription")}</Text>
+                        {t("discoverNatureDescription")}</Text>
                 </View>
                 {/* MainMenu içeriğini buraya ekle */}
                 <View style={{
