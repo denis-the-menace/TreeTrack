@@ -31,7 +31,7 @@ const Preferences = ({ navigation }) => {
             flex: 1,
           }}>
             <Text style={{ fontSize: 30, fontWeight: "bold", color: "#09A555" }}>
-              {t("preferences1")}
+              {t("preferences")}
             </Text>
           </View>
           <View style={{
