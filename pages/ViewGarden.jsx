@@ -1,6 +1,14 @@
-import { View, Text, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Dimensions,
+  Modal,
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import styles from '../styles/Style';
 import { getGardensNoteById } from '../services/garden_services';
 import { formatDate } from '../services/helper';
@@ -8,13 +16,15 @@ import { useTranslation } from 'react-i18next';
 
 const ViewGarden = ({ navigation, route }) => {
   const { t } = useTranslation();
-  const { height } = Dimensions.get("window")
+  const { height, width } = Dimensions.get('window');
   const garden = route.params.garden;
   const onUpdate = route.params.onUpdate;
   const [gardenNotes, setGardenNotes] = useState([]);
   const [imageIdx, setImageIdx] = useState(0);
   const [isArrowPressed, setPressed] = useState(false);
-  const [numberOfLines, setLines] = useState(3)
+  const [numberOfLines, setLines] = useState(3);
+  const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       const notes = await getGardensNoteById(garden.id);
@@ -23,19 +33,13 @@ const ViewGarden = ({ navigation, route }) => {
     fetchData();
   }, []);
 
-  const gardenImages = [];
-  const gardenNotesWithoutImage = [];
-  gardenNotes.forEach(note => {
-    if (note.image_url !== null) {
-      gardenImages.push(note);
-    } else {
-      gardenNotesWithoutImage.push(note);
-    }
-  });
+  const gardenImages = gardenNotes.filter(note => note.image_url !== null);
+  const gardenNotesWithoutImage = gardenNotes.filter(note => note.image_url === null);
 
   const garden_image = !garden.image_url
     ? 'https://cdn-icons-png.flaticon.com/512/3039/3039008.png'
     : garden.image_url;
+
   return (
     <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{ height: '100%' }}>
       <View
@@ -93,11 +97,7 @@ const ViewGarden = ({ navigation, route }) => {
                 <TouchableOpacity
                   onPress={() => {
                     setPressed(true);
-                    if (imageIdx - 1 === -1) {
-                      setImageIdx(gardenImages.length - 1);
-                    } else {
-                      setImageIdx(imageIdx - 1);
-                    }
+                    setImageIdx((imageIdx - 1 + gardenImages.length) % gardenImages.length);
                   }}
                   style={{
                     backgroundColor: '#2c3d4f',
@@ -110,22 +110,20 @@ const ViewGarden = ({ navigation, route }) => {
                   <Text style={{ color: '#fff', fontWeight: 'bold' }}>&lt;</Text>
                 </TouchableOpacity>
 
-                <Image
-                  style={{ width: '90%', height: height * 0.35, borderRadius: 10 }}
-                  source={{
-                    uri:
-                      gardenImages.length === 0
-                        ? garden_image
-                        : gardenImages[imageIdx].image_url,
-                  }}></Image>
+                <TouchableOpacity
+                  onPress={() => {
+                    setModalVisible(true);
+                  }}>
+                  <Image
+                    source={{ uri: gardenImages[imageIdx].image_url }}
+                    style={{ width: 300, height: 250 }}
+                  />
+                </TouchableOpacity>
+
                 <TouchableOpacity
                   onPress={() => {
                     setPressed(true);
-                    if (imageIdx + 1 === gardenImages.length) {
-                      setImageIdx(0);
-                    } else {
-                      setImageIdx(imageIdx + 1);
-                    }
+                    setImageIdx((imageIdx + 1) % gardenImages.length);
                   }}
                   style={{
                     backgroundColor: '#2c3d4f',
@@ -141,8 +139,8 @@ const ViewGarden = ({ navigation, route }) => {
               {gardenImages.length > 0 && (
                 <TouchableOpacity
                   onPress={() => {
-                    setLines(numberOfLines === 3 ? undefined : 3)
-                    setPressed(true)
+                    setLines(numberOfLines === 3 ? undefined : 3);
+                    setPressed(true);
                   }}
                   key={gardenImages[imageIdx].id}
                   style={{
@@ -236,7 +234,6 @@ const ViewGarden = ({ navigation, route }) => {
             <Text style={styles.bt1}> {t("viewInGallery_vg")} </Text>
           </TouchableOpacity>
 
-          {/* newly added Add Plant button */}
           <TouchableOpacity 
             onPress={() => {navigation.navigate("CreatePlant", {garden: garden}, {onUpdate: onUpdate})}}
             style={{ ...styles.button_right, marginTop: 10, marginBottom: 80, marginHorizontal: 10 }}>
@@ -244,6 +241,34 @@ const ViewGarden = ({ navigation, route }) => {
           </TouchableOpacity>
 
         </View>
+
+        {/* Modal for Enlarged Image */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(false);
+          }}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <TouchableOpacity
+                onPress={() => setModalVisible(false)}
+                style={styles.closeButton}>
+                <Text style={styles.closeButtonText}>{t("close")}</Text>
+              </TouchableOpacity>
+              <Image
+                source={{
+                  uri: gardenImages.length === 0
+                    ? garden_image
+                    : gardenImages[imageIdx].image_url,
+                }}
+                style={{ width: '95%', aspectRatio:0.8 }} />
+              
+            </View>
+          </View>
+        </Modal>
+
       </View>
     </LinearGradient>
   );

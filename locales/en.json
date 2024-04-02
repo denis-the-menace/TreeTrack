@@ -207,5 +207,6 @@
   "garden_notes_n":"Garden notes...",
   "verification": "Verification email sent. Please verify your email before signing in.",
   "confirmConditions": "Please, read and confirm the terms and conditions!",
-  "emailNotVerified": "E-mail not verified!"
+  "emailNotVerified": "E-mail not verified!",
+  "close": "CLOSE"
 }

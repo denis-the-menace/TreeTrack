@@ -152,6 +152,28 @@ const styles = StyleSheet.create({
     borderRadius: 5, // İşaretin yuvarlatılmış kenarları
     backgroundColor: '#FFF', // İşaret rengi
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    borderRadius: 10,
+    padding: 20,
+    alignItems: 'center',
+    elevation: 5,
+},
+  closeButton: {
+    alignSelf: 'flex-end',
+    marginBottom: 10,
+  },
+  closeButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FFF',
+  },
 });
 
 export default styles;

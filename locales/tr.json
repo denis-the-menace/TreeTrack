@@ -207,5 +207,6 @@
   "garden_notes_n":"Bahçe notları...",
   "verification": "Doğrulama e-postası gönderildi. Lütfen oturum açmadan önce e-posta adresinizi doğrulayın.",
   "confirmConditions": "Lütfen şartlar ve koşulları okuyup onaylayın!",
-  "emailNotVerified": "E-mail doğrulanmadı!"
+  "emailNotVerified": "E-mail doğrulanmadı!",
+  "close": "KAPAT"
 }
