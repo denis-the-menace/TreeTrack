@@ -230,9 +230,9 @@ const MainMenuScreen = ({setIsSigned}) => {
         tabBarVisible: false,
       }}>
       <Stack.Screen name="Main Menu" component={MainMenu} />
-      <Stack.Screen name="AddNote" component={AddNote} />
+      <Stack.Screen name="AddNote" component={AddNoteStack} />
       <Stack.Screen name="OpenMap" component={Map} />
-      <Stack.Screen name="MyGardens" component={Gardens} />
+      <Stack.Screen name="MyGardens" component={GardensStack} />
       <Stack.Screen name="Gallery" component={Galleries} />
       <Stack.Screen
         name="Settings"
