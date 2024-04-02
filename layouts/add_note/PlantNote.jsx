@@ -204,7 +204,7 @@ const PlantNote = ({navigation}) => {
                   alignItems: 'center',
                 }}
                 onPress={() => {
-                  navigation.navigate('SelectPlant', { selectedGarden });
+                  navigation.navigate('SelectPlant', {selectedGarden: selectedGarden});
                 }}
               >
                 <Image

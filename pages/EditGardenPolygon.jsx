@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import { ToastAndroid } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../styles/Style';
 import MapView, {

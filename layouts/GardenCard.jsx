@@ -5,13 +5,34 @@ import {
   ToastAndroid,
   TouchableOpacity,
   View,
+  Share,
 } from 'react-native';
-import {deleteGarden} from '../services/garden_services';
+import { deleteGarden, getGardensNoteById } from '../services/garden_services';
 import { useTranslation } from 'react-i18next';
 import CustomModal from '../components/CustomModal';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import { formatDate } from '../services/helper';
 
-const {height} = Dimensions.get('window');
+
+const GardenCard = ({navigation, garden, onUpdate}) => {
+  const { t } = useTranslation();
+  const garden_image = !garden.image_url
+    ? 'https://cdn-icons-png.flaticon.com/512/3039/3039008.png'
+    : garden.image_url;
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [gardenNotes, setGardenNotes] = useState([]);
+
+  const {height} = Dimensions.get('window');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const notes = await getGardensNoteById(garden.id);
+      setGardenNotes(notes);
+    };
+    fetchData();
+  }, []);
+
 // delete garden -> bu islemin digerleri gibi child componentlarda olması lazım
 const handleDelete = async (gardenId, onUpdate) => {
   try {
@@ -23,13 +44,44 @@ const handleDelete = async (gardenId, onUpdate) => {
   }
 };
 
-const GardenCard = ({navigation, garden, onUpdate}) => {
-  const { t } = useTranslation();
-  const garden_image = !garden.image_url
-    ? 'https://cdn-icons-png.flaticon.com/512/3039/3039008.png'
-    : garden.image_url;
+const shareGarden = async (garden, gardenNotes, imageUri) => {
+  try {
+    let message = `Explore the ${garden.name} garden:\n\n`;
 
-  const [modalVisible, setModalVisible] = useState(false);
+    // Bahçenin oluşturulduğu tarih
+    message += `📅 Garden Created At: ${formatDate(garden.created_at)}\n\n`;
+
+    // Bahçe notlarını ekleyin
+    if (gardenNotes && gardenNotes.length > 0) {
+      message += '📋 Garden Notes (from newest to oldest):\n';
+      gardenNotes.forEach(note => {
+        if(note.note){
+        message += `- ${note.note} (${formatDate(note.created_at)})\n`;}
+      });
+    } else {
+      message += '📋  No notes available\n\n';
+    }
+    
+    if (imageUri) {
+      message += `\n📷 Last Captured Image of the Garden:\n ${imageUri}\n\n`;
+    }
+    const result = await Share.share({
+      message: message,
+    });
+
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        console.log('Share with ', result.activityType);
+      } else {
+        console.log('Shared');
+      }
+    } else if (result.action === Share.dismissedAction) {
+      console.log('Dismissed');
+    }
+  } catch (error) {
+    console.error('Error Sharing}', error.message);
+  }
+};
 
   return (
     <TouchableOpacity
@@ -64,7 +116,7 @@ const GardenCard = ({navigation, garden, onUpdate}) => {
               </TouchableOpacity>
               <TouchableOpacity
                 className="items-center py-4 px-5 bg-[#FFF1DD] border-b-2 border-x-2 border-black"
-                onPress={() => alert(`Share`)}>
+                onPress={() => shareGarden(garden, gardenNotes, [garden_image])}>
                 <Text className="text-black font-bold">{t("share_gc")}</Text>
               </TouchableOpacity>
               <TouchableOpacity

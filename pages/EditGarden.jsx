@@ -5,8 +5,8 @@ import {
     TextInput,
     ScrollView,
     Image,
-    ToastAndroid,
 } from 'react-native';
+import { ToastAndroid } from 'react-native'; // Add this line
 import LinearGradient from 'react-native-linear-gradient';
 import React, { useState } from 'react';
 import styles from '../styles/Style';
