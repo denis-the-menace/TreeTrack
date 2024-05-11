@@ -8,7 +8,7 @@ const Plants = ({navigation, route}) => {
   const [plants, setPlants] = useState([]);
 
   const updatePlants = async plant => {
-    if (plant) setPlants([...plants, plant]);
+    if (plant) setPlants([plant, ...plants]);
     console.log('inside updatePlants:' + plants.map(plant => plant.name));
   };
 

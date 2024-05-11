@@ -41,6 +41,8 @@ const FilledGardens = ({navigation, gardens, onUpdate}) => {
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }>
               {gardenList.map(garden => (
+                // FIX: yeni garden'in garden id'si daha databasede yaratiliyor oldugu icin undefined oluyor
+                // console.log("Key: " + garden.id),
                 <GardenCard
                   key={garden.id}
                   navigation={navigation}

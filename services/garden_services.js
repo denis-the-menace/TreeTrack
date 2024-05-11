@@ -5,68 +5,51 @@ import {getSortedPlantsByDistance} from './plant_services';
 
 export const getUserGardens = async (getLastImage = false) => {
   const user_uid = await getFromStorage('userId');
-  //console.log("Uid: ", user_uid)
   const userGardensRef = firestore().collection('user_gardens');
   const query = userGardensRef.where('user_uid', '==', user_uid);
   const userGardensDocs = await query.get();
 
   const gardenPromises = userGardensDocs.docs.map(async userGardenDoc => {
     const garden_id = userGardenDoc.data().garden_uid;
-    // console.log('user garden id: ', garden_id);
     const gardenRef = firestore().collection('gardens').doc(garden_id);
     const gardenDoc = await gardenRef.get();
-    const data = gardenDoc.data();
-    //data.created_at = String(data.created_at.toDate());
-    data.polygon = data.polygon.flat();
-    return data;
+    const gardenData = gardenDoc.data();
+    // Modify gardenData as needed
+    return gardenData;
   });
 
-  const gardenList = await Promise.all(gardenPromises);
-  // get last image of the garden if it's wanted
+  let gardenList = await Promise.all(gardenPromises);
+
   if (getLastImage) {
     const gardenImagesPromises = gardenList.map(async garden => {
-      // get last image
-      const notDoc = await firestore()
+      const gardenNotesSnapshot = await firestore()
         .collection('garden_notes')
         .where('garden_id', '==', garden.id)
         .orderBy('created_at', 'desc')
+        .limit(1)
         .get();
-      const data = notDoc.docs.map(d => {
-        return d.data();
-      });
-      return {garden_id: garden.id, data};
+
+      const gardenNotesData = gardenNotesSnapshot.docs.map(doc => doc.data());
+      return {garden_id: garden.id, data: gardenNotesData};
     });
+
     const gardenImageList = await Promise.all(gardenImagesPromises);
-    // add images to garden items
-    gardenList.forEach(garden => {
-      const gardenImage = gardenImageList.find(i => i.garden_id == garden.id);
+
+    gardenList = gardenList.map(garden => {
+      const gardenImage = gardenImageList.find(
+        image => image.garden_id === garden.id,
+      );
       if (gardenImage && gardenImage.data.length !== 0) {
         garden.image_url = gardenImage.data[0].image_url;
       }
+      return garden;
     });
-    for (let i = 0; i < gardenList.length; i++) {
-      const gardenEntity = gardenList[i];
-      const gardenNotes = gardenImageList.find(
-        i => i.garden_id == gardenEntity.id,
-      );
-      if (
-        gardenNotes &&
-        gardenNotes.data != null &&
-        gardenNotes.data.length !== 0
-      ) {
-        // find the latest uploaded image from notes
-        for (let j = 0; j < gardenNotes.data.length; j++) {
-          const g_note = gardenNotes.data[j];
-          if (g_note.image_url !== null) {
-            gardenEntity.image_url = g_note.image_url;
-            break;
-          }
-        }
-      }
-    }
   }
-  // sort desc (gallery kısmında daha fazla sort seçeneği olacak)
-  gardenList.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+  // Sort gardens from newest to oldest
+  gardenList.sort(
+    (a, b) => new Date(b.created_at.toDate()) - new Date(a.created_at.toDate()),
+  );
 
   return gardenList;
 };
@@ -84,8 +67,13 @@ export const getUserGardenNames = async () => {
     const data = gardenDoc.data();
     return {name: data.name, id: data.id};
   });
+
   const gardenList = await Promise.all(gardenPromises);
-  gardenList.sort();
+
+  gardenList.sort(
+    (a, b) => new Date(b.created_at.toDate()) - new Date(a.created_at.toDate()),
+  );
+
   return gardenList;
 };
 
@@ -234,47 +222,44 @@ export const getPlantsOfGarden = async (garden_id, getLastImage) => {
     .where('garden_id', '==', garden_id)
     .orderBy('created_at', 'desc')
     .get();
-  const plantList = querySnapshot.docs.map(doc => {
+
+  const plantList = [];
+
+  querySnapshot.forEach(doc => {
     const data = doc.data();
-    //data.created_at = String(data.created_at.toDate());
-    return data;
+    plantList.push(data);
   });
-  // get last image of the plant if it's wanted
+
+  // Get last image of the plant if requested
   if (getLastImage) {
-    const plantImagesPromises = plantList.map(async plant => {
-      // get last image
-      const notDoc = await firestore()
+    const plantImagePromises = plantList.map(async plant => {
+      const noteQuerySnapshot = await firestore()
         .collection('plant_notes')
         .where('plant_id', '==', plant.id)
         .orderBy('created_at', 'desc')
+        .limit(1)
         .get();
-      const data = notDoc.docs.map(d => {
-        return d.data();
-      });
-      return {plant_id: plant.id, data};
-    });
-    const plantImageList = await Promise.all(plantImagesPromises);
-    // add images to plant items
-    for (let i = 0; i < plantList.length; i++) {
-      const plant = plantList[i];
-      const plantImage = plantImageList.find(i => i.plant_id == plant.id);
-      if (
-        plantImage &&
-        plantImage.data != null &&
-        plantImage.data.length !== 0
-      ) {
-        // find the latest uploaded image from notes
-        for (let j = 0; j < plantImage.data.length; j++) {
-          const p_note = plantImage.data[j];
-          if (p_note.image_url !== null) {
-            plant.image_url = p_note.image_url;
-            break;
-          }
-        }
+
+      const noteDocs = noteQuerySnapshot.docs;
+      if (noteDocs.length > 0) {
+        const lastNoteData = noteDocs[0].data();
+        return {plant_id: plant.id, image_url: lastNoteData.image_url};
+      } else {
+        return {plant_id: plant.id, image_url: null};
       }
-    }
+    });
+
+    const plantImages = await Promise.all(plantImagePromises);
+
+    plantList.forEach((plant, index) => {
+      plant.image_url = plantImages[index].image_url;
+    });
   }
-  // console.log("Plant list: ", plantList)
+
+  plantList.sort(
+    (a, b) => new Date(b.created_at.toDate()) - new Date(a.created_at.toDate()),
+  );
+
   return plantList;
 };
 
