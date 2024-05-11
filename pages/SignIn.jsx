@@ -20,6 +20,7 @@ const SignIn = ({ setIsSigned, navigation }) => {
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  // console.log(navigation);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {
@@ -28,7 +29,7 @@ const SignIn = ({ setIsSigned, navigation }) => {
       setPassword('');
       setToggleCheckBox(false);
     });
-  
+
     return unsubscribe;
   }, [navigation]);
 
@@ -44,7 +45,7 @@ const SignIn = ({ setIsSigned, navigation }) => {
         const firestoreDocument = await usersRef.get();
 
         if (!firestoreDocument.exists) {
-          ToastAndroid.show(t("toast1_signIn"), ToastAndroid.SHORT);
+          ToastAndroid.show(t('toast1_signIn'), ToastAndroid.SHORT);
         }
 
         // Kullanıcı doğrulanmış mı kontrol et
@@ -52,11 +53,10 @@ const SignIn = ({ setIsSigned, navigation }) => {
           setIsSigned(true);
           await saveUserId(uid, toggleCheckBox);
           console.log('inside handleLogin ', uid, toggleCheckBox);
-          ToastAndroid.show(t("toast2_signIn"), ToastAndroid.SHORT);
-
+          ToastAndroid.show(t('toast2_signIn'), ToastAndroid.SHORT);
         } else {
           // Kullanıcı e-postasını doğrulamamışsa hata göster
-          ToastAndroid.show(t("emailNotVerified"), ToastAndroid.SHORT);
+          ToastAndroid.show(t('emailNotVerified'), ToastAndroid.SHORT);
           // Kullanıcıyı tekrar gönderme veya başka bir şey yapma seçeneği burada eklenebilir
         }
       } catch (error) {
@@ -66,15 +66,9 @@ const SignIn = ({ setIsSigned, navigation }) => {
         }
       }
     } else if (email === '' || password === '') {
-      ToastAndroid.show(
-        t("toast3_signIn"),
-        ToastAndroid.SHORT,
-      );
+      ToastAndroid.show(t('toast3_signIn'), ToastAndroid.SHORT);
     } else {
-      ToastAndroid.show(
-        t("toast4_signIn"),
-        ToastAndroid.SHORT,
-      );
+      ToastAndroid.show(t('toast4_signIn'), ToastAndroid.SHORT);
     }
   };
 
@@ -89,12 +83,14 @@ const SignIn = ({ setIsSigned, navigation }) => {
       <LinearGradient
         colors={['#BAE9D1', '#36861C']}
         className="w-full mt-10 p-8 rounded-[32px] rounded-bl-none flex items-center">
-        <Text className="text-white text-xl mb-2 text-center">{t("welcome")}!</Text>
+        <Text className="text-white text-xl mb-2 text-center">
+          {t('welcome')}!
+        </Text>
 
         <TextInput
           value={email}
           onChangeText={setEmail}
-          placeholder={t("emailPlaceholder")}
+          placeholder={t('emailPlaceholder')}
           placeholderTextColor={'#21212160'}
           className="bg-white rounded-full mt-2 pl-4 w-full text-black"
           style={{
@@ -105,7 +101,7 @@ const SignIn = ({ setIsSigned, navigation }) => {
           <TextInput
             value={password}
             onChangeText={setPassword}
-            placeholder={t("passwordPlaceholder")}
+            placeholder={t('passwordPlaceholder')}
             placeholderTextColor={'#21212160'}
             secureTextEntry={!isPasswordVisible}
             className="bg-white rounded-full mt-2 pl-4 w-full text-black"
@@ -136,7 +132,7 @@ const SignIn = ({ setIsSigned, navigation }) => {
         <Text
           onPress={() => navigation.navigate('ForgotPassword')}
           className="text-white text-sm underline mt-2 ml-2">
-          {t("forgotPassword")}
+          {t('forgotPassword')}
         </Text>
 
         <View className="flex flex-row mt-2 justify-center items-center">
@@ -146,7 +142,7 @@ const SignIn = ({ setIsSigned, navigation }) => {
             onValueChange={newValue => setToggleCheckBox(newValue)}
             tintColors={{ true: 'white' }}
           />
-          <Text className="text-white text-sm">{t("rememberMe")}</Text>
+          <Text className="text-white text-sm">{t('rememberMe')}</Text>
         </View>
       </LinearGradient>
 
@@ -157,18 +153,17 @@ const SignIn = ({ setIsSigned, navigation }) => {
           elevation: 5,
         }}>
         <Text className="text-lg text-center font-bold text-white">
-          {t("signIn_B")}
+          {t('signIn_B')}
         </Text>
       </TouchableOpacity>
 
-      <Text className="text-black text-lg mt-4">
-        {t("dontHaveAccount")}
-      </Text>
+      <Text className="text-black text-lg mt-4">{t('dontHaveAccount')}</Text>
 
       <Text
         onPress={() => navigation.navigate('SignUp', { setIsSigned: false })}
         className="text-lg underline font-bold text-[#36861C]">
-        {'\t'}{t("signUp")}
+        {'\t'}
+        {t('signUp')}
       </Text>
     </View>
   );

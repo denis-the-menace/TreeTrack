@@ -6,9 +6,10 @@ import {getPlantsOfGarden} from '../services/garden_services';
 const Plants = ({navigation, route}) => {
   const garden = route.params.garden;
   const [plants, setPlants] = useState([]);
-  const updatePlants = async () => {
-    const data = await getPlantsOfGarden(garden.id, true);
-    setPlants(data);
+
+  const updatePlants = async plant => {
+    if (plant) setPlants([...plants, plant]);
+    console.log('inside updatePlants:' + plants.map(plant => plant.name));
   };
 
   useEffect(() => {
@@ -17,10 +18,15 @@ const Plants = ({navigation, route}) => {
       setPlants(data);
     };
     fetchData();
+    console.log('plants useEffect (data fethed)');
   }, []);
 
   return plants.length == 0 ? (
-    <EmptyPlants navigation={navigation} garden={garden} />
+    <EmptyPlants
+      navigation={navigation}
+      garden={garden}
+      onUpdate={updatePlants}
+    />
   ) : (
     <FilledPlants
       navigation={navigation}

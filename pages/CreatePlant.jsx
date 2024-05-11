@@ -4,21 +4,18 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
-  ScrollView,
   ToastAndroid,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../styles/Style';
 import React, {useState, useEffect} from 'react';
-import PhotoPick from '../layouts/photo_picker/ImagePicker';
-import storage from '@react-native-firebase/storage';
 import {insertNewPlant} from '../services/plant_services';
 import AutocompleteInput from 'react-native-autocomplete-input';
 import {getPlantTypes, searchPlantType} from '../services/plant_type_services';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 const CreatePlant = ({route, navigation}) => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const onUpdate =
     route.params && route.params.onUpdate ? route.params.onUpdate : () => {};
   const plantLocation =
@@ -37,7 +34,7 @@ const CreatePlant = ({route, navigation}) => {
 
   // add plant
   const addPlant = async () => {
-      const plantData = {
+    const plantData = {
       name: plantName,
       created_at: new Date(),
       garden_id: garden.id,
@@ -54,8 +51,9 @@ const CreatePlant = ({route, navigation}) => {
       // if new type is inserted, update the list
       setPlantTypes(searchPlantTypeResult.plantTypes);
       await insertNewPlant(plantData);
-      ToastAndroid.show(t("toast1_cp"), ToastAndroid.SHORT);
-      onUpdate();
+      ToastAndroid.show(t('toast1_cp'), ToastAndroid.SHORT);
+      // console.log(route.params.onUpdate);
+      onUpdate(plantData);
       navigation.navigate('Plants', {garden});
     } catch (error) {
       console.log('Insert plant error: ', error);
@@ -92,10 +90,10 @@ const CreatePlant = ({route, navigation}) => {
           {'\u003E'}
           {garden.name}{' '}
         </Text>
-        <Text style={styles.text}>{t("add_new_plant")}</Text>
+        <Text style={styles.text}>{t('add_new_plant')}</Text>
         {/* add plant section */}
         <View>
-          <Text style={styles.t4}>{t("give_name_to_plant")}</Text>
+          <Text style={styles.t4}>{t('give_name_to_plant')}</Text>
           <TextInput
             value={plantName}
             onChangeText={text => setPlantName(text)}
@@ -114,7 +112,7 @@ const CreatePlant = ({route, navigation}) => {
               elevation: 5,
               fontSize: 16,
             }}></TextInput>
-          <Text style={styles.t4}>{t("select_plant_type")}</Text>
+          <Text style={styles.t4}>{t('select_plant_type')}</Text>
           <View
             style={{
               width: '100%',
@@ -144,7 +142,7 @@ const CreatePlant = ({route, navigation}) => {
                 elevation: 5,
                 fontSize: 16,
               }}
-              placeholder={t("enter_plant_type")}
+              placeholder={t('enter_plant_type')}
               placeholderTextColor={'#21212160'}
               flatListProps={{
                 keyExtractor: (_, idx) => idx,
@@ -174,7 +172,7 @@ const CreatePlant = ({route, navigation}) => {
             padding: 10,
             width: '100%',
           }}>
-          <Text style={styles.t4}>{t("add_location_plant")}</Text>
+          <Text style={styles.t4}>{t('add_location_plant')}</Text>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <TouchableOpacity
               style={{
@@ -198,7 +196,8 @@ const CreatePlant = ({route, navigation}) => {
                   height: 25,
                 }}></Image>
               <Text style={{...styles.bt1, color: '#212121', marginLeft: 5}}>
-              {t("open_map")}              </Text>
+                {t('open_map')}{' '}
+              </Text>
             </TouchableOpacity>
             {plantLocation.length > 2 && (
               <Image
@@ -214,9 +213,9 @@ const CreatePlant = ({route, navigation}) => {
         </View>
 
         <TouchableOpacity
-              style={{...styles.button_right, width: 125}}
-              onPress={addPlant}>
-              <Text style={{...styles.bt1}}>{t("add_button")}</Text>
+          style={{...styles.button_right, width: 125}}
+          onPress={addPlant}>
+          <Text style={{...styles.bt1}}>{t('add_button')}</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

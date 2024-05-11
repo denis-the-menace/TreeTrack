@@ -20,6 +20,7 @@ export const getUserGardens = async (getLastImage = false) => {
     data.polygon = data.polygon.flat();
     return data;
   });
+
   const gardenList = await Promise.all(gardenPromises);
   // get last image of the garden if it's wanted
   if (getLastImage) {
@@ -88,59 +89,124 @@ export const getUserGardenNames = async () => {
   return gardenList;
 };
 
+// export const deleteGarden = async gardenId => {
+//   // remove garden
+//   const gardenRef = firestore().collection('gardens').doc(gardenId);
+//   await gardenRef.delete();
+//   // remove relation
+//   const user_uid = await getFromStorage('userId');
+//   const userGardenQuery = firestore()
+//     .collection('user_gardens')
+//     .where('user_uid', '==', user_uid)
+//     .where('garden_uid', '==', gardenId);
+//   const querySnapshot = await userGardenQuery.get();
+//   querySnapshot.forEach(async doc => {
+//     await doc.ref.delete();
+//   });
+//   // remove garden notes
+//   let gardenNotesRef = await firestore()
+//     .collection('garden_notes')
+//     .where('garden_id', '==', gardenId)
+//     .get();
+//   gardenNotesRef.docs.map(async doc => {
+//     await doc.ref.delete();
+//   });
+//   console.log('GARDEN NOTES REMOVED');
+//   // remove plants
+//   const plant_id_list = [];
+//   const plantsRef = firestore()
+//     .collection('plants')
+//     .where('garden_id', '==', gardenId);
+//   const plantQuerySnapshot = await plantsRef.get();
+//   plantQuerySnapshot.forEach(async doc => {
+//     const plant = doc.data();
+//     plant_id_list.push(plant.id);
+//     await doc.ref.delete();
+//   });
+//   console.log('PLANTS REMOVED');
+//   // remove plant notes
+//   let plantCollection = await firestore().collection('plants');
+//   const plantBatches = [];
+//   while (plant_id_list.length) {
+//     const batch = plant_id_list.splice(0, 10);
+//     plantBatches.push(
+//       plantCollection
+//         .where('plant_id', 'in', [...batch])
+//         .get()
+//         .then(results =>
+//           results.docs.map(async doc => {
+//             await doc.ref.delete();
+//           }),
+//         ),
+//     );
+//   }
+//   await Promise.all(plantBatches);
+//   console.log('PLANT NOTES REMOVED');
+// };
+
 export const deleteGarden = async gardenId => {
-  // remove garden
-  const gardenRef = firestore().collection('gardens').doc(gardenId);
-  await gardenRef.delete();
-  // remove relation
-  const user_uid = await getFromStorage('userId');
-  const userGardenQuery = firestore()
-    .collection('user_gardens')
-    .where('user_uid', '==', user_uid)
-    .where('garden_uid', '==', gardenId);
-  const querySnapshot = await userGardenQuery.get();
-  querySnapshot.forEach(async doc => {
-    await doc.ref.delete();
-  });
-  // remove garden notes
-  let gardenNotesRef = await firestore()
-    .collection('garden_notes')
-    .where('garden_id', '==', gardenId)
-    .get();
-  gardenNotesRef.docs.map(async doc => {
-    await doc.ref.delete();
-  });
-  console.log('GARDEN NOTES REMOVED');
-  // remove plants
-  const plant_id_list = [];
-  const plantsRef = firestore()
-    .collection('plants')
-    .where('garden_id', '==', gardenId);
-  const plantQuerySnapshot = await plantsRef.get();
-  plantQuerySnapshot.forEach(async doc => {
-    const plant = doc.data();
-    plant_id_list.push(plant.id);
-    await doc.ref.delete();
-  });
-  console.log('PLANTS REMOVED');
-  // remove plant notes
-  let plantCollection = await firestore().collection('plants');
-  const plantBatches = [];
-  while (plant_id_list.length) {
-    const batch = plant_id_list.splice(0, 10);
-    plantBatches.push(
-      plantCollection
-        .where('plant_id', 'in', [...batch])
-        .get()
-        .then(results =>
-          results.docs.map(async doc => {
-            await doc.ref.delete();
-          }),
-        ),
-    );
+  try {
+    // Remove garden
+    const gardenRef = firestore().collection('gardens').doc(gardenId);
+    await gardenRef.delete();
+
+    // Remove relation from user_gardens
+    const user_uid = await getFromStorage('userId');
+    const userGardenQuery = firestore()
+      .collection('user_gardens')
+      .where('user_uid', '==', user_uid)
+      .where('garden_uid', '==', gardenId);
+
+    console.log('User garden query:', userGardenQuery);
+
+    const userGardenSnapshot = await userGardenQuery.get();
+    userGardenSnapshot.forEach(async doc => {
+      await doc.ref.delete();
+    });
+
+    // Remove garden notes
+    const gardenNotesRef = firestore()
+      .collection('garden_notes')
+      .where('garden_id', '==', gardenId)
+      .get();
+
+    const gardenNotesQuerySnapshot = await gardenNotesRef;
+    console.log('Garden notes:', gardenNotesQuerySnapshot);
+
+    gardenNotesQuerySnapshot.docs.forEach(async doc => {
+      await doc.ref.delete();
+    });
+
+    // Remove plants and plant notes
+    const plantsRef = firestore()
+      .collection('plants')
+      .where('garden_id', '==', gardenId);
+    const plantQuerySnapshot = await plantsRef.get();
+
+    console.log('Plants:', plantQuerySnapshot);
+
+    const deletePromises = plantQuerySnapshot.docs.map(async doc => {
+      // Delete plant
+      await doc.ref.delete();
+      // Delete plant notes
+      const plantNotesRef = firestore()
+        .collection('plant_notes')
+        .where('plant_id', '==', doc.id);
+      const plantNotesQuerySnapshot = await plantNotesRef.get();
+      const deletePlantNotesPromises = plantNotesQuerySnapshot.docs.map(
+        async noteDoc => {
+          await noteDoc.ref.delete();
+        },
+      );
+      await Promise.all(deletePlantNotesPromises);
+    });
+    await Promise.all(deletePromises);
+
+    console.log('Garden and associated data deleted successfully');
+  } catch (error) {
+    console.error('Error deleting garden:', error);
+    throw error; // Rethrow the error for further handling
   }
-  await Promise.all(plantBatches);
-  console.log('PLANT NOTES REMOVED');
 };
 
 export const insertGarden = async gardenData => {

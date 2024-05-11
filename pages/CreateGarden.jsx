@@ -11,11 +11,11 @@ import styles from '../styles/Style';
 import React, {useState, useEffect} from 'react';
 import {insertGarden} from '../services/garden_services';
 import AutocompleteInput from 'react-native-autocomplete-input';
-import { getGardenTypes, searchGardenType } from '../services/garden_type_sevice';
-import { useTranslation } from 'react-i18next';
+import {getGardenTypes, searchGardenType} from '../services/garden_type_sevice';
+import {useTranslation} from 'react-i18next';
 
 const CreateGarden = ({route, navigation}) => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const onUpdate =
     route.params && route.params.onUpdate ? route.params.onUpdate : () => {};
   const polygon =
@@ -48,9 +48,10 @@ const CreateGarden = ({route, navigation}) => {
       // if new type is inserted, update the list
       setGardenTypes(searchGardenTypeResult.gardenTypes);
       await insertGarden(gardenData);
-      ToastAndroid.show(t("toast1_cg"), ToastAndroid.SHORT);
-      onUpdate();
-      navigation.navigate('GardensStack', {screen: 'Gardens'});
+      ToastAndroid.show(t('toast1_cg'), ToastAndroid.SHORT);
+      // console.log("inside createGarden" + onUpdate);
+      onUpdate(gardenData);
+      navigation.navigate('Gardens');
     } catch (error) {
       console.log('Insert garden error: ', error);
     }
@@ -63,8 +64,8 @@ const CreateGarden = ({route, navigation}) => {
       return [];
     }
     const filteredGardenTypes = gardenTypes.filter(gardenType =>
-      gardenType.toLowerCase().includes(searchText.toLowerCase())
-    );   
+      gardenType.toLowerCase().includes(searchText.toLowerCase()),
+    );
     return filteredGardenTypes;
   };
 
@@ -78,15 +79,15 @@ const CreateGarden = ({route, navigation}) => {
       colors={['#D1A96DE5', '#DB966FE5']}
       style={{height: '100%'}}>
       <View style={{padding: 20, flex: 1, marginBottom: 110}}>
-        <Text style={styles.text}>{t("add_new_garden")}</Text>
+        <Text style={styles.text}>{t('add_new_garden')}</Text>
         {/* add garden section */}
         <View>
-          <Text style={styles.t4}>{t("give_name_to_garden")}</Text>
+          <Text style={styles.t4}>{t('give_name_to_garden')}</Text>
           <TextInput
             value={gardenName}
             onChangeText={text => setGardenName(text)}
             placeholderTextColor={'#21212160'}
-            placeholder={t("garden_name_placeholder")}
+            placeholder={t('garden_name_placeholder')}
             style={{
               width: '100%',
               height: 42,
@@ -100,7 +101,7 @@ const CreateGarden = ({route, navigation}) => {
               elevation: 5,
               fontSize: 16,
             }}></TextInput>
-          <Text style={styles.t4}>{t("select_garden_type")}</Text>
+          <Text style={styles.t4}>{t('select_garden_type')}</Text>
           <View
             style={{
               width: '100%',
@@ -130,7 +131,7 @@ const CreateGarden = ({route, navigation}) => {
                 elevation: 5,
                 fontSize: 16,
               }}
-              placeholder={t("enter_garden_type")}
+              placeholder={t('enter_garden_type')}
               placeholderTextColor={'#21212160'}
               flatListProps={{
                 keyExtractor: (_, idx) => idx,
@@ -159,7 +160,7 @@ const CreateGarden = ({route, navigation}) => {
               padding: 10,
               width: '100%',
             }}>
-            <Text style={styles.t4}>{t("add_location_garden")}</Text>
+            <Text style={styles.t4}>{t('add_location_garden')}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <TouchableOpacity
                 style={{
@@ -179,7 +180,7 @@ const CreateGarden = ({route, navigation}) => {
                     height: 25,
                   }}></Image>
                 <Text style={{...styles.bt1, color: '#212121', marginLeft: 5}}>
-                {t("open_map")}
+                  {t('open_map')}
                 </Text>
               </TouchableOpacity>
               {polygon.length > 2 && (
@@ -196,9 +197,9 @@ const CreateGarden = ({route, navigation}) => {
           </View>
         </View>
         <TouchableOpacity
-            style={{...styles.button_right, width: 125}}
-            onPress={addGarden}>
-            <Text style={{...styles.bt1}}>{t("save_button")}</Text>
+          style={{...styles.button_right, width: 125}}
+          onPress={addGarden}>
+          <Text style={{...styles.bt1}}>{t('save_button')}</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

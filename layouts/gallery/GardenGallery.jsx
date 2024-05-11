@@ -8,13 +8,16 @@ import {
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import React, {useState, useEffect} from 'react';
-import styles from "../../styles/Style";
-import { getGardenNotes, getUserGardenNames } from '../../services/garden_services';
-import { formatDate, sortNoteList } from '../../services/helper';
-import { useTranslation } from 'react-i18next';
+import styles from '../../styles/Style';
+import {
+  getGardenNotes,
+  getUserGardenNames,
+} from '../../services/garden_services';
+import {formatDate, sortNoteList} from '../../services/helper';
+import {useTranslation} from 'react-i18next';
 
 const GardenGallery = ({selectedGarden}) => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   console.log('selected garden: ', selectedGarden); // TODO - view in gallery
   const [gardenNoteList, setNoteList] = useState([]);
   const [filteredNoteList, setFilteredNoteList] = useState([]);
@@ -115,30 +118,35 @@ const GardenGallery = ({selectedGarden}) => {
             </Picker>
           </View>
 
-        <View
-          style={{
-            width: '49%',
-            height: 45,
-            borderRadius: 15,
-            backgroundColor: '#fff',
-            justifyContent: 'center',
-          }}>
-          <Picker style={{color: '#212121'}} selectedValue={sortOptionPickerValue}>
-            {sortOptions.map(sort => (
-              <Picker.Item
-                key={sort.id}
-                label={sort.name}
-                value={sort.id}
-              />
-            ))}
-          </Picker>
+          <View
+            style={{
+              width: '49%',
+              height: 45,
+              borderRadius: 15,
+              backgroundColor: '#fff',
+              justifyContent: 'center',
+            }}>
+            <Picker
+              style={{color: '#212121'}}
+              selectedValue={sortOptionPickerValue}>
+              {sortOptions.map(sort => (
+                <Picker.Item key={sort.id} label={sort.name} value={sort.id} />
+              ))}
+            </Picker>
+          </View>
         </View>
+        {isLoading && (
+          <Text style={{color: '#efefef', padding: 10}}>{t('loading_gg')}</Text>
+        )}
+        {!isLoading && filteredNoteList.length == 0 && (
+          <Text style={{color: '#efefef', padding: 10}}>
+            {' '}
+            {t('no_note_gg')}
+          </Text>
+        )}
       </View>
-      {isLoading && <Text style={{color: '#efefef', padding: 10}}>{t("loading_gg")}</Text>}
-      {!isLoading && filteredNoteList.length == 0 && <Text style={{color: '#efefef', padding: 10}}> {t("no_note_gg")}</Text>}
-    </View>
-  );
-}
+    );
+  }
   return (
     <View>
       <View

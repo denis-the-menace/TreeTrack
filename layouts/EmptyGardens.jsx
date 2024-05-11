@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native";
 import { useTranslation } from 'react-i18next';
 
 
-const EmptyGardens = ({navigation}) => {
+const EmptyGardens = ({navigation, onUpdate}) => {
   const { t } = useTranslation();
   return (
     <LinearGradient colors={['#D1A96DE5', '#DB966FE5']} className="h-full">
@@ -14,7 +14,7 @@ const EmptyGardens = ({navigation}) => {
           <TouchableOpacity
             className="bg-[#FFF1DD] rounded-full p-5"
             onPress={() => {
-              navigation.navigate('CreateGarden');
+              navigation.navigate('CreateGarden', {onUpdate: onUpdate});
             }}>
             <Image
               source={require('../images/icons/plus.png')}

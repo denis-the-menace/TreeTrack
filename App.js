@@ -15,6 +15,11 @@ import { getFromStorage } from './services/storage';
 import HomeNavigation from './navigations/HomeNavigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18next from './services/i18next';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 const App = () => {
   const [isSignedIn, setIsSigned] = useState(false);

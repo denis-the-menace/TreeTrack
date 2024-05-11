@@ -1,5 +1,5 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
@@ -7,11 +7,10 @@ import ForgotPassword from '../pages/ForgotPassword';
 
 const Stack = createNativeStackNavigator();
 
-const HomeNavigation = ({setIsSigned}) => {
-  console.log('HomeNavigation is called', setIsSigned);
+const HomeNavigation = ({ setIsSigned }) => {
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false }}
       initialRouteName="Home">
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="SignIn">

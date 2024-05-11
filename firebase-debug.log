@@ -1,0 +1,23 @@
+[debug] [2024-04-02T12:04:10.045Z] ----------------------------------------------------------------------
+[debug] [2024-04-02T12:04:10.047Z] Command:       /usr/bin/node /usr/bin/firebase login
+[debug] [2024-04-02T12:04:10.047Z] CLI Version:   13.6.0
+[debug] [2024-04-02T12:04:10.047Z] Platform:      linux
+[debug] [2024-04-02T12:04:10.047Z] Node Version:  v21.5.0
+[debug] [2024-04-02T12:04:10.048Z] Time:          Tue Apr 02 2024 15:04:10 GMT+0300 (GMT+03:00)
+[debug] [2024-04-02T12:04:10.048Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-04-02T12:04:10.050Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[info] i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[debug] [2024-04-02T12:04:10.707Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2024-04-02T12:04:10.708Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2024-04-02T12:04:41.886Z] ----------------------------------------------------------------------
+[debug] [2024-04-02T12:04:41.888Z] Command:       /usr/bin/node /usr/bin/firebase login
+[debug] [2024-04-02T12:04:41.888Z] CLI Version:   13.6.0
+[debug] [2024-04-02T12:04:41.888Z] Platform:      linux
+[debug] [2024-04-02T12:04:41.888Z] Node Version:  v21.5.0
+[debug] [2024-04-02T12:04:41.889Z] Time:          Tue Apr 02 2024 15:04:41 GMT+0300 (GMT+03:00)
+[debug] [2024-04-02T12:04:41.889Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 

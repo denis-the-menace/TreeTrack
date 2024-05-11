@@ -2,7 +2,7 @@ import {View, Text, Image, RefreshControl, ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {TouchableOpacity} from 'react-native';
 import GardenCard from './GardenCard';
-import {useState, useCallback} from 'react';
+import {useState, useCallback, useEffect} from 'react';
 import {getUserGardens} from '../services/garden_services';
 import { useTranslation } from 'react-i18next';
 
@@ -10,12 +10,19 @@ const FilledGardens = ({navigation, gardens, onUpdate}) => {
   const { t } = useTranslation();
   const [refreshing, setRefreshing] = useState(false);
   const [gardenList, setGardenList] = useState(gardens);
+
+  useEffect(() => {
+    setGardenList(gardens);
+    console.log("gardens useEffect");
+  }, [gardens]);
+
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     const data = await getUserGardens(true);
     setRefreshing(false);
     setGardenList(data);
   }, []);
+
   return (
     <LinearGradient colors={['#FFFFFF', '#FFFFFF']} className="h-full">
       <View className="flex">
@@ -35,8 +42,8 @@ const FilledGardens = ({navigation, gardens, onUpdate}) => {
               }>
               {gardenList.map(garden => (
                 <GardenCard
-                  navigation={navigation}
                   key={garden.id}
+                  navigation={navigation}
                   garden={garden}
                   onUpdate={onUpdate}
                 />

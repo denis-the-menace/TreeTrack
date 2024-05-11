@@ -27,6 +27,8 @@ import PrivacyAndSafety from '../pages/PrivacyAndSafety';
 import Preferences from '../pages/Preferences';
 import MainMenu from '../pages/MainMenu';
 import ChangePassword from '../pages/ChangePassword';
+import {NavigationContainer} from '@react-navigation/native';
+import GardenCard from '../layouts/GardenCard';
 
 const {width, height} = Dimensions.get('window');
 const Tab = createBottomTabNavigator();
@@ -160,30 +162,37 @@ const BottomNavigation = ({setIsSigned}) => {
   );
 };
 const GardensStack = () => {
+  const gardenStack = createNativeStackNavigator();
   return (
-    <Stack.Navigator
+    <gardenStack.Navigator
       screenOptions={{
         headerShown: false,
-      }}>
-      <Stack.Screen name="Gardens" component={Gardens} />
-      <Stack.Screen name="CreateGarden" component={CreateGarden} />
+      }}
+      initialRouteName="Gardens">
+      <gardenStack.Screen name="Gardens" component={Gardens} />
+      <gardenStack.Screen name="CreateGarden" component={CreateGarden} />
+      <gardenStack.Screen name="ViewGarden" component={ViewGarden} />
+      <gardenStack.Screen name="EditGarden" component={EditGarden} />
+      <gardenStack.Screen
+        name="EditGardenPolygon"
+        component={EditGardenPolygon}
+      />
+      <gardenStack.Screen name="GardenCard" component={GardenCard} />
 
-      <Stack.Screen name="ViewGarden" component={ViewGarden} />
-
-      <Stack.Screen name="Plants" component={Plants} />
-
-      <Stack.Screen name="CreatePlant" component={CreatePlant} />
-
-      <Stack.Screen name="ViewPlant" component={ViewPlant} />
-
-      <Stack.Screen name="DrawPolygon" component={DrawPolygon} />
-
-      <Stack.Screen name="AddPlantLocation" component={AddPlantLocation} />
-      <Stack.Screen name="EditPlant" component={EditPlant} />
-      <Stack.Screen name="EditPlantLocation" component={EditPlantLocation} />
-      <Stack.Screen name="EditGarden" component={EditGarden} />
-      <Stack.Screen name="EditGardenPolygon" component={EditGardenPolygon} />
-    </Stack.Navigator>
+      <gardenStack.Screen name="Plants" component={Plants} />
+      <gardenStack.Screen name="CreatePlant" component={CreatePlant} />
+      <gardenStack.Screen name="EditPlant" component={EditPlant} />
+      <gardenStack.Screen name="ViewPlant" component={ViewPlant} />
+      <gardenStack.Screen name="DrawPolygon" component={DrawPolygon} />
+      <gardenStack.Screen
+        name="AddPlantLocation"
+        component={AddPlantLocation}
+      />
+      <gardenStack.Screen
+        name="EditPlantLocation"
+        component={EditPlantLocation}
+      />
+    </gardenStack.Navigator>
   );
 };
 

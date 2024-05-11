@@ -8,14 +8,13 @@ import {
   Share,
 } from 'react-native';
 import {deletePlant, getPlantNotesById} from '../services/plant_services';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import CustomModal from '../components/CustomModal';
 import {useState, useEffect} from 'react';
-import { formatDate } from '../services/helper';
-
+import {formatDate} from '../services/helper';
 
 const PlantCard = ({navigation, plant, garden, onUpdate}) => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const plant_image = !plant.image_url
     ? 'https://cdn-icons-png.flaticon.com/512/1892/1892747.png'
     : plant.image_url;
@@ -29,60 +28,59 @@ const PlantCard = ({navigation, plant, garden, onUpdate}) => {
       setPlantNotes(notes);
     };
     fetchData();
-  }, []); 
+  }, []);
 
-const {height} = Dimensions.get('window');
-// delete garden -> bu islemin digerleri gibi child componentlarda olması lazım
-const handleDelete = async (plantId, onUpdate) => {
-  try {
-    await deletePlant(plantId);
-    ToastAndroid.show(t("toast1_plantCard"), ToastAndroid.SHORT);
-    onUpdate();
-  } catch (error) {
-    console.log('Delete plant error: ', error);
-  }
-};
+  const {height} = Dimensions.get('window');
 
-
-const sharePlant = async (plant, plantNotes, imageUri) => {
-  try {
-    let message = `Explore the ${plant.name} plant:\n\n`;
-
-    // Bahçenin oluşturulduğu tarih
-    message += `📅 Plant Created At: ${formatDate(plant.created_at)}\n\n`;
-
-    // Bahçe notlarını ekleyin
-    if (plantNotes && plantNotes.length > 0) {
-      message += '📋 Plant Notes (from newest to oldest):\n';
-      plantNotes.forEach(note => {
-        if(note.note){
-        message += `- ${note.note} (${formatDate(note.created_at)})\n`;}
-      });
-    } else {
-      message += '📋  No notes available\n\n';
+  const handleDelete = async (plantId, onUpdate) => {
+    try {
+      await deletePlant(plantId);
+      ToastAndroid.show(t('toast1_deletePlant'), ToastAndroid.SHORT);
+      onUpdate(plant, "delete");
+    } catch (error) {
+      console.log('Delete plant error: ', error);
     }
-    
-    if (imageUri) {
-      message += `\n📷 Last Captured Image of the Plant:\n ${imageUri}\n\n`;
-    }
-    const result = await Share.share({
-      message: message,
-    });
+  };
 
-    if (result.action === Share.sharedAction) {
-      if (result.activityType) {
-        console.log('Share with ', result.activityType);
+  const sharePlant = async (plant, plantNotes, imageUri) => {
+    try {
+      let message = `Explore the ${plant.name} plant:\n\n`;
+
+      // Bahçenin oluşturulduğu tarih
+      message += `📅 Plant Created At: ${formatDate(plant.created_at)}\n\n`;
+
+      // Bahçe notlarını ekleyin
+      if (plantNotes && plantNotes.length > 0) {
+        message += '📋 Plant Notes (from newest to oldest):\n';
+        plantNotes.forEach(note => {
+          if (note.note) {
+            message += `- ${note.note} (${formatDate(note.created_at)})\n`;
+          }
+        });
       } else {
-        console.log('Shared');
+        message += '📋  No notes available\n\n';
       }
-    } else if (result.action === Share.dismissedAction) {
-      console.log('Dismissed');
-    }
-  } catch (error) {
-    console.error('Error Sharing}', error.message);
-  }
-};
 
+      if (imageUri) {
+        message += `\n📷 Last Captured Image of the Plant:\n ${imageUri}\n\n`;
+      }
+      const result = await Share.share({
+        message: message,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          console.log('Share with ', result.activityType);
+        } else {
+          console.log('Shared');
+        }
+      } else if (result.action === Share.dismissedAction) {
+        console.log('Dismissed');
+      }
+    } catch (error) {
+      console.error('Error Sharing}', error.message);
+    }
+  };
 
   return (
     <TouchableOpacity
@@ -117,23 +115,17 @@ const sharePlant = async (plant, plantNotes, imageUri) => {
                     onUpdate,
                   })
                 }>
-                <Text className="text-black font-bold">
-                  {t("edit_pc")}
-                </Text>
+                <Text className="text-black font-bold">{t('edit_pc')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 className="items-center py-4 px-5 bg-[#FFF1DD] border-b-2 border-x-2 border-black"
                 onPress={() => sharePlant(plant, plantNotes, [plant_image])}>
-                <Text className="text-black font-bold">
-                  {t("share_pc")}
-                </Text>
+                <Text className="text-black font-bold">{t('share_pc')}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 className="items-center py-4 px-5 bg-[#FFF1DD] border-b-2 border-x-2 border-black"
                 onPress={() => handleDelete(plant.id, onUpdate)}>
-                <Text className="text-black font-bold">
-                  {t("delete_pc")}
-                </Text>
+                <Text className="text-black font-bold">{t('delete_pc')}</Text>
               </TouchableOpacity>
             </CustomModal>
           </View>
