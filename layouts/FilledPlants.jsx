@@ -14,7 +14,7 @@ const FilledPlants = ({navigation, garden, plants, onUpdate}) => {
 
   useEffect(() => {
     setPlantList(plants);
-    console.log('filledplants useEffect');
+    // console.log('filledplants useEffect');
   }, [plants]);
 
   const onRefresh = useCallback(async () => {
@@ -46,8 +46,8 @@ const FilledPlants = ({navigation, garden, plants, onUpdate}) => {
               }>
               {plantList.map(plant => (
                 <PlantCard
+                  key={plant.id}
                   navigation={navigation}
-                  key={plant.name}
                   plant={plant}
                   garden={garden}
                   onUpdate={onUpdate}

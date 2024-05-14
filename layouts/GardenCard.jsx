@@ -7,22 +7,21 @@ import {
   View,
   Share,
 } from 'react-native';
-import { deleteGarden, getGardensNoteById } from '../services/garden_services';
-import { useTranslation } from 'react-i18next';
+import {deleteGarden, getGardensNoteById} from '../services/garden_services';
+import {useTranslation} from 'react-i18next';
 import CustomModal from '../components/CustomModal';
-import { useState, useEffect } from 'react';
-import { formatDate } from '../services/helper';
+import {useState, useEffect} from 'react';
+import {formatDate} from '../services/helper';
 
-const GardenCard = ({ navigation, garden, onUpdate }) => {
-  const { t } = useTranslation();
+const GardenCard = ({navigation, garden, onUpdate}) => {
+  const {t} = useTranslation();
   const garden_image = !garden.image_url
     ? 'https://cdn-icons-png.flaticon.com/512/3039/3039008.png'
     : garden.image_url;
-
   const [modalVisible, setModalVisible] = useState(false);
   const [gardenNotes, setGardenNotes] = useState([]);
 
-  const { height } = Dimensions.get('window');
+  const {height} = Dimensions.get('window');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,7 +84,7 @@ const GardenCard = ({ navigation, garden, onUpdate }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('ViewGarden', { garden, onUpdate });
+        navigation.navigate('ViewGarden', {garden, onUpdate});
       }}>
       <View className="flex flex-row justify-center">
         <View className="w-3/4 bg-white p-4 rounded-lg m-4">
@@ -109,7 +108,7 @@ const GardenCard = ({ navigation, garden, onUpdate }) => {
               <TouchableOpacity
                 className="items-center py-4 px-5 bg-[#FFF1DD] rounded-t-3xl border-2 border-black"
                 onPress={() =>
-                  navigation.navigate('EditGarden', { garden, onUpdate })
+                  navigation.navigate('EditGarden', {garden, onUpdate})
                 }>
                 <Text className="text-black font-bold">{t('edit_gc')}</Text>
               </TouchableOpacity>

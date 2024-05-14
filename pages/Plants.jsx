@@ -7,9 +7,12 @@ const Plants = ({navigation, route}) => {
   const garden = route.params.garden;
   const [plants, setPlants] = useState([]);
 
-  const updatePlants = async plant => {
-    if (plant) setPlants([plant, ...plants]);
-    console.log('inside updatePlants:' + plants.map(plant => plant.name));
+  const updatePlants = (plant, method) => {
+    if (method == 'add') setPlants([plant, ...plants]);
+    else if (method == 'delete')
+      setPlants(prevPlants => prevPlants.filter(p => p.id !== plant.id));
+
+    console.log('inside updatePlants:' + plants.map(plant => plant.id + "=>" + plant.name));
   };
 
   useEffect(() => {
@@ -18,7 +21,7 @@ const Plants = ({navigation, route}) => {
       setPlants(data);
     };
     fetchData();
-    console.log('plants useEffect (data fethed)');
+    // console.log('plants useEffect (data fethed)');
   }, []);
 
   return plants.length == 0 ? (

@@ -8,16 +8,16 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../styles/Style';
-import React, {useState, useEffect} from 'react';
-import {insertNewPlant} from '../services/plant_services';
+import React, { useState, useEffect } from 'react';
+import { insertNewPlant } from '../services/plant_services';
 import AutocompleteInput from 'react-native-autocomplete-input';
-import {getPlantTypes, searchPlantType} from '../services/plant_type_services';
-import {useTranslation} from 'react-i18next';
+import { getPlantTypes, searchPlantType } from '../services/plant_type_services';
+import { useTranslation } from 'react-i18next';
 
-const CreatePlant = ({route, navigation}) => {
-  const {t} = useTranslation();
+const CreatePlant = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const onUpdate =
-    route.params && route.params.onUpdate ? route.params.onUpdate : () => {};
+    route.params && route.params.onUpdate ? route.params.onUpdate : () => { };
   const plantLocation =
     route.params && route.params.coordinates ? route.params.coordinates : [];
   const garden = route.params.garden;
@@ -34,7 +34,7 @@ const CreatePlant = ({route, navigation}) => {
 
   // add plant
   const addPlant = async () => {
-    const plantData = {
+    let plantData = {
       name: plantName,
       created_at: new Date(),
       garden_id: garden.id,
@@ -50,11 +50,11 @@ const CreatePlant = ({route, navigation}) => {
       plantData.plant_type = searchPlantTypeResult.plant_type;
       // if new type is inserted, update the list
       setPlantTypes(searchPlantTypeResult.plantTypes);
-      await insertNewPlant(plantData);
+      const plantId = await insertNewPlant(plantData);
+      plantData.id = plantId;
       ToastAndroid.show(t('toast1_cp'), ToastAndroid.SHORT);
-      // console.log(route.params.onUpdate);
-      onUpdate(plantData);
-      navigation.navigate('Plants', {garden});
+      onUpdate(plantData, 'add');
+      navigation.navigate('Plants', { garden });
     } catch (error) {
       console.log('Insert plant error: ', error);
     }
@@ -77,8 +77,8 @@ const CreatePlant = ({route, navigation}) => {
     setShowAutoCompleteResult(true);
   };
   return (
-    <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{height: '100%'}}>
-      <View style={{padding: 20, flex: 1, marginBottom: 110}}>
+    <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{ height: '100%' }}>
+      <View style={{ padding: 20, flex: 1, marginBottom: 110 }}>
         <Text
           style={{
             fontSize: 20,
@@ -146,7 +146,7 @@ const CreatePlant = ({route, navigation}) => {
               placeholderTextColor={'#21212160'}
               flatListProps={{
                 keyExtractor: (_, idx) => idx,
-                renderItem: ({item}) => (
+                renderItem: ({ item }) => (
                   <TouchableOpacity
                     style={{
                       borderWidth: 0,
@@ -173,7 +173,7 @@ const CreatePlant = ({route, navigation}) => {
             width: '100%',
           }}>
           <Text style={styles.t4}>{t('add_location_plant')}</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <TouchableOpacity
               style={{
                 ...styles.button_left,
@@ -195,7 +195,7 @@ const CreatePlant = ({route, navigation}) => {
                   width: 25,
                   height: 25,
                 }}></Image>
-              <Text style={{...styles.bt1, color: '#212121', marginLeft: 5}}>
+              <Text style={{ ...styles.bt1, color: '#212121', marginLeft: 5 }}>
                 {t('open_map')}{' '}
               </Text>
             </TouchableOpacity>
@@ -213,9 +213,9 @@ const CreatePlant = ({route, navigation}) => {
         </View>
 
         <TouchableOpacity
-          style={{...styles.button_right, width: 125}}
+          style={{ ...styles.button_right, width: 125 }}
           onPress={addPlant}>
-          <Text style={{...styles.bt1}}>{t('add_button')}</Text>
+          <Text style={{ ...styles.bt1 }}>{t('add_button')}</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>

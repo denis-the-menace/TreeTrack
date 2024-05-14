@@ -214,6 +214,8 @@ export const insertGarden = async gardenData => {
     user_uid: user_uid,
     garden_uid: gardenRef.id,
   });
+
+  return gardenRef.id;
 };
 
 export const getPlantsOfGarden = async (garden_id, getLastImage) => {

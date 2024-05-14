@@ -13,7 +13,7 @@ const FilledGardens = ({navigation, gardens, onUpdate}) => {
 
   useEffect(() => {
     setGardenList(gardens);
-    console.log("gardens useEffect");
+    // console.log("gardens useEffect");
   }, [gardens]);
 
   const onRefresh = useCallback(async () => {

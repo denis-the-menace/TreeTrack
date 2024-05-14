@@ -29,6 +29,7 @@ import MainMenu from '../pages/MainMenu';
 import ChangePassword from '../pages/ChangePassword';
 import {NavigationContainer} from '@react-navigation/native';
 import GardenCard from '../layouts/GardenCard';
+import PlantCard from '../layouts/PlantCard';
 
 const {width, height} = Dimensions.get('window');
 const Tab = createBottomTabNavigator();
@@ -183,6 +184,7 @@ const GardensStack = () => {
       <gardenStack.Screen name="CreatePlant" component={CreatePlant} />
       <gardenStack.Screen name="EditPlant" component={EditPlant} />
       <gardenStack.Screen name="ViewPlant" component={ViewPlant} />
+      <gardenStack.Screen name="PlantCard" component={PlantCard} />
       <gardenStack.Screen name="DrawPolygon" component={DrawPolygon} />
       <gardenStack.Screen
         name="AddPlantLocation"

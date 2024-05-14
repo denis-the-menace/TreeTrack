@@ -36,7 +36,7 @@ const PlantCard = ({navigation, plant, garden, onUpdate}) => {
     try {
       await deletePlant(plantId);
       ToastAndroid.show(t('toast1_deletePlant'), ToastAndroid.SHORT);
-      onUpdate(plant, "delete");
+      onUpdate(plant, 'delete');
     } catch (error) {
       console.log('Delete plant error: ', error);
     }

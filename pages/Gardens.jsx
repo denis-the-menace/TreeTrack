@@ -6,11 +6,17 @@ import { getUserGardens } from '../services/garden_services';
 const Gardens = ({ navigation }) => {
   const [gardens, setGardens] = useState([]);
 
-  const updateGardens = async garden => {
-    if (garden) setGardens([garden, ...gardens]);
-    // state degistirmek async oldugu icin console log ettigimizde en son ekledigimiz garden gozukmuyor
-    // fakat filled gardens'a buradaki gardens state'ini gonderirken en son ekledigimiz garden gozukuyor
-    console.log('inside updateGardens:' + gardens.map(garden => garden.name));
+  // CreateGarden'daki addGarden methodu async oldugu icin console log ettigimizde en son ekledigimiz garden gozukmuyor
+  // fakat filled gardens'a buradaki gardens state'ini gonderirken en son ekledigimiz garden gozukuyor
+  const updateGardens = (garden, method) => {
+    if (method == 'add') setGardens([garden, ...gardens]);
+    else if (method == 'delete')
+      setGardens(prevGardens => prevGardens.filter(g => g.id !== garden.id));
+
+    console.log(
+      'inside updateGardens:' +
+      gardens.map(garden => garden.id + '=>' + garden.name),
+    );
   };
 
   useEffect(() => {
@@ -20,10 +26,10 @@ const Gardens = ({ navigation }) => {
       setGardens(data);
     };
     if (gardens.length == 0) fetchData();
-    console.log('gardens useEffect (data fethed)');
+    // console.log('gardens useEffect (data fetched)');
   }, []);
 
-  console.log('inside gardens: ' + gardens.map(garden => garden.name));
+  // console.log('inside gardens: ' + gardens.map(garden => garden.name));
 
   return gardens.length == 0 ? (
     <EmptyGardens navigation={navigation} onUpdate={updateGardens} />
