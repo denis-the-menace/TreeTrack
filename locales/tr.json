@@ -209,5 +209,8 @@
   "verification": "Doğrulama e-postası gönderildi. Lütfen oturum açmadan önce e-posta adresinizi doğrulayın.",
   "confirmConditions": "Lütfen şartlar ve koşulları okuyup onaylayın!",
   "emailNotVerified": "E-mail doğrulanmadı!",
-  "close": "KAPAT"
+  "close": "KAPAT",
+  "edit_garden_photo": "Bahçe fotoğrafını güncelle",
+  "edit_photo_gallery":"Galeriden Seç",
+  "take_photo":"Fotoğraf Çek"
 }
