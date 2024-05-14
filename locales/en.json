@@ -214,5 +214,6 @@
   "close": "CLOSE",
   "edit_garden_photo": "Edit photo of your garden",
   "edit_photo_gallery":"Select From Gallery",
-  "take_photo":"Take a Photo"
+  "take_photo":"Take a Photo",
+  "edit_garden_notes": "Edit garden notes"
 }

@@ -5,14 +5,13 @@ import {
     TextInput,
     ScrollView,
     Image,
+    ToastAndroid,
 } from 'react-native';
-
-import { ToastAndroid } from 'react-native'; // Add this line
 import LinearGradient from 'react-native-linear-gradient';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Style';
 import { useRoute } from '@react-navigation/native';
-import { updateGarden } from '../services/garden_services';
+import { updateGarden, getGardensNoteById, updateGardenNote } from '../services/garden_services';
 import { useTranslation } from 'react-i18next';
 import PhotoPick from '../layouts/photo_picker/ImagePicker';
 import storage from '@react-native-firebase/storage';
@@ -24,10 +23,18 @@ const EditGarden = ({ navigation }) => {
     const onUpdate = route.params.onUpdate;
     const newGardenArea = route.params && route.params.polygon ? route.params.polygon : [];
     
-    const [gardenNote, setTextInputValue] = useState('');
+    const [gardenNotes, setGardenNotes] = useState([]);
     const [gardenName, setGardenName] = useState(garden.name);
     const [image, setSelectedImage] = useState(null);
     const [isImageCleared, setIsImageCleared] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const notes = await getGardensNoteById(garden.id);
+            setGardenNotes(notes);
+        };
+        fetchData();
+    }, []);
 
     const onSelectImage = (image) => {
         if (!image) {
@@ -51,32 +58,32 @@ const EditGarden = ({ navigation }) => {
         return await imageRef.getDownloadURL();
       };
 
-    const handleUpdateGarden = async () => {
-        const updated_garden = garden
-        let imageUrl = null;
-        if (image != null && image.path != null) {
-          const imageName = image.path.split('/').pop();
-          await uploadImage(image.path, 'gardens');
-          imageUrl = await getImageUrl('gardens', imageName);
-        
+      const handleUpdateGarden = async () => {
+        const updatedGarden = garden;
+        if (newGardenArea.length > 2) {
+            updatedGarden.polygon = newGardenArea;
         }
-        if(newGardenArea.length > 2){
-            updated_garden.polygon = newGardenArea
+        if (gardenName.length > 0) {
+            updatedGarden.name = gardenName;
         }
-        if(gardenName.length > 0){
-            updated_garden.name = gardenName
-        }
-          updated_garden.image_url = imageUrl;
         try {
-            await updateGarden(garden.id, updated_garden)
-        
-            ToastAndroid.show(t("toast1_eg"), ToastAndroid.SHORT)
-            navigation.navigate("Gardens")
-            // TODO: Navigate?
+            await updateGarden(garden.id, updatedGarden);
+            ToastAndroid.show(t("toast1_eg"), ToastAndroid.SHORT);
+            navigation.navigate("Gardens");
         } catch (error) {
-            console.log("Error garden update: ", error)
+            console.log("Error garden update: ", error);
         }
     };
+
+    const handleNoteUpdate = async (noteId, updatedNote) => {
+        try {
+            await updateGardenNote(noteId, updatedNote);
+            ToastAndroid.show(t("toast2_eg"), ToastAndroid.SHORT); // Başarılı güncelleme mesajı
+        } catch (error) {
+            console.log("Error updating garden note: ", error); // Hata durumunda konsola hata yazdırma
+        }
+    };
+
     return (
         <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{ height: '100%' }}>
             <View  
@@ -130,6 +137,32 @@ const EditGarden = ({ navigation }) => {
                             
                         </View>
        
+                        <View style={{ marginTop: 20 }}>
+                            <Text style={styles.t4}>{t("edit_garden_notes")}</Text>
+                            <ScrollView style={{ maxHeight: 95 }}>
+                                {gardenNotes.map(note => (
+                                    <View key={note.id} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                                        <TextInput
+                                            value={note.note}
+                                            onChangeText={text => {
+                                                const updatedNotes = [...gardenNotes];
+                                                const noteIndex = updatedNotes.findIndex(item => item.id === note.id);
+                                                updatedNotes[noteIndex].note = text;
+                                                setGardenNotes(updatedNotes);
+                                            }}
+                                            placeholder={t("edit_garden_notes")}
+                                            placeholderTextColor={'#21212160'}
+                                            style={styles.text_area}
+                                        />
+                                        <TouchableOpacity
+                                            onPress={() => handleNoteUpdate(note.id, { note: note.note })}
+                                            style={{ paddingHorizontal: 10 }}>
+                                            <Text style={{ ...styles.bt1, color: '#212121' }}>{t("update")}</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                ))}
+                            </ScrollView>
+                        </View>
                         
                         <TouchableOpacity style={styles.button_right} onPress={handleUpdateGarden}>
                             <Text style={styles.bt1}> {t("update")} </Text>

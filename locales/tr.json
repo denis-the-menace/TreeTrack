@@ -214,5 +214,6 @@
   "close": "KAPAT",
   "edit_garden_photo": "Bahçe fotoğrafını güncelle",
   "edit_photo_gallery":"Galeriden Seç",
-  "take_photo":"Fotoğraf Çek"
+  "take_photo":"Fotoğraf Çek",
+  "edit_garden_notes": "Bahçe notunu düzenle"
 }

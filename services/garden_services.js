@@ -378,6 +378,18 @@ export const insertGardenNote = async gardenNote => {
   await gardenNoteRf.update({id: gardenNoteRf.id});
 };
 
+export const updateGardenNote = async (noteId, updatedNoteData) => {
+  try {
+    const noteRef = firestore().collection('garden_notes').doc(noteId);
+    await noteRef.update(updatedNoteData);
+    console.log('Garden note updated successfully');
+    return true; // İşlem başarılı olduğunda true döndür
+  } catch (error) {
+    console.error('Error updating garden note:', error);
+    return false; // İşlem sırasında bir hata oluşursa false döndür
+  }
+};
+
 export const getSortedGardensByDistance = async userLocation => {
   const gardens = await getUserGardens();
   let gardensWithoutPolygon = [];
