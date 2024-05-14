@@ -32,7 +32,7 @@ const PlantCard = ({navigation, plant, garden, onUpdate}) => {
 
   const {height} = Dimensions.get('window');
 
-  const handleDelete = async (plantId, onUpdate) => {
+  const handleDelete = async (plantId) => {
     try {
       await deletePlant(plantId);
       ToastAndroid.show(t('toast1_deletePlant'), ToastAndroid.SHORT);

@@ -31,7 +31,7 @@ const GardenCard = ({navigation, garden, onUpdate}) => {
     fetchData();
   }, []);
 
-  const handleDelete = async (gardenId, onUpdate) => {
+  const handleDelete = async (gardenId) => {
     try {
       await deleteGarden(gardenId);
       ToastAndroid.show(t('toast1_deleteGarden'), ToastAndroid.SHORT);
