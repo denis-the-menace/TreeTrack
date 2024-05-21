@@ -27,6 +27,8 @@ const GardenNote = ({ navigation }) => {
   const { t } = useTranslation();
   const [gardenList, setGardenList] = useState([]);
   const [currentPosition, setPosition] = useState(null);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(false);
+
   useEffect(() => {
     Geolocation.getCurrentPosition((pos) => {
       const crd = pos.coords;
@@ -83,6 +85,7 @@ const GardenNote = ({ navigation }) => {
   };
 
   const saveNote = async () => {
+    setIsSaveDisabled(true); 
     let imageUrl = null;
     if (image != null && image.path != null) {
       const imageName = image.path.split('/').pop();
@@ -108,6 +111,7 @@ const GardenNote = ({ navigation }) => {
       setSelectedGarden(gardenList[0]);
       setGardenPickerValue(gardenNames[0]);
       navigation.navigate('AddNote');
+      setIsSaveDisabled(false);
     } catch (error) {
       console.log('Insert garden note error: ', error);
     }
@@ -179,11 +183,15 @@ const GardenNote = ({ navigation }) => {
             </ScrollView>
 
             <TouchableOpacity
-              style={styles.button_right}
-              onPress={saveNote}
-            >
-              <Text style={styles.bt1}> {t("save_button")} </Text>
-            </TouchableOpacity>
+                style={[
+                  styles.button_right,
+                  isSaveDisabled && styles.button_disabled 
+                ]}
+                onPress={saveNote}
+                disabled={isSaveDisabled}
+              >
+                <Text style={styles.bt1}> {t("save_button")} </Text>
+              </TouchableOpacity>
           </KeyboardAvoidingView>
         </View>
       </ScrollView>

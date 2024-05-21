@@ -24,6 +24,7 @@ import { useTranslation } from 'react-i18next';
 const PlantNote = ({navigation}) => {
   const { t } = useTranslation();
   const [gardenList, setGardenList] = useState([]);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(false);
   // TODO: konum takibi izin verilmemişse varsayılan konumu Ankara yap
   const [currentPosition, setPosition] = useState(null);
   useEffect(() => {
@@ -94,6 +95,7 @@ const PlantNote = ({navigation}) => {
         ToastAndroid.LONG,
       );
     } else {
+      setIsSaveDisabled(true); 
       // upload image to storage and get URL
       let imageUrl = null;
       if (imagePath != null && imagePath.path != null) {
@@ -123,6 +125,7 @@ const PlantNote = ({navigation}) => {
         setSelectedGarden(gardenList[0])
         setGardenPickerValue(gardenNames[0])
         navigation.setParams({ selectedPlant: null });
+        setIsSaveDisabled(false);
       } catch (error) {
         console.log('Insert plant note error: ', error);
       }
@@ -221,8 +224,12 @@ const PlantNote = ({navigation}) => {
 
               {/* Save Button */}
               <TouchableOpacity
-                style={styles.button_right}
+                style={[
+                  styles.button_right,
+                  isSaveDisabled && styles.button_disabled 
+                ]}
                 onPress={saveNote}
+                disabled={isSaveDisabled}
               >
                 <Text style={styles.bt1}> {t("save_button")} </Text>
               </TouchableOpacity>
