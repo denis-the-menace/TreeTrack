@@ -94,7 +94,7 @@ const EditGarden = ({ navigation }) => {
                 <ScrollView>
                     <View style={{ marginBottom: 90 }}>
                         
-                        <Text style={styles.subtext}> &gt; {garden.name}</Text>
+                        <Text style={styles.subtext}> {garden.name}</Text>
                         <Text style={styles.text}>{t("edit_garden")}</Text>
                         <Text style={styles.t4}>{t("edit_garden_photo")}</Text>
                         <PhotoPick

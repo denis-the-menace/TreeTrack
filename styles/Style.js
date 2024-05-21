@@ -24,6 +24,10 @@ const styles = StyleSheet.create({
     height: 30,
   },
 
+  button_disabled: {
+    backgroundColor: '#d3d3d3',
+    opacity: 0.5,
+  },
   text: {
     fontSize: 30,
     fontWeight: 'bold',
