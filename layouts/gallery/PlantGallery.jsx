@@ -47,16 +47,18 @@ const PlantGallery = () => {
     console.log("Plant note: ", pressedItem)
     // TODO: show Modal
   }
-  const sortOptions = [{name: "Newest to Oldest", id: 1}
-                      ,{name: "Oldest to Newest", id: 2}
-                      ,{name: "Plant Names", id: 3}]
+  const sortOptions = [
+    { name: t("newest"), id: 1 },
+    { name: t("oldest"), id: 2},
+    { name: t("plantName"), id: 3},
+  ];
   const [sortOptionPickerValue, setSortOptionPicker] = useState(sortOptions[0])
   const onSortOptionChange = (itemValue) => {
     setSortOptionPicker(itemValue)
     let sortedNotes = sortNoteList(filteredNoteList, itemValue, 'plant')
     setFilteredNoteList(sortedNotes)
   }
-  const filterOptions = [{name: "All Plants", id: 1}, ...plantNames]
+  const filterOptions = [{ name: t("all_plants"), id: 1 }, ...plantNames]
   const [filterOptionPickerValue, setFilterOptionPicker] = useState(filterOptions[0])
   
   const onFilterPickerChange = (itemValue) => {

@@ -218,9 +218,11 @@
   "take_photo":"Fotoğraf Çek",
   "edit_garden_notes": "Bahçe notunu düzenle",
   "all_garden": "Tüm Bahçeler",
+  "all_plants": "Tüm Bitkiler",
   "newest": "Yeniden Eskiye",
   "oldest": "Eskiden Yeniye",
   "gardenName": "Bahçe İsimleri",
+  "plantName": "Bitki İsimleri",
   "selectDate_gn": "Tarih Seçin",
   "selectDate_pn": "Tarih Seçin"
 }

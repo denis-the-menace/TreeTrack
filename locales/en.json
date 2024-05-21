@@ -220,9 +220,11 @@
   "take_photo":"Take a Photo",
   "edit_garden_notes": "Edit garden notes",
   "all_garden": "All Gardens",
+  "all_plants": "All Plants",
   "newest": "Newest to Oldest",
   "oldest": "Oldest to Newest",
   "gardenName": "Garden Names",
+  "plantName": "Plant Names",
   "selectDate_gn": "Select Date",
   "selectDate_pn": "Select Date"
 }
