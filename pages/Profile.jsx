@@ -269,23 +269,7 @@ const Profile = ({ navigation, route }) => {
             <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
             <Text style={{ color: 'black' }}>{t("homeGarden")}</Text>
           </View>
-          <Text style={{ color: 'white', fontSize: 20, paddingLeft: 20, marginTop: 20 }}>{t("social")}</Text>
-          <View
-            style={{
-              backgroundColor: isModalVisible ? '#FFFFFF80' : '#FFFFFF',
-              padding: 20,
-              paddingTop: 10,
-              paddingBottom: 10,
-              borderRadius: 10
-            }}>
-            <Text style={{ color: 'black' }}>{t("shareProfile")}</Text>
-            <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>{t("connectInstagram")}</Text>
-            <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>{t("connectTwitter")}</Text>
-            <View style={{ height: 1, backgroundColor: 'gray', marginTop: 5, marginBottom: 5 }}></View>
-            <Text style={{ color: 'black' }}>{t("connectPinterest")}</Text>
-          </View>
+          
           <TouchableOpacity
           onPress={() => navigation.navigate('ChangePassword')}
           style={{

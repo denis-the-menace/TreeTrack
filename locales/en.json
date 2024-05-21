@@ -108,6 +108,8 @@
   "gardenerInformation": "Gardener Information",
   "homeGarden": "Home Garden",
   "social": "Social",
+  "instagram": "Instagram",
+  "website": "Website",
   "shareProfile": "Share Sprout Profile",
   "connectInstagram": "Connect Instagram",
   "connectTwitter": "Connect Twitter",
@@ -166,9 +168,10 @@
   "contactInformation": "Contact Via",
   "thankYouMessage": "Thank you for choosing Tree Track! Your feedback and inquiries are valuable to us. We're dedicated to providing you with the best gardening experience possible.",
   "customerSupport": "Our customer support team is available to assist you with any questions, concerns, or feedback you may have. Please feel free to reach out to us via email or phone.",
-  "email_support": "Email: treetrack_info@gmail.com",
+  "email_support": "Email: treetrackinfo@gmail.com",
   "phoneNumber_support": "Phone: +1234567890",
-  "address_support": "Address: Tree Track Company, 151. Street, No: 7840 Ankara, Türkiye",
+  "address_support": "Address: Ayvali Neighborhood 150 Street Etlik-Kecioren / Ankara",
+  "ankara_turkey": "Ankara / Türkiye",
   "gardenType_vg": "Garden Type",
   "noGardenNote_vg": "This garden does not have any note.",
   "gardenNotes_vg": "Garden Notes",
@@ -215,5 +218,9 @@
   "edit_garden_photo": "Edit photo of your garden",
   "edit_photo_gallery":"Select From Gallery",
   "take_photo":"Take a Photo",
-  "edit_garden_notes": "Edit garden notes"
+  "edit_garden_notes": "Edit garden notes",
+  "all_garden": "All Gardens",
+  "newest": "Newest to Oldest",
+  "oldest": "Oldest to Newest",
+  "gardenName": "Garden Names"
 }

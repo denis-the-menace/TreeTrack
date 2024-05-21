@@ -163,33 +163,6 @@ const Settings = ({ navigation, route }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{
-              padding: 10,
-              borderRadius: 50,
-              backgroundColor: "#FFFFFF",
-              marginBottom: 10
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between"
-              }}
-            >
-              <Text style={{ color: "#25596E" }}> {t("notifications1")} </Text>
-
-              <Image
-                style={{
-                  marginEnd: 5
-                }}
-                source={require('../images/icons/ic_right_arrow.png')}
-              >
-              </Image>
-
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             onPress={() => {
               navigation.navigate("Support");
             }}

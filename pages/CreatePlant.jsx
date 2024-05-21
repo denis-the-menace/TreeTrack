@@ -87,7 +87,6 @@ const CreatePlant = ({ route, navigation }) => {
             color: '#fff',
           }}>
           {' '}
-          {'\u003E'}
           {garden.name}{' '}
         </Text>
         <Text style={styles.text}>{t('add_new_plant')}</Text>

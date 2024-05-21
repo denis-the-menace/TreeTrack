@@ -54,12 +54,12 @@ const GardenGallery = ({selectedGarden}) => {
   };
 
   const sortOptions = [
-    {name: 'Newest to Oldest', id: 1},
-    {name: 'Oldest to Newest', id: 2},
-    {name: 'Garden Names', id: 3},
+    { name: t("newest"), id: 1 },
+    { name: t("oldest"), id: 2},
+    { name: t("gardenName"), id: 3},
   ];
   const [sortOptionPickerValue, setSortOptionPicker] = useState(sortOptions[0]);
-  const filterOptions = [{name: 'All Gardens', id: 1}, ...gardenNames];
+  const filterOptions = [{ name: t("all_garden"), id: 1 }, ...gardenNames];
   const [filterOptionPickerValue, setFilterOptionPicker] = useState(
     filterOptions[0],
   );

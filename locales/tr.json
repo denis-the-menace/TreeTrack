@@ -168,7 +168,8 @@
   "customerSupport": "Müşteri destek ekibimiz, sahip olabileceğiniz herhangi bir soru, endişe veya geri bildirim konusunda size yardımcı olmak için hazırdır. Lütfen bize e-posta veya telefon aracılığıyla ulaşmaktan çekinmeyin.",
   "email_support": "E-posta: treetrack_info@gmail.com",
   "phoneNumber_support": "Telefon: +1234567890",
-  "address_support": "Adres: Tree Track Şirketi, 151. Cadde, No: 7840, Ankara, Türkiye",
+  "address_support": "Adres: Ayvalı Mah. 150 Sk. Etlik-Keçiören / Ankara",
+  "ankara_turkey": "Ankara / Türkiye",
   "gardenType_vg": "Bahçe Türü",
   "noGardenNote_vg": "Bu bahçede herhangi bir not bulunmamaktadır.",
   "gardenNotes_vg": "Bahçe Notları",
@@ -215,5 +216,9 @@
   "edit_garden_photo": "Bahçe fotoğrafını güncelle",
   "edit_photo_gallery":"Galeriden Seç",
   "take_photo":"Fotoğraf Çek",
-  "edit_garden_notes": "Bahçe notunu düzenle"
+  "edit_garden_notes": "Bahçe notunu düzenle",
+  "all_garden": "Tüm Bahçeler",
+  "newest": "Yeniden Eskiye",
+  "oldest": "Eskiden Yeniye",
+  "gardenName": "Bahçe İsimleri"
 }

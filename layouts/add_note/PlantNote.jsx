@@ -216,7 +216,7 @@ const PlantNote = ({navigation}) => {
                     height: 25,
                   }}
                 ></Image>
-                <Text style={{ ...styles.bt1, color: '#212121', marginLeft: 5 }}> Open Map </Text>
+                <Text style={{ ...styles.bt1, color: '#212121', marginLeft: 5 }}> {t("openMap_mm")} </Text>
               </TouchableOpacity>
 
               {/* Save Button */}

@@ -189,7 +189,7 @@ const SelectPlant = ({navigation}) => {
   return (
     <LinearGradient colors={['#89C6A7', '#89C6A7']} style={{height: '100%'}}>
       <View style={styles.container}>
-        <Text style={styles.subtext}> &gt; {t("addPhoto")}</Text>
+        <Text style={styles.subtext}>{t("addPhoto")}</Text>
         <Text style={styles.text}>{t("selectPlant")}</Text>
 
         <Text
