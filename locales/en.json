@@ -222,5 +222,7 @@
   "all_garden": "All Gardens",
   "newest": "Newest to Oldest",
   "oldest": "Oldest to Newest",
-  "gardenName": "Garden Names"
+  "gardenName": "Garden Names",
+  "selectDate_gn": "Select Date",
+  "selectDate_pn": "Select Date"
 }

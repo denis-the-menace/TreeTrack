@@ -192,8 +192,8 @@ const Settings = ({ navigation, route }) => {
             style={{
               height: 50,
               backgroundColor: 'white',
-              borderRadius: 50,
-              marginTop: 15,
+              borderRadius: 50, 
+              marginTop: 50,
               width: '100%',
               elevation: 5,
               justifyContent: 'center'

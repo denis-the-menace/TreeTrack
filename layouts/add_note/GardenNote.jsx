@@ -7,13 +7,12 @@ import {
   ScrollView,
   ToastAndroid,
   KeyboardAvoidingView,
-  Image,
 } from 'react-native';
-
 import LinearGradient from 'react-native-linear-gradient';
 import { Picker } from '@react-native-picker/picker';
 import Geolocation from '@react-native-community/geolocation';
 import storage from '@react-native-firebase/storage';
+import DatePicker from 'react-native-date-picker';
 import styles from '../../styles/Style';
 import PhotoPick from '../photo_picker/ImagePicker';
 import { useTranslation } from 'react-i18next';
@@ -22,12 +21,12 @@ import {
   insertGardenNote,
 } from '../../services/garden_services';
 
-
 const GardenNote = ({ navigation }) => {
   const { t } = useTranslation();
   const [gardenList, setGardenList] = useState([]);
   const [currentPosition, setPosition] = useState(null);
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
     Geolocation.getCurrentPosition((pos) => {
@@ -50,7 +49,6 @@ const GardenNote = ({ navigation }) => {
     fetchData();
   }, [currentPosition]);
 
-  {/* TODO: kullanıcıya en yakın olan bahçelere göre bu liste sıralanmalı */}
   let gardenNames = gardenList.map((garden) => ({
     id: garden.id,
     gardenName: garden.name,
@@ -85,7 +83,7 @@ const GardenNote = ({ navigation }) => {
   };
 
   const saveNote = async () => {
-    setIsSaveDisabled(true); 
+    setIsSaveDisabled(true);
     let imageUrl = null;
     if (image != null && image.path != null) {
       const imageName = image.path.split('/').pop();
@@ -94,7 +92,7 @@ const GardenNote = ({ navigation }) => {
     }
 
     const newGardenNote = {
-      created_at: new Date(),
+      created_at: selectedDate,
       garden_id: selectedGarden.id,
       note: gardenNote,
       image_url: imageUrl,
@@ -124,14 +122,11 @@ const GardenNote = ({ navigation }) => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={{ marginBottom: 90, paddingHorizontal: 10 }}>
-          <Text style={styles.t4}>
-          {t("gardenPhoto_gn")}
-          </Text>
+          <Text style={styles.t4}>{t("gardenPhoto_gn")}</Text>
           <PhotoPick
             onSelect={onSelectImage}
             isCleared={isImageCleared}
             setIsCleared={setIsImageCleared}
-            
           />
 
           <Text style={styles.t4}>{t("selectGarden_gn")}</Text>
@@ -158,16 +153,22 @@ const GardenNote = ({ navigation }) => {
             </Picker>
           </View>
 
+          <Text style={styles.t4}>{t("selectDate_gn")}</Text>
+          <DatePicker
+            date={selectedDate}
+            onDateChange={setSelectedDate}
+            mode="date"
+            locale="en"
+          />
+
           <Text style={styles.t4}>{t("enterNotes_gn")}</Text>
           <KeyboardAvoidingView
             behavior="padding"
             keyboardVerticalOffset={10}
             style={{ flex: 1 }}
           >
-            {/*Automatic growth of the text input field as you enter
-            text has been prevented and a scrool has been added.*/}
             <ScrollView
-              style={{ maxHeight: 130 }} // Max height of ScrollView
+              style={{ maxHeight: 130 }}
               contentContainerStyle={{ flexGrow: 1 }}
             >
               <TextInput
@@ -183,15 +184,15 @@ const GardenNote = ({ navigation }) => {
             </ScrollView>
 
             <TouchableOpacity
-                style={[
-                  styles.button_right,
-                  isSaveDisabled && styles.button_disabled 
-                ]}
-                onPress={saveNote}
-                disabled={isSaveDisabled}
-              >
-                <Text style={styles.bt1}> {t("save_button")} </Text>
-              </TouchableOpacity>
+              style={[
+                styles.button_right,
+                isSaveDisabled && styles.button_disabled,
+              ]}
+              onPress={saveNote}
+              disabled={isSaveDisabled}
+            >
+              <Text style={styles.bt1}>{t("save_button")}</Text>
+            </TouchableOpacity>
           </KeyboardAvoidingView>
         </View>
       </ScrollView>
